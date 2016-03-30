@@ -4,7 +4,7 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-/**
+/***
  * This is the class the creates and defines the window that the game runs on;
  */
 
