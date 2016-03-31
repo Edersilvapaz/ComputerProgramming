@@ -4,6 +4,10 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+
+// This is a test comment
+
+
 /***
  * This is the class the creates and defines the window that the game runs on;
  */
