@@ -1,4 +1,4 @@
-package src.dev.game;
+package dev.game;
 
 /**
  * This program simulates an alternative version of the game Frogger, an Arcade game created in 1981.<br>

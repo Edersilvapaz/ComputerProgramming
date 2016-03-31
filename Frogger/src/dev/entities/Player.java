@@ -1,12 +1,13 @@
-package src.dev.entities;
+package dev.entities;
 
 /***
  * This is the class that defines the player object, i.e., the frog;
  */
 
 import java.awt.Graphics;
-import src.dev.game.Game;
-import src.dev.graphics.Assets;
+
+import dev.game.Game;
+import dev.graphics.Assets;
 
 /*
  * This class extends the abstract class Entity, this means that every variable, object or method

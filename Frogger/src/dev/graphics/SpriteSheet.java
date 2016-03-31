@@ -1,4 +1,4 @@
-package src.dev.graphics;
+package dev.graphics;
 
 /**
  * This class specifies SpriteSheets objects, this was created to make it easier to crop the images we want from a larger image;

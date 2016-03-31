@@ -1,4 +1,4 @@
-package src.dev.states;
+package dev.states;
 
 /**
  * This is the class that summarizes all the information about the states of the game;
@@ -7,7 +7,8 @@ package src.dev.states;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import src.dev.game.*;
+
+import dev.game.*;
 
 /*
  * This class is an abstract class, that means it is not possible to instantiate it, just extending it using other subclasses;

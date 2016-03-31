@@ -1,4 +1,4 @@
-package src.dev.linkedlists;
+package dev.linkedlists;
 
 /**
  * This class holds the linked lists that helps the creation of the objects of the game;
@@ -8,8 +8,9 @@ package src.dev.linkedlists;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
-import src.dev.game.Game;
-import src.dev.entities.*;
+
+import dev.entities.*;
+import dev.game.Game;
 
 public class RiverItems {
 	

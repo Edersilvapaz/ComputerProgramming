@@ -1,4 +1,4 @@
-package src.dev.input;
+package dev.input;
 
 /**
  * This is the class that identifies all the actions that are performed by the mouse;

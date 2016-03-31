@@ -1,4 +1,4 @@
-package src.dev.entities;
+package dev.entities;
 
 /**
  * This is the main class for the entities in the game, every entity that the game has will extend this one;
@@ -8,7 +8,8 @@ package src.dev.entities;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
-import src.dev.game.Game;
+
+import dev.game.Game;
 
 /*
  * This class is an abstract class, that means it is not possible to instantiate it, just extending it using other subclasses;

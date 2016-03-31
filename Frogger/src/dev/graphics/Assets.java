@@ -1,4 +1,4 @@
-package src.dev.graphics;
+package dev.graphics;
 
 /**
  * This is the class the initializes and keeps all the images used on the game

@@ -1,4 +1,4 @@
-package src.dev.game;
+package dev.game;
 
 /**
  * This class is the base of the entire game.
@@ -7,12 +7,13 @@ package src.dev.game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import src.dev.display.Display;
-import src.dev.graphics.Assets;
-import src.dev.input.KeyManager;
-import src.dev.input.MouseManager;
-import src.dev.states.GameState;
-import src.dev.states.State;
+
+import dev.display.Display;
+import dev.graphics.Assets;
+import dev.input.KeyManager;
+import dev.input.MouseManager;
+import dev.states.GameState;
+import dev.states.State;
 
 /*
  * "implements Runnable" allow the Game class to work wit threads: start, stop, and run them.

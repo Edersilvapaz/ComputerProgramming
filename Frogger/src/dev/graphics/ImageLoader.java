@@ -1,4 +1,4 @@
-package src.dev.graphics;
+package dev.graphics;
 
 /**
  * This is the class responsible to actually loads the image the the folder which contains the sprites of the game;
@@ -21,7 +21,7 @@ public class ImageLoader {
 			return ImageIO.read(ImageLoader.class.getResource("/"+path+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(1);
+		System.exit(1);
 		}
 		return null;
 	}	

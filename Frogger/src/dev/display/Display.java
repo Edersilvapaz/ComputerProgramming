@@ -1,4 +1,4 @@
-package src.dev.display;
+package dev.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

@@ -1,4 +1,4 @@
-package src.dev.states;
+package dev.states;
 
 /**
  * This is the class that all the actual game information, everything that happens on the screen when the game is running is defined here
@@ -7,9 +7,10 @@ package src.dev.states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-import src.dev.entities.*;
-import src.dev.game.Game;
-import src.dev.linkedlists.*;
+
+import dev.entities.*;
+import dev.game.Game;
+import dev.linkedlists.*;
 
 /*
  * This class extends the abstract class State, this means that every variable, object or method
