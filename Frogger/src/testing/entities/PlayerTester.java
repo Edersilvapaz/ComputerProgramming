@@ -10,11 +10,14 @@ public class PlayerTester {
 
 	@Test
 	public void testPlaterCreation() {
+		
 		int gameWidth = 100;
 		int gameHeight = 100;
 		Game game = new Game("",gameWidth,gameHeight);
 		Player player = new Player(game);
+		
+		
 		assertEquals(player.getWidth(),28,10);
-		assertEquals(player.getHeight(),10,10);
+		assertEquals(player.getHeight(),28,10);
 	}
 }
