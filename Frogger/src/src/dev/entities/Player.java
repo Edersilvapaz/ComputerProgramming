@@ -59,17 +59,17 @@ public class Player extends Entity{
 					counter=0;
 					anim=0;
 				}
-				if(game.getKeyManager().down && y<480){
+				else if(game.getKeyManager().down && y<480){
 					moveDown=true;
 					counter=0;
 					anim=1;
 				}
-				if(game.getKeyManager().left && x>25){
+				else if(game.getKeyManager().left && x>25){
 					moveLeft=true;
 					counter=0;
 					anim=2;
 				}
-				if(game.getKeyManager().right && x<340){
+				else if(game.getKeyManager().right && x<340){
 					moveRight=true;
 					counter=0;
 					anim=3;
