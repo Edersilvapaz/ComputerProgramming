@@ -31,7 +31,7 @@ public class Player extends Entity{
 	private int score;
 	private int life;
 	
-	//Constructor method:asda
+	//Constructor method:asdas
 	//The super method calls the constructor of the super class that this one is extending, in this case Entity;
 	public Player(Game game) {
 		//Player will start always at the middle bottom of the screen and will have a fixed size;
