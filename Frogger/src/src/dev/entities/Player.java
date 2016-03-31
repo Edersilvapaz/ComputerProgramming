@@ -1,6 +1,6 @@
 package src.dev.entities;
 
-/**
+/***
  * This is the class that defines the player object, i.e., the frog;
  */
 
