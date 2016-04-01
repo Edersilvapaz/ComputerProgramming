@@ -1,6 +1,3 @@
-/**
- * asdasdasddasd
- */
 package dev.game;
 
 /**

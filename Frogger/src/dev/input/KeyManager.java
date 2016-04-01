@@ -45,4 +45,20 @@ public class KeyManager implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		
 	}
+	
+	public void Up(){
+		up = true;
+	}
+	
+	public void Down(){
+		down = true;
+	}
+	
+	public void Right(){
+		right=true;
+	}
+	
+	public void Left(){
+		left=true;
+	}
 }

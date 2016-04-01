@@ -42,7 +42,6 @@ public class Player extends Entity{
 
 	@Override
 	public void tick() {
-
 		/*
 		 * Every time a moving button is pressed and the counter is equal to 8:
 		 * 		1.	The move boolean variable is set to false so the action on the keyboard will be detected only once;
@@ -53,24 +52,24 @@ public class Player extends Entity{
 		 * 		4.	When the key is released, the move boolean variable is set to true, allowing the program to act when a new key is pressed;
 		 */
 		
-		if(game.getKeyManager().up||game.getKeyManager().down||game.getKeyManager().left||game.getKeyManager().right){
+		if(game.getKeyManager().up||game.getKeyManager().down||game.getKeyManager().left||game.getKeyManager().right ){
 			if(move && counter==necessaryMovements){
-				if(game.getKeyManager().up && y>80){
+				if( game.getKeyManager().up && y>80 ){
 					moveUp=true;
 					counter=0;
 					anim=0;
 				}
-				else if(game.getKeyManager().down && y<480){
+				else if( game.getKeyManager().down && y<480 ){
 					moveDown=true;
 					counter=0;
 					anim=1;
 				}
-				else if(game.getKeyManager().left && x>25){
+				else if( game.getKeyManager().left && x>25 ){
 					moveLeft=true;
 					counter=0;
 					anim=2;
 				}
-				else if(game.getKeyManager().right && x<340){
+				else if( game.getKeyManager().right && x<340){
 					moveRight=true;
 					counter=0;
 					anim=3;
