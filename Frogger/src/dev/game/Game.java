@@ -152,7 +152,9 @@ public class Game implements Runnable{
 	 * and creates all state objects and sets the very first state of the game.
 	 */
 	private void init(){
+		//Creates the the Display object and makes it appear on the screen
 		display = new Display(title,width,height);
+		display.createDisplay();
 		
 		//The key and mouse listener are added to the game window so that they can be used in the game;
 		display.getFrame().addKeyListener(keyManager);
