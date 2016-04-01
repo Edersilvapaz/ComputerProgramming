@@ -22,7 +22,7 @@ public class Game implements Runnable{
 	 */
 	
 	private int width,height;
-	private float defaultSpeed;	//Rules the defaultSpeed of the game
+	private float defaultSpeed; //Rules the defaultSpeed of the game
 	private String title;
 	
 	private Display display; //creates and configures the display of the game;
@@ -161,7 +161,7 @@ public class Game implements Runnable{
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		
-		Assets.init();//initiate the assets of the game;
+		Assets.init(); //initiate the assets of the game;
 		
 		//here the states objects of the game are created and the first state to be used in the game is defined;
 		gameState = new GameState(this);
