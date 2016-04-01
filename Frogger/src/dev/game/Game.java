@@ -1,13 +1,7 @@
 package dev.game;
 
-/**
- * This class is the base of the entire game.
- * It contains the methods to create a new game, opens the game windows and contains the game loop that keeps the game running.
- */
-
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-
 import dev.display.Display;
 import dev.graphics.Assets;
 import dev.input.KeyManager;
@@ -15,44 +9,44 @@ import dev.input.MouseManager;
 import dev.states.GameState;
 import dev.states.State;
 
-/*
- * "implements Runnable" allow the Game class to work wit threads: start, stop, and run them.
- * A thread is what is used to make things run at the same time during a program and is the base of the game.
- * This game will make use of one single thread.
+/**
+ * This class is the base of the entire game.<br>
+ * It contains the methods to create a new game, opens the game windows and contains the game loop that keeps the game running.
+ * @author Eder Paz; Neil Blake; Logan Wedel
  */
-
 public class Game implements Runnable{
+	/*
+	 * "implements Runnable" allow the Game class to work wit threads: start, stop, and run them.
+	 * A thread is what is used to make things run at the same time during a program and is the base of the game.
+	 * This game will make use of one single thread.
+	 */
 	
-	//The game has defined width, height and title, which are defined through the start() method;
-	//It also has a defaultSpeed which rules the speed that the game runs on;
 	private int width,height;
-	private float defaultSpeed;
+	private float defaultSpeed;				//Rules the defaultSpeed of the game
 	private String title;
 	
-	
-	//											"display" creates and configures the display of the game;
-	//These are the main variables of the game:	"running" is responsible for keeping the game loop running;
-	//											"thread" is the thread that the game runs on;
-	private Display display;
-	private boolean running = false;
+	private Display display;				//creates and configures the display of the game;
+	private boolean running = false;		//responsible for keeping the gameloop running;
 	private Thread thread;
 	
-	//These are the variables responsible for drawing the game assets on the screen;
-	//BuffersStrategy buffers the entire image on the screen so that we have a stable image;
-	//Graphics is the responsible for actually drawing the assets on the screen;
-	private BufferStrategy bs;
-	private Graphics g;
 	
-	//KeyManager and MouseManager are the classes responsible for detecting all the action performed on the keyboard or the mouse;
-	private KeyManager keyManager;
-	private MouseManager mouseManager;
+	private BufferStrategy bs;				//buffers the entire image on the screen so that we have a stable image;
+	private Graphics g;						//responsible for actually drawing the assets on the screen;
+	
+	private KeyManager keyManager;			//object that read the keyboard actions
+	private MouseManager mouseManager;		//object that read the mouse actions
 	
 	//the game will hold an instance of each state that it might go through;
 	private State gameState;
 	
 	
-	//In the Game constructor the width, height and title of the game is defined;
-	//The objects responsible for the keyboard and mouse readings are also created;
+	/**
+	 * The game title, width and height are defined.<br>
+	 * The objects for reading from the keyboard and the mouse are also initiated here.
+	 * @param title Defines the name of the game
+	 * @param width Defines the width of the game screen
+	 * @param height Defines the height of the game screen
+	 */
 	public Game(String title,int width, int height){
 		this.title = title;
 		this.width = width;
@@ -62,8 +56,10 @@ public class Game implements Runnable{
 		mouseManager = new MouseManager();
 	}
 	
-	//This method is responsible for starting the game
-	//It creates a new thread and starts it;
+	/**
+	 * This methods actually starts the game.<br>
+	 * It creates a new thread and starts it.
+	 */
 	public synchronized void start(){
 		if(running)
 			return;
@@ -72,7 +68,9 @@ public class Game implements Runnable{
 		thread.start();
 	}
 	
-	//This method ends the game by stopping the thread through the join() method;
+	/**
+	 * This game ends the game by stopping the game thread.<br>
+	 */
 	public synchronized void stop(){
 		if(!running)
 			return;
@@ -85,9 +83,11 @@ public class Game implements Runnable{
 		}
 	}
 	
-	//This method is called when the game thread is started;
-	//It is responsible for initiating the display, the assets and the states of the game;
-	//It also contains the MAIN GAME LOOP;
+	/**
+	 * This method is called when the game thread is started, right after the start() method.<br>
+	 * It initiates the display, the assets and the states of the game.<br>
+	 * It also contains the MAIN GAME LOOP;
+	 */
 	public void run(){
 		
 		init();//initiate display, assets and game states;
@@ -146,9 +146,11 @@ public class Game implements Runnable{
 		
 	}
 	
-	//This is the method responsible for creating and defining the screen for the game;
-	//It also adds the key and the mouse listener to the game, initiates the assets of the game,
-	//creates all states objects of the game and sets the very first state of the game;
+	/**
+	 * This methods is responsible for creating and defining the window for the game.<br>
+	 * It also adds the key and mouse listeners to the game frame and initiates the assets of the game,<br>
+	 * and creates all state objects and sets the very first state of the game.
+	 */
 	private void init(){
 		display = new Display(title,width,height);
 		
@@ -166,18 +168,20 @@ public class Game implements Runnable{
 		State.setState(gameState);
 	}
 	
-	
-	//This is the method that makes the game upgrade its variables,
-	//It gets the current running state and ticks it;
-	//It also tick the key manager so it can upgrade when a key is pressed on the keyboard;
+	/**
+	 * This method makes the game upgrade its variables.<br>
+	 * It ticks the current running game state and the key manager.
+	 */
 	private void tick(){
 		keyManager.tick();
 		if(State.getState()!=null)
 			State.getState().tick();
 	}
 	
-	//This is the method that draw the game on the window
-	//It gets the current running state and renders it;
+	/**
+	 * This method draws the game on its window.<br>
+	 * It renders the current running game state.
+	 */
 	private void render(){
 		
 		//get the current buffer strategy saved on the canvas of the game;
@@ -207,28 +211,50 @@ public class Game implements Runnable{
 		g.dispose();
 	}
 	
-	//This sections is for getters and setters needed on the game, once all of the variables in these class are private;
-	
+	/**
+	 * Getter for the game width.
+	 * @return The width of the game window
+	 */
 	public int getWidht(){
 		return width;
 	}
 	
+	/**
+	 * Getter for the game height.
+	 * @return The height of the game window
+	 */
 	public int getHeight(){
 		return height;
 	}
 	
+	/**
+	 * Getter for the object that reads the keyboard inputs.
+	 * @return KeyManager class instance.
+	 */
 	public KeyManager getKeyManager(){
 		return keyManager;
 	}
 	
+	/**
+	 * Getter for the object that reads the mouse inputs.
+	 * @return MouseManager class instance.
+	 */
 	public MouseManager getMouseManager(){
 		return mouseManager;
 	}
 	
+	/**
+	 * Getter for the default speed of the game.
+	 * @return Game default speed variable
+	 */
 	public float getDefaultSpeed(){
 		return defaultSpeed;
 	}
 	
+	/**
+	 * Setter for the default speed of the game.
+	 * @param speed Value in which the game default speed is going to be set to.
+	 */
 	public void setDefaultSpeed(float speed){
 		defaultSpeed=speed;
 	}
