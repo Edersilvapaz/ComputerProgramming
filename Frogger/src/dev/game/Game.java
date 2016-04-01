@@ -22,19 +22,19 @@ public class Game implements Runnable{
 	 */
 	
 	private int width,height;
-	private float defaultSpeed;				//Rules the defaultSpeed of the game
+	private float defaultSpeed;	//Rules the defaultSpeed of the game
 	private String title;
 	
-	private Display display;				//creates and configures the display of the game;
-	private boolean running = false;		//responsible for keeping the gameloop running;
+	private Display display; //creates and configures the display of the game;
+	private boolean running = false; //responsible for keeping the gameloop running;
 	private Thread thread;
 	
 	
-	private BufferStrategy bs;				//buffers the entire image on the screen so that we have a stable image;
-	private Graphics g;						//responsible for actually drawing the assets on the screen;
+	private BufferStrategy bs; //buffers the entire image on the screen so that we have a stable image;
+	private Graphics g; //responsible for actually drawing the assets on the screen;
 	
-	private KeyManager keyManager;			//object that read the keyboard actions
-	private MouseManager mouseManager;		//object that read the mouse actions
+	private KeyManager keyManager; //object that read the keyboard actions
+	private MouseManager mouseManager; //object that read the mouse actions
 	
 	//the game will hold an instance of each state that it might go through;
 	private State gameState;
