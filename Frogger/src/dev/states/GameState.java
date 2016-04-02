@@ -31,11 +31,11 @@ public class GameState extends State{
 	
 	//These are the variables used to generate the items on the screen
 	private int gen;			//used to decide which kind of object within the linked list to create
-	private int vehiclePos;		//used to decide the random position of each created object
+	private int position;		//used to decide the random position of each created object
 	
 	//This variables are used to manage the uploading the score 
-	private boolean[] posPerm = new boolean[11];		//Array used to decide when to upgrade the score
-	private int[] pos = new int[11];					//Array which stores all the y position the player needs to get to in order to increase score
+	private boolean[] scorePermition = new boolean[11];		//Array used to decide when to upgrade the score
+	private int[] playerPosition = new int[11];					//Array which stores all the y position the player needs to get to in order to increase score
 	
 	//Constructor of the GameState;
 	//It creates a new instance of all objects an instantiate the game object passed to it;
@@ -49,9 +49,9 @@ public class GameState extends State{
 		alligator = new AlligatorBank(game);
 		game.setDefaultSpeed(1.5f);
 		
-		for(int i=0 ; i<pos.length ; i++){
-			pos[i]=111+i*34;
-			posPerm[i]=true;
+		for(int i=0 ; i<playerPosition.length ; i++){
+			playerPosition[i]=111+i*34;
+			scorePermition[i]=true;
 		}
 	}
 	
@@ -74,37 +74,37 @@ public class GameState extends State{
 			counter=0;
 			gen = r.nextInt(4);
 			
-			vehiclePos++;
-			if(vehiclePos==5)
-				vehiclePos=0;
+			position++;
+			if(position==5)
+				position=0;
 			
 			if(gen==0 || gen==1)
-				riverItems.addLog(new Log(game,vehiclePos,r.nextInt(81)+50));
+				riverItems.addLog(new Log(game,position,r.nextInt(81)+50));
 			else if(gen==2)
-				riverItems.addTurtle(new Turtle(game,vehiclePos,r.nextInt(2)+2));
+				riverItems.addTurtle(new Turtle(game,position,r.nextInt(2)+2));
 			else
-				riverItems.addAlligator(new Alligator(game,vehiclePos));
+				riverItems.addAlligator(new Alligator(game,position));
 			
 			if(gen==0)
-				vehicles.addCar(new Car(game,vehiclePos));
+				vehicles.addCar(new Car(game,position));
 			else if(gen==1)
-				vehicles.addTruck(new Truck(game,vehiclePos));
+				vehicles.addTruck(new Truck(game,position));
 			else if(gen==2)
-				vehicles.addBus(new Bus(game,vehiclePos));
+				vehicles.addBus(new Bus(game,position));
 			else
-				vehicles.addTaxi(new Taxi(game,vehiclePos));
+				vehicles.addTaxi(new Taxi(game,position));
 		}
 		
 		/*
 		 * This loop goes through all the position the frog can reach in the y axis;
 		 * If the frog is there and its respective boolean variable is equal to true,
 		 * it updates the player score by 20 and sets the boolean variable to false so
-		 * that getting to that position again wont increase anything on the project;
+		 * that getting to that position again wont increase anything on the player's score;
 		 */
-		for(int i=0 ; i<pos.length ; i++){
-			if(player.getY()==pos[i] && posPerm[i]==true){
+		for(int i=0 ; i<playerPosition.length ; i++){
+			if(player.getY()==playerPosition[i] && scorePermition[i]==true){
 				player.setScore(player.getScore()+20);
-				posPerm[i]=false;
+				scorePermition[i]=false;
 			}
 		}
 		

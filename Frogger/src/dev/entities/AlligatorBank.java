@@ -33,7 +33,7 @@ public class AlligatorBank extends Entity{
 	
 	/**
 	 * Controls how much time the alligator is in one river bank and gives it a new random position.<br>
-	 * Upgrade the variables used to animate the river bank alligator. 
+	 * Defines which alligator image should be drawn by the render() method. 
 	 */
 	@Override
 	public void tick() {

@@ -40,7 +40,7 @@ public class Alligator extends Entity{
 	}
 	
 	/**
-	 * Upgrades the x position of the entity and animates the alligator figure on the screen;
+	 * Upgrades the x position of the alligator and defines which alligator image should be drawn by the render() method;
 	 */
 	@Override
 	public void tick() {
