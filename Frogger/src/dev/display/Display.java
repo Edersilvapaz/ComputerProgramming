@@ -6,15 +6,14 @@ import javax.swing.JFrame;
 
 /**
  * This is the class responsible for creating and closing the window of the game.
- * @author Eder Paz ; Neil Blake; Logan Wedel
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class Display {
 	
 	/*
-	 * A Jframe is the window itself;
+	 * A Jframe is the window itself
 	 * A Canvas is the place where the items are drawn and measured from, not the actual window
 	 */
-	
 	private JFrame frame=null;
 	private Canvas canvas;
 	
@@ -38,20 +37,20 @@ public class Display {
 	 */
 	public void createDisplay(){
 		if(frame==null){
-			frame = new JFrame(title);								// set the title of the screen;
-			frame.setSize(width, height);							// set the width and height of the screen;
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// set the window to close and the close button is pressed;
-			frame.setResizable(false);								// set the window to not resizable so the size of the screen can be changed during the game;
-			frame.setLocationRelativeTo(null);						// set the screen to open right in the middle of the computer screen;
-			frame.setVisible(true);									// makes the window visible;
+			frame = new JFrame(title);								// set the title of the screen
+			frame.setSize(width, height);							// set the width and height of the screen
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// set the window to close and the close button is pressed
+			frame.setResizable(false);								// set the window to not resizable so the size of the screen can be changed during the game
+			frame.setLocationRelativeTo(null);						// set the screen to open right in the middle of the computer screen
+			frame.setVisible(true);									// makes the window visible
 			
-			canvas = new Canvas();									//Create a new canvas object;
+			canvas = new Canvas();									//Create a new canvas object
 			canvas.setPreferredSize(new Dimension(width,height));	//
-			canvas.setMaximumSize(new Dimension(width,height));		//Set the size of the canvas to the window width and height and fix it to that size;
+			canvas.setMaximumSize(new Dimension(width,height));		//Set the size of the canvas to the window width and height and fix it to that size
 			canvas.setMinimumSize(new Dimension(width,height));		//
 			canvas.setFocusable(false);
 			
-			frame.add(canvas);										// add the canvas to the window frame;
+			frame.add(canvas);										// add the canvas to the window frame
 			frame.pack();											// makes the frame pack all the information together
 		}
 	}

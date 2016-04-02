@@ -1,37 +1,40 @@
 package dev.entities;
 
-/**
- * This is the class that defines every alligator that shows up in the river bank;
- */
-
 import java.awt.Graphics;
-
 import dev.game.Game;
 import dev.graphics.Assets;
 
-/*
- * This class extends the abstract class Entity, this means that every variable, object or method
- * that it contains can be used by this one, as long as it is defined as protected;
+/**
+ * This is the class that defines every alligator that shows up in the river bank.<br>
+ * It extends the abstract class Entity.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
-
 public class AlligatorBank extends Entity{
 	
-	//The alligator in the river banks will change its position while the game is running,
-	//this variable is how many time the alligator stays in a respective bank;
-	private final int time = 600;
+
+	/*
+	 * This class extends the abstract class Entity, this means that every variable, object or method
+	 * that it contains can be used by this one, as long as it is defined as protected
+	 */
 	
-	//Constructor method:
-	//The super method calls the constructor of the super class that this one is extending, in this case Entity;
+	private final int time = 600; //Holds how much time the alligator stays in a respective bank
+	
+	/**
+	 * Defines the river bank alligator's width, height.<br>
+	 * Defines the random initial position of the river bank alligator in one of the river banks.
+	 * @param game Instance of the game so that the bank alligator can rely on the game variables.
+	 */
 	public AlligatorBank(Game game) {
-		//Every alligator in the bank will have the same size;
-		//Its y will be fixed in the river bank height;
-		//Its x position will be in one of the river banks, defined randomly by the r object and the expression on line 29;
+		//Its y will be fixed in the river bank height
+		//Its x position will be in one of the river banks, defined randomly by the r object and the expression on line 31
 		super(game,0,82,alliBank_width,alliBank_height);
 		x=25f+82.2f*r.nextInt(5);
 	}
 	
-	//The tick method uses the counter variable to give a new random x position to the entity
-	//and upgrade the anim variable to animate the alligator figure on the screen;
+	/**
+	 * Controls how much time the alligator is in one river bank and gives it a new random position.<br>
+	 * Upgrade the variables used to animate the river bank alligator. 
+	 */
 	@Override
 	public void tick() {
 		counter++;
@@ -55,8 +58,10 @@ public class AlligatorBank extends Entity{
 		else if(counter==time-60)
 			anim=3;
 	}
-
-	//The render method draws and animates the alligator figure on the screen according the object's variables;
+	
+	/**
+	 * Draws the river bank alligator on the screen according to its x, y position and the figure it is define by the tick() method.
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.alligatorBank[anim],(int)x,(int)y,width,height,null);
