@@ -17,7 +17,7 @@ public class Launcher {
 	 * @param args Not used in the game
 	 */
 	public static void main(String[] args){
-		Game game = new Game("FROGGER",400,560);
+		Game game = new Game("FROGGER",400,560); //The name that shows at the top of the game window and its size are defined here
 		game.start();
 	}
 }

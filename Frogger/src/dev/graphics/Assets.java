@@ -1,11 +1,10 @@
 package dev.graphics;
 
-/**
- * This is the class the initializes and keeps all the images used on the game
- */
-
 import java.awt.image.BufferedImage;
-
+/**
+ * This is the class the loads and holds all the images used on the game.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
+ */
 public class Assets {
 	
 	//Here all the items size all stored on the sprite, they are not objects sizes in the game;
@@ -23,20 +22,50 @@ public class Assets {
 	private static int alliBank_width = 15;
 	private static int alliBank_height = 10;
 	
-	//Here all the buffered image objects used in the game are initialized;
+	/**
+	 * Image of the background of the game.
+	 */
 	public static BufferedImage bgnd;
+	/**
+	 * Image of the log.
+	 */
 	public static BufferedImage log;
+	/**
+	 * Images of the river bank alligator.
+	 */
 	public static BufferedImage[] alligatorBank = new BufferedImage[4];
+	/**
+	 * Images of the game taxis.
+	 */
 	public static BufferedImage[] taxi = new BufferedImage[2];
+	/**
+	 * Images of the game cars.
+	 */
 	public static BufferedImage[] car = new BufferedImage[8];
+	/**
+	 * Images of the game trucks.
+	 */
 	public static BufferedImage[] truck = new BufferedImage[8];
+	/**
+	 * Images of the game buses.
+	 */
 	public static BufferedImage[] bus = new BufferedImage[4];
+	/**
+	 * Images of the frog.
+	 */
 	public static BufferedImage[][] frog = new BufferedImage[4][3];
+	/**
+	 * Images of the game turtles.
+	 */
 	public static BufferedImage[][] turtle = new BufferedImage[2][2];
+	/**
+	 * Images of the game alligators.
+	 */
 	public static BufferedImage[][] alligator = new BufferedImage[2][2];
 	
-	//This is the method that initializes all the SpriteSheet objects that are going to be used;
-	//It also makes use of the crop() method to associate the specific bufferedImage object to its image; 
+	/**
+	 * Load all the Sprite sheets objects and images that are doing to be used in the game.<br>
+	 */
 	public static void init(){
 		
 		//Initialize all the game sprite sheets;
@@ -72,6 +101,6 @@ public class Assets {
 				turtle[x][y] = riverItems.crop(x*turtle_width,45+y*turtle_height,turtle_width,turtle_height);
 				alligator[x][y] = riverItems.crop(x*alli_width,11+y*alli_height,alli_width,alli_height);
 			}
-		}
+		}	
 	}
 }

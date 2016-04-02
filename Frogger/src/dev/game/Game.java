@@ -16,27 +16,27 @@ import dev.states.State;
  */
 public class Game implements Runnable{
 	/*
-	 * "implements Runnable" allow the Game class to work wit threads: start, stop, and run them.
-	 * A thread is what is used to make things run at the same time during a program and is the base of the game.
-	 * This game will make use of one single thread.
+	 * "implements Runnable" allow the Game class to work wit threads: start, stop, and run them
+	 * A thread is what is used to make things run at the same time during a program and is the base of the game
+	 * This game will make use of one single thread
 	 */
 	
 	private int width,height;
 	private float defaultSpeed; //Rules the defaultSpeed of the game
 	private String title;
 	
-	private Display display; //creates and configures the display of the game;
-	private boolean running = false; //responsible for keeping the gameloop running;
+	private Display display; //creates and configures the display of the game
+	private boolean running = false; //responsible for keeping the game loop running
 	private Thread thread;
 	
 	
-	private BufferStrategy bs; //buffers the entire image on the screen so that we have a stable image;
-	private Graphics g; //responsible for actually drawing the assets on the screen;
+	private BufferStrategy bs; //buffers the entire image on the screen so that we have a stable image
+	private Graphics g; //responsible for actually drawing the assets on the screen
 	
 	private KeyManager keyManager; //object that read the keyboard actions
 	private MouseManager mouseManager; //object that read the mouse actions
 	
-	//the game will hold an instance of each state that it might go through;
+	//the game will hold an instance of each state that it might go through
 	private State gameState;
 	
 	
@@ -90,27 +90,27 @@ public class Game implements Runnable{
 	 */
 	public void run(){
 		
-		init();//initiate display, assets and game states;
+		init();//initiate display, assets and game states
 		
 		/*
-		 * This is the game loop, it controls the game so it upgrade its variables and draw its figures on the screen 60 times per second;
+		 * This is the game loop, it controls the game so it upgrade its variables and draw its figures on the screen 60 times per second
 		 * 
 		 * 1. The amount of time that each tick* will have is defined on line 117, dividing the amount of nanoseconds in a second by the amount of frames
-		 * 	we want in the game, in this case: 60;
+		 * 	we want in the game, in this case: 60
 		 * 
 		 * After that, every time the while loop runs:
 		 * 
-		 * 2. The now variable gets how many time the game is running (line 125);
+		 * 2. The now variable gets how many time the game is running (line 125)
 		 * 3. The delta variable is increased by how many time the game has been running since the last time the loop ran in nanoseconds
-		 * 	divided by how many time each tick* has in the game (line 126);
-		 * 4. The lastTime variable gets the current running time for the next time the game loop will run (line 128); 
+		 * 	divided by how many time each tick* has in the game (line 126)
+		 * 4. The lastTime variable gets the current running time for the next time the game loop will run (line 128) 
 		 * 5. If the delta variable holds a value greater than 1, it means that the time that each tick* will have is passed and
-		 * 	it is time to tick* and render* the game;
+		 * 	it is time to tick* and render* the game
 		 * 
-		 * TICK() - This method is responsible for upgrading the variables of the game, like positions and counter;
-		 * RENDER(Graphics g) -  This method is responsible for drawing the game on the screen;
+		 * TICK() - This method is responsible for upgrading the variables of the game, like positions and counter
+		 * RENDER(Graphics g) -  This method is responsible for drawing the game on the screen
 		 * EACH CLASS THAT PLAYS A ROLE ON THE GAME WILL HAVE ITS OWN TICK() AND RENDER() METHOD, AND ALL OF THEM ARE CALLED TOGETHER
-		 * THROUGH THE GAME CLASS TICK() AND REDNER();
+		 * THROUGH THE GAME CLASS TICK() AND REDNER()
 		 *  
 		 */
 		
@@ -142,7 +142,7 @@ public class Game implements Runnable{
 			}
 		}
 		
-		stop();//When the game loop is done, closes the game;
+		stop();//When the game loop is done, closes the game
 		
 	}
 	
@@ -156,16 +156,16 @@ public class Game implements Runnable{
 		display = new Display(title,width,height);
 		display.createDisplay();
 		
-		//The key and mouse listener are added to the game window so that they can be used in the game;
+		//The key and mouse listener are added to the game window so that they can be used in the game
 		display.getFrame().addKeyListener(keyManager);
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		
-		Assets.init(); //initiate the assets of the game;
+		Assets.init(); //initiate the assets of the game
 		
-		//here the states objects of the game are created and the first state to be used in the game is defined;
+		//here the states objects of the game are created and the first state to be used in the game is defined
 		gameState = new GameState(this);
 		State.setState(gameState);
 	}
@@ -186,29 +186,29 @@ public class Game implements Runnable{
 	 */
 	private void render(){
 		
-		//get the current buffer strategy saved on the canvas of the game;
+		//get the current buffer strategy saved on the canvas of the game
 		bs = display.getCanvas().getBufferStrategy();
 		
-		//if there isn't any buffer strategy created yet, creates a new one;
+		//if there isn't any buffer strategy created yet, creates a new one
 		if(bs == null){
 			display.getCanvas().createBufferStrategy(3);
 			return;
 		}
 		
-		//The graphics gets the buffered image that has to be drawn on the screen;
+		//The graphics gets the buffered image that has to be drawn on the screen
 		g = bs.getDrawGraphics();
 		
-		//The graphics cleans the screen so that only the current buffered image is going to be shown;
+		//The graphics cleans the screen so that only the current buffered image is going to be shown
 		g.clearRect(0,0,width,height);
 		
-		//This draws the background on the screen;
+		//This draws the background on the screen
 		g.drawImage(Assets.bgnd,0,0,width,height,null);
 		
-		//This renders the current running state of the game;
+		//This renders the current running state of the game
 		if(State.getState()!=null)
 			State.getState().render(g);
 		
-		//Get the buffered image generated by the buffered strategy and draws it on the screen;
+		//Get the buffered image generated by the buffered strategy and draws it on the screen
 		bs.show();
 		g.dispose();
 	}
