@@ -47,7 +47,9 @@ public abstract class State {
 	 * @param state State that the current game state has to be set to.
 	 */
 	public static void setState(State state){
-		currentState = state;
+		if(changeState){
+			currentState = state;
+		}
 	}
 	
 	/**
@@ -59,7 +61,7 @@ public abstract class State {
 	}
 	
 	/**
-	 * Getter for the boolean variable used to allow or not the game state.
+	 * Getter for the boolean variable used to allow or not the game to change its state.
 	 * @return Boolean variable.
 	 */
 	public static boolean changeState() {
@@ -67,7 +69,7 @@ public abstract class State {
 	}
 	
 	/**
-	 * Setter for the boolean variable used to allow or not to change the state.
+	 * Setter for the boolean variable used to allow or not the game to change its state.
 	 * @param b Boolean value in which the variable will be set to.
 	 */
 	public static void setChangeState(boolean b) {
