@@ -1,29 +1,22 @@
 package dev.input;
 
-/**
- * This is the class that identifies all the actions that are performed by the mouse;
- * It implements MouseListener and MouseMotionListener which contains the methods:
- * mousePressed(), mouseReleased(), and mouseMoved();
- * These methods run every time an action is performed by the mouse regardless of what is happening on the game;
- * Other methods are provided (line 62 to 80), but the game is not going to make use of them; 
- */
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * This is the class that identifies all the actions that are performed by the mouse.<br>
+ * It holds boolean variables so that is easy to detected in the game if the mouse is used.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
+ */
 public class MouseManager implements MouseListener, MouseMotionListener{
 	
 	private boolean leftPressed, rightPressed;	//these variables detect clicks on the mouse buttons;
 	private int mouseX, mouseY;					//these variables store the mouse position on the screen;
 	
-	public MouseManager(){
-		
-	}
-	
-	//In this section are the methods that run every time one of the buttons of the mouse is pressed,
-	//They set the respective mouse button boolean variable to true or false, depending on the action performed;
-	
+	/**
+	 * Set the respective mouse button boolean variable to true.
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getButton()==MouseEvent.BUTTON1)
@@ -31,7 +24,10 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 		if(e.getButton()==MouseEvent.BUTTON3)
 			rightPressed = true;
 	}
-
+	
+	/**
+	 * Set the respective mouse button boolean variable to true.
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(e.getButton()==MouseEvent.BUTTON1)
@@ -40,51 +36,79 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 			rightPressed = false;
 	}
 	
-	//This method upgrade the mouse position on the screen every time the mouse is moved through it;
-	
+	/**
+	 * Stores the mouse x and y position every time the mouse moves on the screen.
+	 */
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		mouseX = e.getX();
 		mouseY = e.getY();
 	}
 	
-	//This sections is for getters of the variables that detect clicks and position of the mouse so they can be used inn the game;
-	
-	public boolean isRightPressed(){
-		return rightPressed;
-	}
-	
-	public boolean isLeftPressed(){
-		return leftPressed;
-	}
-	
-	public int getMouseX(){
-		return mouseX;
-	}
-	
-	public int getMouseY(){
-		return mouseY;
-	}
-	
-	//This sections is for the methods provided to work with the mouse that the game does not use;
-	
+	/**
+	 * Runs every time the mouse click and drags.<br>
+	 * Not used in the game.
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
 	}
-
+	
+	/**
+	 * Runs every time the mouse is clicked, that means pressing and releasing it.<br>
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
 	}
-
+	
+	/**
+	 * Runs every time the mouse enters the screen.<br>
+	 * Not used in the game.
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		
 	}
-
+	
+	/**
+	 * Runs every time the mouse exits the screen.<br>
+	 * Not used in the game.
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		
+	}
+	
+	/**
+	 * Getter for the boolean variable that says if the left button of the mouse is pressed or not.
+	 * @return True for pressed, false for not pressed.
+	 */
+	public boolean isRightPressed(){
+		return rightPressed;
+	}
+	
+	/**
+	 * Getter for the boolean variable that says if the right button of the mouse is pressed or not
+	 * @return True for pressed, false for not pressed.
+	 */
+	public boolean isLeftPressed(){
+		return leftPressed;
+	}
+	
+	/**
+	 * Getter for the mouse position on the screen.
+	 * @return Mouse x position on the screen.
+	 */
+	public int getMouseX(){
+		return mouseX;
+	}
+	
+	/**
+	 * Getter for the mouse position on the screen.
+	 * @return Mouse y position on the screen.
+	 */
+	public int getMouseY(){
+		return mouseY;
 	}
 }

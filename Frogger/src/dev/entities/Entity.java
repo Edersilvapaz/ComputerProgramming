@@ -106,7 +106,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Abstract class used to upgrade the entity object variables.
+	 * Upgrade the entity object variables.
 	 */
 	public abstract void tick();
 	

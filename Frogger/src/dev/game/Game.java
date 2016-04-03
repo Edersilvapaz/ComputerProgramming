@@ -89,7 +89,7 @@ public class Game implements Runnable{
 	 * It also contains the MAIN GAME LOOP;
 	 */
 	public void run(){
-		
+
 		init();//initiate display, assets and game states
 		
 		/*
@@ -127,7 +127,7 @@ public class Game implements Runnable{
 			delta += (now - lastTime)/timePerTick;
 			timer += now - lastTime;
 			lastTime = now;
-
+			
 			if(delta >= 1){
 				tick();
 				render();

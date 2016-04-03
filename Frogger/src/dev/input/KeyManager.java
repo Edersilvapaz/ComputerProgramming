@@ -1,64 +1,89 @@
 package dev.input;
 
-/**
- * This is the class that identifies all the actions that are performed on the keyboard;
- * It implements KeyListener which contains the methods keyPressed(), keyReleased(), and keyTyped() method();
- * These methods run every time a key is pressed on the keyboard regardless of what is happening on the game; 
- */
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * This is the class that identifies all the actions that are performed on the keyboard.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
+ */
 public class KeyManager implements KeyListener{
 	
 	private boolean[] keys;					//This boolean array is responsible for identifying which key on the keyboard has been pressed;
-	public boolean up,down,left,right;		//These are the keys that the game will use;
+	private boolean up,down,left,right;		//These are the keys that the game will use;
 	
-	//Constructor, initiate all the keys of the keyboard as false, by default parameters;
+	/**
+	 * Initiate the boolean array that is used to store which key that action took place on.
+	 */
 	public KeyManager(){
 		keys = new boolean[256];
 	}
 	
-	//This method upgrades the variable that the game uses,
-	//Setting them to its respective value on the key boolean array;
+	/**
+	 * Upgrades the variables that the game uses.<br>
+	 * Set them to its respective value on the boolean array. 
+	 */
 	public void tick(){
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
-		right = keys[KeyEvent.VK_D];		
+		right = keys[KeyEvent.VK_D];
 	}
 	
-	//In this section are the methods that run every time a key is pressed on the keyboard,
-	//They set the key array on the position of the key where the action took place to true or false, depending on the action performed;
-	
+	/**
+	 * Runs every time a key is pressed on the keyboard and stores its respective boolean variable to true. 
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()]=true;
 	}
-
+	
+	/**
+	 * Runs every time a key is released on the keyboard and stores its respective boolean variable to true.
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()]=false;	
 	}
-
+	
+	/**
+	 * Runs every time a key is typed on the keyboard.<br>
+	 * Not used in the game.
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
 	}
 	
-	public void Up(){
-		up = true;
+	/**
+	 * Getter for the boolean variable that indicates to move up.
+	 * @return Boolean variable up.
+	 */
+	public boolean Up(){
+		return up;
 	}
 	
-	public void Down(){
-		down = true;
+	/**
+	 * Getter for the boolean variable that indicates to move down.
+	 * @return Boolean variable down.
+	 */
+	public boolean Down(){
+		return down;
 	}
 	
-	public void Right(){
-		right=true;
+	/**
+	 * Getter for the boolean variable that indicates to move right.
+	 * @return Boolean variable right.
+	 */
+	public boolean Right(){
+		return right;
 	}
 	
-	public void Left(){
-		left=true;
+	/**
+	 * Getter for the boolean variable that indicates to move left.
+	 * @return Boolean variable left.
+	 */
+	public boolean Left(){
+		return left;
 	}
 }
