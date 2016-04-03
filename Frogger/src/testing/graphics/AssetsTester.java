@@ -14,7 +14,7 @@ import dev.graphics.Assets;
 public class AssetsTester {
 	
 	/**
-	 * Tests if the background image is loaded correctly
+	 * Tests if the background image is loaded correctly.
 	 */
 	@Test
 	public void testBackgroundImage() {
@@ -37,7 +37,7 @@ public class AssetsTester {
 	}
 	
 	/**
-	 * Tests if the log image is loaded correctly
+	 * Tests if the log image is loaded correctly.
 	 */
 	@Test
 	public void testLogImage(){
@@ -61,13 +61,14 @@ public class AssetsTester {
 	}
 	
 	/**
-	 * Tests if the river bank alligator images are loaded correctly
+	 * Tests if the river bank alligator images are loaded correctly.
 	 */
 	@Test
 	public void testAlligatorBankImage(){
 		
 		Assets.init();
 		
+		BufferedImage riverItems = null;
 		BufferedImage alligatorImage1 = null;
 		BufferedImage alligatorImage2 = null;
 		BufferedImage alligatorImage3 = null;
@@ -75,14 +76,11 @@ public class AssetsTester {
 		
 		//Hard coding the alligators images
 		try{
-			alligatorImage1 = ImageIO.read(AssetsTester.class.getResource("/River_Items.png"));
-			alligatorImage1 = alligatorImage1.getSubimage(42,0,15,10);
-			alligatorImage2 = ImageIO.read(AssetsTester.class.getResource("/River_Items.png"));
-			alligatorImage2 = alligatorImage2.getSubimage(57,0,15,10);
-			alligatorImage3 = ImageIO.read(AssetsTester.class.getResource("/River_Items.png"));
-			alligatorImage3 = alligatorImage3.getSubimage(72,0,15,10);
-			alligatorImage4 = ImageIO.read(AssetsTester.class.getResource("/River_Items.png"));
-			alligatorImage4 = alligatorImage4.getSubimage(87,0,15,10);
+			riverItems = ImageIO.read(AssetsTester.class.getResource("/River_Items.png"));
+			alligatorImage1 = riverItems.getSubimage(42,0,15,10);
+			alligatorImage2 = riverItems.getSubimage(57,0,15,10);
+			alligatorImage3 = riverItems.getSubimage(72,0,15,10);
+			alligatorImage4 = riverItems.getSubimage(87,0,15,10);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -104,5 +102,37 @@ public class AssetsTester {
 		for(int x=0 ; x<alligatorImage4.getWidth() ; x++)
 			for(int y=0 ; y<alligatorImage4.getHeight() ; y++)
 				assertTrue(alligatorImage4.getRGB(x,y)==Assets.alligatorBank[3].getRGB(x,y)); //Test if the pixel in the x and y position are the same
+	}
+	
+	/**
+	 * Test if the taxi images are loaded correctly.
+	 */
+	@Test
+	public void testTaxiImage(){
+		
+		Assets.init();
+		
+		BufferedImage vehicles = null;
+		BufferedImage taxiImage1 = null;
+		BufferedImage taxiImage2 = null;
+		
+		//Hard coding the taxi images
+		try{
+			vehicles = ImageIO.read(AssetsTester.class.getResource("/Vehicles.png"));
+			taxiImage1 = vehicles.getSubimage(120,0,15,10);
+			taxiImage2 = vehicles.getSubimage(135,0,15,10);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		//Tests if the taxi images in the assets class are the they are supposed to be
+		//First image
+		for(int x=0 ; x<taxiImage1.getWidth() ; x++ )
+			for(int y=0 ; y<taxiImage1.getHeight() ; y++ )
+				assertTrue(taxiImage1.getRGB(x,y)==Assets.taxi[0].getRGB(x,y));
+		//Second image
+		for(int x=0 ; x<taxiImage2.getWidth() ; x++ )
+			for(int y=0 ; y<taxiImage2.getHeight() ; y++ )
+				assertTrue(taxiImage2.getRGB(x,y)==Assets.taxi[1].getRGB(x,y));
 	}
 }

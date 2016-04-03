@@ -18,8 +18,9 @@ import dev.game.Game;
 public class PlayerTester {
 	
 	/**
-	 * This method tests if the Player constructor initiates the Player object's width, height, x and y positions correctly.<br>
-	 * It also tests the getters and setters for position and size of the player.
+	 * The player is supposed to start exactly in the middle of the screen according to the x axis and<br>
+	 * 75 pixels above the bottom of the windows.<br>
+	 * This method tests if player object is created in the correct position according to the game object passed to it.
 	 */
 	@Test
 	public void testCreation() {
@@ -49,7 +50,9 @@ public class PlayerTester {
 	 */
 	
 	/**
-	 * This method tests if the Player moves correctly when is it commanded to move up.
+	 * The player movement takes 8 ticks to complete its movement, after that it stops and waits for a new command.<br>
+	 * This tests simulates a move up command and calls the player tick method 20 times.<br>
+	 * It tests if in the first 8 ticks it moved correctly (amount of pixels) and on the other it stay stopped, as it is supposed to.
 	 */
 	@Test
 	public void testMovingUp(){
@@ -83,7 +86,9 @@ public class PlayerTester {
 	}
 	
 	/**
-	 * This method tests if the Player moves correctly when is it commanded to move down.
+	 * The player movement takes 8 ticks to complete its movement, after that it stops and waits for a new command.<br>
+	 * This tests simulates a move down command and calls the player tick method 20 times.<br>
+	 * It tests if in the first 8 ticks it moved correctly (amount of pixels) and on the other it stay stopped, as it is supposed to.
 	 */
 	@Test
 	public void testMovingDown(){
@@ -117,7 +122,9 @@ public class PlayerTester {
 	}
 	
 	/**
-	 * This method tests if the Player moves correctly when is it commanded to move right.
+	 * The player movement takes 8 ticks to complete its movement, after that it stops and waits for a new command.<br>
+	 * This tests simulates a move right command and calls the player tick method 20 times.<br>
+	 * It tests if in the first 8 ticks it moved correctly (amount of pixels) and on the other it stay stopped, as it is supposed to.
 	 */
 	@Test
 	public void testMovingRight(){
@@ -151,7 +158,9 @@ public class PlayerTester {
 	}
 	
 	/**
-	 * This method tests if the Player moves correctly when is it commanded to move left.
+	 * The player movement takes 8 ticks to complete its movement, after that it stops and waits for a new command.<br>
+	 * This tests simulates a move left command and calls the player tick method 20 times.<br>
+	 * It tests if in the first 8 ticks it moved correctly (amount of pixels) and on the other it stay stopped, as it is supposed to.
 	 */
 	@Test
 	public void testMovingLeft(){
