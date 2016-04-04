@@ -1,8 +1,12 @@
 package dev.linkedlists;
 
 import java.awt.Graphics;
-import java.util.LinkedList;
-import dev.entities.*;
+import java.util.ArrayList;
+import dev.entities.Bus;
+import dev.entities.Car;
+import dev.entities.Entity;
+import dev.entities.Taxi;
+import dev.entities.Truck;
 import dev.game.Game;
 
 /**
@@ -12,10 +16,10 @@ import dev.game.Game;
 public class Vehicles {
 	
 	//Initiates the linked lists that will hold each of the vehicles objects
-	private LinkedList<Car> car = new LinkedList<Car>();
-	private LinkedList<Truck> truck = new LinkedList<Truck>();
-	private LinkedList<Bus> bus = new LinkedList<Bus>();
-	private LinkedList<Taxi> taxi = new LinkedList<Taxi>();
+	private ArrayList<Car> car = new ArrayList<Car>();
+	private ArrayList<Truck> truck = new ArrayList<Truck>();
+	private ArrayList<Bus> bus = new ArrayList<Bus>();
+	private ArrayList<Taxi> taxi = new ArrayList<Taxi>();
 	
 	//Create an instance of game so that the game variables can be used
 	Game game;

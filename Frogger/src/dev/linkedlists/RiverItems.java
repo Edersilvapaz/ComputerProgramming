@@ -1,8 +1,10 @@
 package dev.linkedlists;
 
 import java.awt.Graphics;
-import java.util.LinkedList;
-import dev.entities.*;
+import java.util.ArrayList;
+import dev.entities.Alligator;
+import dev.entities.Log;
+import dev.entities.Turtle;
 import dev.game.Game;
 
 /**
@@ -12,9 +14,9 @@ import dev.game.Game;
 public class RiverItems {
 	
 	//Initiate the linked lists that will hold every river item on the game
-	private LinkedList<Log> log = new LinkedList<Log>();
-	private LinkedList<Turtle> turtle = new LinkedList<Turtle>();
-	private LinkedList<Alligator> alligator = new LinkedList<Alligator>();
+	private ArrayList<Log> log = new ArrayList<Log>();
+	private ArrayList<Turtle> turtle = new ArrayList<Turtle>();
+	private ArrayList<Alligator> alligator = new ArrayList<Alligator>();
 	
 	//Create an instance of game so that the game variables can be used;
 	Game game;
