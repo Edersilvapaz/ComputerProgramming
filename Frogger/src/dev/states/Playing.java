@@ -11,7 +11,7 @@ import dev.linkedlists.*;
  * This is the class that all the actual game information, everything that happens on the screen when the game is running is defined here.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
-public class GameState extends State{
+public class Playing extends GameStates{
 	
 	//This variable is used to generate all the random values in the game
 	private Random r = new Random();
@@ -36,7 +36,7 @@ public class GameState extends State{
 	 * Initialize the variables to record the player score correctly.
 	 * @param game Game instance so that the game state can rely on the game variables.
 	 */
-	public GameState(Game game) {
+	public Playing(Game game) {
 		super(game);
 		this.game=game;
 		player = new Player(game);
@@ -109,8 +109,8 @@ public class GameState extends State{
 		}
 		
 		//Ticking all the objects that the game state contains
-		player.tick();
 		alligator.tick();
+		player.tick();
 		vehicles.tick();
 		riverItems.tick();
 	}

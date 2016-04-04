@@ -9,7 +9,7 @@ import dev.game.*;
  * A "game state" is a single situation that the game might go to, like each menu, each phase of the game.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
-public abstract class State {
+public abstract class GameStates {
 	
 	/*
 	 * This class is an abstract class, that means it is not possible to instantiate it, just extending it using other subclasses
@@ -20,14 +20,14 @@ public abstract class State {
 	protected Font font = new Font("SansSerif",Font.BOLD,20); //Temporary variable used to draw menu items
 	protected Game game;
 	
-	private static State currentState = null; //currentState - stores the current state that is being ticked and rendered on the screen
+	private static GameStates currentState = null; //currentState - stores the current state that is being ticked and rendered on the screen
 	private static boolean changeState = true; //changeState - variable used to make the transition between state more precise
 	
 	/**
 	 * Creates a new instance of the game to each game state so the the state can rely on the game variables.
 	 * @param game Instance of the game so that the game state can rely on the game variables.
 	 */
-	public State(Game game){
+	public GameStates(Game game){
 		this.game = game;
 	}
 	
@@ -46,7 +46,7 @@ public abstract class State {
 	 * Sets the current state of the game.
 	 * @param state State that the current game state has to be set to.
 	 */
-	public static void setState(State state){
+	public static void setState(GameStates state){
 		if(changeState){
 			currentState = state;
 		}
@@ -56,7 +56,7 @@ public abstract class State {
 	 * Getter for the current game state.
 	 * @return Current running game state.
 	 */
-	public static State getState(){
+	public static GameStates getState(){
 		return currentState;
 	}
 	
