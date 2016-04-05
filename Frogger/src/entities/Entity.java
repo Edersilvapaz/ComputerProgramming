@@ -156,4 +156,12 @@ public abstract class Entity {
 	public Rectangle getBounds() {
 		return bounds;
 	}
+	
+	/**
+	 * Getter for the main game object.
+	 * @return Instance of the game so the game private variables can be accessed.
+	 */
+	public Game getGame(){
+		return game;
+	}
 }

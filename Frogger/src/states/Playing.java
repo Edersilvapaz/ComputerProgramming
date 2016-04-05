@@ -41,8 +41,8 @@ public class Playing extends GameStates{
 		super(game);
 		this.game=game;
 		player = new Player(game);
-		vehicles = new Vehicles(game);
-		riverItems = new RiverItems(game);
+		vehicles = new Vehicles();
+		riverItems = new RiverItems();
 		alligator = new AlligatorBank(game);
 		game.setDefaultSpeed(1.5f);
 		

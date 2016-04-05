@@ -2,11 +2,9 @@ package linkedlists;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-
 import entities.Alligator;
 import entities.Log;
 import entities.Turtle;
-import game.Game;
 
 /**
  * This class holds the linked lists that helps the creation of the objects of the game.
@@ -19,38 +17,27 @@ public class RiverItems {
 	private ArrayList<Turtle> turtle = new ArrayList<Turtle>();
 	private ArrayList<Alligator> alligator = new ArrayList<Alligator>();
 	
-	//Create an instance of game so that the game variables can be used;
-	Game game;
-	
-	/**
-	 * Makes a copy of the game object passed to it.
-	 * @param game Instance of game so that it can rely on the game variables.
-	 */
-	public RiverItems(Game game){
-		this.game = game;
-	}
-	
 	/**
 	 * Goes through every position available on the linked links and tests the position of the object on the screen.<br>
 	 * If it is already completely out of the screen, the respective object is removed, is it is not, its tick() method is called
 	 */
 	public void tick(){
 		for(int i=0 ; i<log.size() ; i++ ){
-			if(log.get(i).getX()>game.getWidht()+log.get(i).getWidth()+1 || log.get(i).getX()<-(log.get(i).getWidth()+1))
+			if(log.get(i).getX()>log.get(i).getGame().getWidht()+log.get(i).getWidth()+1 || log.get(i).getX()<-(log.get(i).getWidth()+1))
 				removeLog(log.get(i));
 			else
 				log.get(i).tick();
 		}
 		
 		for(int i=0 ; i<turtle.size() ; i++ ){
-			if(turtle.get(i).getX()>game.getWidht()+turtle.get(i).getWidth()+1 || turtle.get(i).getX()<-(turtle.get(i).getWidth()+1))
+			if(turtle.get(i).getX()>turtle.get(i).getGame().getWidht()+turtle.get(i).getWidth()+1 || turtle.get(i).getX()<-(turtle.get(i).getWidth()+1))
 				removeTurtle(turtle.get(i));
 			else
 				turtle.get(i).tick();
 		}
 		
 		for(int i=0 ; i<alligator.size() ; i++ ){
-			if(alligator.get(i).getX()>game.getWidht()+alligator.get(i).getX()+1 || alligator.get(i).getX()<-(alligator.get(i).getWidth()+1))
+			if(alligator.get(i).getX()>alligator.get(i).getGame().getWidht()+alligator.get(i).getX()+1 || alligator.get(i).getX()<-(alligator.get(i).getWidth()+1))
 				removeAlligator(alligator.get(i));
 			else
 				alligator.get(i).tick();

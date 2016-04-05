@@ -2,13 +2,11 @@ package linkedlists;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-
 import entities.Bus;
 import entities.Car;
 import entities.Entity;
 import entities.Taxi;
 import entities.Truck;
-import game.Game;
 
 /**
  * This class holds the linked lists that helps the creation of the objects of the game.
@@ -22,45 +20,34 @@ public class Vehicles {
 	private ArrayList<Bus> bus = new ArrayList<Bus>();
 	private ArrayList<Taxi> taxi = new ArrayList<Taxi>();
 	
-	//Create an instance of game so that the game variables can be used
-	Game game;
-	
-	/**
-	 * Makes a copy of the game object passed to it.
-	 * @param game Instance of game so that it can rely on the game variables.
-	 */
-	public Vehicles(Game game){
-		this.game=game;
-	}
-	
 	/**
 	 * Goes through every position available on the linked links and tests the position of the object on the screen.<br>
 	 * If it is already completely out of the screen, the respective object is removed, is it is not, its tick() method is called
 	 */
 	public void tick(){
 		for(int i=0 ; i<car.size() ; i++ ){
-			if(	car.get(i).getX()>game.getWidht()+Entity.car_width+1 || car.get(i).getX()<-(Entity.car_width+1) )
+			if(	car.get(i).getX()>car.get(i).getGame().getWidht()+Entity.car_width+1 || car.get(i).getX()<-(Entity.car_width+1) )
 				removeCar(car.get(i));
 			else
 				car.get(i).tick();
 		}
 		
 		for(int i=0 ; i<truck.size() ; i++ ){
-			if(truck.get(i).getX()>game.getWidht()+Entity.truck_width+1||truck.get(i).getX()<-(Entity.truck_width+1))
+			if(truck.get(i).getX()>truck.get(i).getGame().getWidht()+Entity.truck_width+1||truck.get(i).getX()<-(Entity.truck_width+1))
 				removeTruck(truck.get(i));
 			else
 				truck.get(i).tick();
 		}
 		
 		for(int i=0 ; i<bus.size() ; i++ ){
-			if(bus.get(i).getX()>game.getWidht()+Entity.truck_width+1||bus.get(i).getX()<-(Entity.truck_width+1))
+			if(bus.get(i).getX()>bus.get(i).getGame().getWidht()+Entity.truck_width+1||bus.get(i).getX()<-(Entity.truck_width+1))
 				removeBus(bus.get(i));
 			else
 				bus.get(i).tick();
 		}
 		
 		for(int i=0; i<taxi.size() ; i++){
-			if(taxi.get(i).getX()>game.getWidht()+Entity.car_width+1||taxi.get(i).getX()<-(Entity.car_width+1))
+			if(taxi.get(i).getX()>taxi.get(i).getGame().getWidht()+Entity.car_width+1||taxi.get(i).getX()<-(Entity.car_width+1))
 				removeTaxi(taxi.get(i));
 			else
 				taxi.get(i).tick();
