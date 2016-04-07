@@ -3,7 +3,6 @@ package states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-
 import entities.*;
 import game.Game;
 import linkedlists.*;
@@ -124,8 +123,8 @@ public class Playing extends GameStates{
 	public void render(Graphics g) {
 		
 		//Draw the player score
-		g.setColor(Color.WHITE);
 		g.setFont(font);
+		g.setColor(Color.WHITE);
 		g.drawString("Score: "+player.getScore(),10,game.getHeight()-20);
 		
 		//Render all the objects
