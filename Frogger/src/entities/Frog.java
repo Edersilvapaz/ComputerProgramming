@@ -10,7 +10,7 @@ import graphics.Assets;
  * It extends the abstract class entity.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
-public class Player extends Entity{
+public class Frog extends Entity{
 	
 	/*
 	 * This class extends the abstract class Entity, this means that every variable, object or method
@@ -28,16 +28,12 @@ public class Player extends Entity{
 	private int necessaryMovements=8;
 	private float moveX = 27.40f/necessaryMovements;
 	private float moveY = 34f/necessaryMovements;
-
-	//these variable store the life and the score of the player
-	private int score;
-	private int life;
 	
 	/**
-	 * Defines the player size and initial position on the screen.
+	 * Defines the player size, initial position on the screen and initial life amount.
 	 * @param game Instance of game so that the player can rely on the game variables.
 	 */
-	public Player(Game game) {
+	public Frog(Game game) {
 		//Player will start always at the middle bottom of the screen and will have a fixed size
 		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height);
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
@@ -137,34 +133,12 @@ public class Player extends Entity{
 	}
 	
 	/**
-	 * Setter for the player score.
-	 * @param score Value in which the score is supposed to set.
+	 * Define what happens when the player dies, either by being hit by a vehicle, sinking in<br>
+	 * the river or time's up.
 	 */
-	public void setScore(int score){
-		this.score=score;
-	}
-	
-	/**
-	 * Getter for the player score.
-	 * @return Current player score value.
-	 */
-	public int getScore(){
-		return score;
-	}
-	
-	/**
-	 * Setter for the player life.
-	 * @param life Value in which the life has to be set.
-	 */
-	public void setLife(int life){
-		this.life=life;
-	}
-	
-	/**
-	 * Getter for the player life.
-	 * @return Current player life value.
-	 */
-	public int getLife(){
-		return life;
+	public void Death(){
+		x = (game.getWidht()-player_width)/2;
+		y = game.getHeight()-75;
+		anim=0;
 	}
 }

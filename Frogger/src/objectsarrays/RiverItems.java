@@ -1,4 +1,4 @@
-package linkedlists;
+package objectsarrays;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

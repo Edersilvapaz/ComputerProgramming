@@ -18,7 +18,7 @@ public abstract class GameStates {
 	
 	//Here all the common variables to the game states are defined
 	protected int counter; //Used to upgrade the state variables, when it is needed
-	protected Font font = new Font("SansSerif",Font.BOLD,20); //Temporary variable used to draw menu items
+	protected Font playingFont = new Font("SansSerif",Font.BOLD,18); //Temporary variable used to draw menu items
 	protected Game game;
 	
 	private static GameStates currentState = null; //currentState - stores the current state that is being ticked and rendered on the screen
