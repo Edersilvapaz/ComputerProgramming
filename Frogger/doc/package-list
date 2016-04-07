@@ -1,9 +1,8 @@
-dev.display
-dev.entities
-dev.game
-dev.graphics
-dev.input
-dev.linkedlists
-dev.states
-testing.entities
-testing.graphics
+display
+entities
+game
+graphics
+input
+linkedlists
+score
+states
