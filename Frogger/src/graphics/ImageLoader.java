@@ -18,7 +18,7 @@ public class ImageLoader {
 	public static BufferedImage loadImage(String fileName){
 		try {
 			//return the buffered image
-			return ImageIO.read(ImageLoader.class.getResource("/"+fileName+".png"));
+			return ImageIO.read(ImageLoader.class.getResource("/SpriteSheets/"+fileName+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		System.exit(1);
