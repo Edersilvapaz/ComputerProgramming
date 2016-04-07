@@ -1,7 +1,7 @@
 package score;
 
 /**
- * 
+ * This class holds the arrays that store the name and the score of the five high scores of the game.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class Score {
@@ -12,7 +12,7 @@ public class Score {
 	public static int[] score = new int[5];
 	
 	/**
-	 * 
+	 * Initiate the high scores of the game according to the data saved in the HighScores file in the resource folder.
 	 */
 	public static void init(){
 		
@@ -23,7 +23,7 @@ public class Score {
 	}
 	
 	/**
-	 * 
+	 * Closes the scanner object used to read from the file.
 	 */
 	public static void close(){
 		file.close();
