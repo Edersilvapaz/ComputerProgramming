@@ -3,6 +3,8 @@ package states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+
+import collisiondetection.Collision;
 import entities.*;
 import game.Game;
 import graphics.Assets;
@@ -19,8 +21,7 @@ public class Playing extends GameStates{
 	private Random r = new Random();
 	
 	//Here all the game objects are defined 
-	private Game game; //game instance to use game variables
-	private Player player;
+	private Player player; //player object
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
 	private AlligatorBank alligator; //instance of the alligator that stays on the river bank
@@ -29,7 +30,7 @@ public class Playing extends GameStates{
 	private int gen; //used to decide which kind of object within the linked list to create
 	private int position; //used to decide the random position of each created object
 	private int timer; //used to implement the timer of each phase.
-	private int playerSelect;
+	private int frogIndex; //used to which between frogs during the game
 	
 	//these variable store the life and the score of the player
 	private int score;
@@ -41,31 +42,56 @@ public class Playing extends GameStates{
 	
 	/**
 	 * Creates a new instance of all objects and instantiate the game object passed to it.<br>
-	 * Initialize the variables to record the player score correctly.<br>
-	 * Initialize the timer of the game.
 	 * @param game Game instance so that the game state can rely on the game variables.
 	 */
 	public Playing(Game game) {
 		super(game);
 		this.game=game;
-		
-		player = new Player();
-		for(int x=0; x<5 ; x++)
-			player.addFrog(new Frog(game));
-		
+		player = new Player(game);		
 		vehicles = new Vehicles();
 		riverItems = new RiverItems();
 		alligator = new AlligatorBank(game);
 		game.setDefaultSpeed(1.5f);
+		
+		levelBegin();
+	}
+	
+	/**
+	 * Starts every different level of the game.<br>
+	 * Initialize the variables to record the player score correctly.<br>
+	 * Initialize the timer of the game.
+	 */
+	public void levelBegin(){
 		
 		for(int i=0 ; i<playerPosition.length ; i++){
 			playerPosition[i]=111+i*34;
 			scorePermition[i]=true;
 		}
 		
+		for(int x=0 ; x<5 ; x++)
+			player.getFrog(x).goToInitialPosition();
+		
 		timer=3600;
+		frogIndex=0;
 		life=3;
-		playerSelect=0;
+	}
+	
+	/**
+	 * Called every time a frog reaches a river bank,
+	 * call the next frog to the game and resets the variables used for score tracking. 
+	 */
+	public void changeFrog(){
+		frogIndex++;
+		
+		for(int i=0 ; i<playerPosition.length ; i++){
+			playerPosition[i]=111+i*34;
+			scorePermition[i]=true;
+		}
+		
+		//If every frog reached its river bank, start a new level
+		if(frogIndex==5){
+			levelBegin();
+		}
 	}
 	
 	/**
@@ -75,14 +101,7 @@ public class Playing extends GameStates{
 	 */
 	@Override
 	public void tick() {
-		timer--;
 		counter++;
-		
-		//If the time of the level is up, kill the player and go back to the beginning of the level;
-		if(timer==0){
-			player.getFrog(playerSelect).Death();
-			timer=3600;
-		}
 		
 		/*
 		 * Every time counter is equal to 30
@@ -118,6 +137,32 @@ public class Playing extends GameStates{
 				vehicles.addTaxi(new Taxi(game,position));
 		}
 		
+		timer--;
+		
+		//If the time of the level is up, kill the player and go back to the beginning of the level
+		if(timer==0){
+			for(int x=0 ; x<5 ; x++)
+				player.Death();
+			life--;
+			timer=3600;
+			frogIndex=0;
+		}
+		
+		//every time a frog gets to a bank, start to play with the next frog
+		if(player.getFrog(frogIndex).getY()==77){
+			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<0.1f){
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<0.1f){
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<0.1f){
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<0.1f){
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<0.1f){
+				changeFrog();
+			}
+		}
+		
 		/*
 		 * This loop goes through all the position the frog can reach in the y axis
 		 * If the frog is there and its respective boolean variable is equal to true
@@ -125,15 +170,34 @@ public class Playing extends GameStates{
 		 * that getting to that position again wont increase anything on the player's score
 		 */
 		for(int i=0 ; i<playerPosition.length ; i++){
-			if(player.getFrog(playerSelect).getY()==playerPosition[i] && scorePermition[i]==true){
-				score+=20;
+			if(player.getFrog(frogIndex).getY()==playerPosition[i] && scorePermition[i]==true){
+				score+=5;
 				scorePermition[i]=false;
 			}
 		}
 		
+		//Starting collision detecting stuff
+		//Collision with vehicles already detected
+		if(Collision.frogAndCars(player.getFrog(frogIndex),vehicles.getCars())){
+			player.getFrog(frogIndex).goToInitialPosition();
+			life--;
+		}
+		if(Collision.frogAndTrucks(player.getFrog(frogIndex),vehicles.getTrucks())){
+			player.getFrog(frogIndex).goToInitialPosition();
+			life--;	
+		}
+		if(Collision.frogAndBuses(player.getFrog(frogIndex),vehicles.getBuses())){
+			player.getFrog(frogIndex).goToInitialPosition();
+			life--;
+		}
+		if(Collision.frogAndTaxis(player.getFrog(frogIndex),vehicles.getTaxis())){
+			player.getFrog(frogIndex).goToInitialPosition();
+			life--;
+		}
+		
 		//Ticking all the objects that the game state contains
 		alligator.tick();
-		player.getFrog(playerSelect).tick();
+		player.getFrog(frogIndex).tick();;
 		vehicles.tick();
 		riverItems.tick();
 	}
@@ -171,7 +235,8 @@ public class Playing extends GameStates{
 		//Render all the objects
 		riverItems.render(g);
 		alligator.render(g);
-		player.getFrog(playerSelect).render(g);
+		for(int x=0 ; x<=frogIndex ; x++) //render just the frogs that are on the river bank or current playing
+			player.getFrog(x).render(g);
 		vehicles.render(g);
 	}
 }

@@ -154,7 +154,7 @@ public abstract class Entity {
 	 * @return Entity's rectangle object that defines the are that the enemy holds in the screen.
 	 */
 	public Rectangle getBounds() {
-		return bounds;
+		return new Rectangle(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 	
 	/**

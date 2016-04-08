@@ -1,7 +1,6 @@
 package entities;
 
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -39,6 +38,12 @@ public class Taxi extends Entity{
 			x=game.getWidht()+width;
 			image = 0;
 		}
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=3;
+		bounds.y=3;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-2*bounds.y;
 	}
 
 	/**

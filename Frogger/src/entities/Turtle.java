@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
@@ -42,6 +43,12 @@ public class Turtle extends Entity{
 			image=0;
 			speed=-game.getDefaultSpeed();
 		}
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=2;
+		bounds.y=2;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-2*bounds.y;
 	}
 
 	/**
@@ -66,12 +73,9 @@ public class Turtle extends Entity{
 	@Override
 	public void render(Graphics g) {
 		//this if statement draw the amount of turtle needed according to the side they are moving to;
-		if(speed<0){
-			for(int i=0 ; i<amountTurtle ; i++ )
-				g.drawImage(Assets.turtle[image][anim],(int)(x-i*turtle_width),(int)y,turtle_width,height,null);
-		}else{
-			for(int i=0 ; i<amountTurtle ; i++ )
-				g.drawImage(Assets.turtle[image][anim],(int)(x+i*turtle_width),(int)y,turtle_width,height,null);
-		}
+		for(int i=0 ; i<amountTurtle ; i++ )
+			g.drawImage(Assets.turtle[image][anim],(int)(x+i*turtle_width),(int)y,turtle_width,height,null);
+		g.setColor(Color.MAGENTA);
+		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 }

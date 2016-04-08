@@ -1,12 +1,13 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
 import graphics.Assets;
 
 /**
- * This is the class that defines the player, i.e., the frog.<br>
+ * This is the class that defines the frogs that are used by the player.<br>
  * It extends the abstract class entity.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
@@ -18,7 +19,7 @@ public class Frog extends Entity{
 	 */
 	
 	//These boolean variables are used make the frog move on the screen
-	private boolean move = true;
+	private boolean move = false;
 	private boolean moveUp = false;
 	private boolean moveDown = false;
 	private boolean moveLeft = false;
@@ -37,6 +38,12 @@ public class Frog extends Entity{
 		//Player will start always at the middle bottom of the screen and will have a fixed size
 		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height);
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=3;
+		bounds.y=3;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-2*bounds.y;
 	}
 	
 	/**
@@ -130,15 +137,25 @@ public class Frog extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
+		g.setColor(Color.BLUE);
+		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 	
 	/**
 	 * Define what happens when the player dies, either by being hit by a vehicle, sinking in<br>
 	 * the river or time's up.
 	 */
-	public void Death(){
+	public void goToInitialPosition(){
 		x = (game.getWidht()-player_width)/2;
 		y = game.getHeight()-75;
 		anim=0;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isStopped(){
+		return !moveUp&&!moveDown&&!moveLeft&&!moveRight;
 	}
 }

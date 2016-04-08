@@ -135,4 +135,36 @@ public class Vehicles {
 	public void removeTaxi(Taxi taxi){
 		this.taxi.remove(taxi);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Car> getCars(){
+		return car;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Truck> getTrucks(){
+		return truck;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Bus> getBuses(){
+		return bus;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Taxi> getTaxis(){
+		return taxi;
+	}
 }

@@ -1,7 +1,6 @@
 package entities;
 
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -40,6 +39,12 @@ public class Car extends Entity{
 			x=game.getWidht()+width;
 			image = r.nextInt(4);
 		}
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=3;
+		bounds.y=3;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-2*bounds.y;
 	}
 	
 	/**
@@ -51,7 +56,7 @@ public class Car extends Entity{
 	}
 	
 	/**
-	 * Draws the alligator on the screen according to its x, y position and the image defined by the constructor.
+	 * Draws the car on the screen according to its x, y position and the image defined by the constructor.
 	 */
 	@Override
 	public void render(Graphics g) {

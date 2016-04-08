@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
@@ -38,6 +39,12 @@ public class Alligator extends Entity{
 			image=0;
 			speed=-game.getDefaultSpeed();
 		}
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=3;
+		bounds.y=13;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-15;
 	}
 	
 	/**
@@ -61,5 +68,7 @@ public class Alligator extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.alligator[image][anim],(int)x,(int)y,width,height,null);
+		g.setColor(Color.GREEN);
+		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 }

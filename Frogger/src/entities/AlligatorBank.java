@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Game;
@@ -30,6 +31,12 @@ public class AlligatorBank extends Entity{
 		//Its x position will be in one of the river banks, defined randomly by the r object and the expression on line 31
 		super(game,0,82,alliBank_width,alliBank_height);
 		x=25f+82.2f*r.nextInt(5);
+		
+		//setting the rectangle variables used to collision detection
+		bounds.x=1;
+		bounds.y=1;
+		bounds.width=width-2*bounds.x;
+		bounds.height=height-2*bounds.y;
 	}
 	
 	/**
@@ -66,5 +73,7 @@ public class AlligatorBank extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.alligatorBank[anim],(int)x,(int)y,width,height,null);
+		g.setColor(Color.GRAY);
+		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 }
