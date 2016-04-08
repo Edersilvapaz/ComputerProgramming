@@ -2,6 +2,7 @@ package collisiondetection;
 
 import java.util.ArrayList;
 import entities.*;
+import objectsarrays.*;
 
 /**
  * 
@@ -16,7 +17,41 @@ public class Collision {
 	 * @param vehicles
 	 * @return
 	 */
-	public static boolean frogAndCars(Frog frog,ArrayList<Car> car){
+	public boolean frogAndVehicles(Frog frog,Vehicles vehicles){
+		if(frogAndCars(frog,vehicles.getCars())) //Check for collisions with cars
+			return true;
+		if(frogAndTrucks(frog,vehicles.getTrucks())) //check for collisions with trucks
+			return true;
+		if(frogAndBuses(frog,vehicles.getBuses())) //check for collisions with buses
+			return true;
+		if(frogAndTaxis(frog,vehicles.getTaxis())) //check for collision with taxis
+			return true;
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param frog
+	 * @param log
+	 * @return
+	 */
+	public boolean frogAndLogs(Frog frog,ArrayList<Log> log){
+		for(int x=0 ; x<log.size() ; x++){
+			if(log.get(x)!=null){
+				if(log.get(x).getBounds().intersects(frog.getBounds()))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param frog
+	 * @param vehicles
+	 * @return
+	 */
+	private boolean frogAndCars(Frog frog,ArrayList<Car> car){
 		for(int x=0 ; x<car.size() ; x++){
 			if(car.get(x)!=null){
 				if(car.get(x).getBounds().intersects(frog.getBounds()))
@@ -32,7 +67,7 @@ public class Collision {
 	 * @param truck
 	 * @return
 	 */
-	public static boolean frogAndTrucks(Frog frog,ArrayList<Truck> truck){
+	private boolean frogAndTrucks(Frog frog,ArrayList<Truck> truck){
 		for(int x=0 ; x<truck.size() ; x++){
 			if(truck.get(x)!=null){
 				if(truck.get(x).getBounds().intersects(frog.getBounds()))
@@ -48,7 +83,7 @@ public class Collision {
 	 * @param bus
 	 * @return
 	 */
-	public static boolean frogAndBuses(Frog frog,ArrayList<Bus> bus){
+	private boolean frogAndBuses(Frog frog,ArrayList<Bus> bus){
 		for(int x=0 ; x<bus.size() ; x++){
 			if(bus.get(x)!=null){
 				if(bus.get(x).getBounds().intersects(frog.getBounds()))
@@ -64,7 +99,7 @@ public class Collision {
 	 * @param taxi
 	 * @return
 	 */
-	public static boolean frogAndTaxis(Frog frog,ArrayList<Taxi> taxi){
+	private boolean frogAndTaxis(Frog frog,ArrayList<Taxi> taxi){
 		for(int x=0 ; x<taxi.size() ; x++){
 			if(taxi.get(x)!=null){
 				if(taxi.get(x).getBounds().intersects(frog.getBounds()))
@@ -73,5 +108,4 @@ public class Collision {
 		}
 		return false;
 	}
-
 }

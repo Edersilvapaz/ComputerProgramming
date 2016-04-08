@@ -106,4 +106,28 @@ public class RiverItems {
 	public void removeAlligator(Alligator alligator){
 		this.alligator.remove(alligator);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Log> getLogs(){
+		return log;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Turtle> getTurtles(){
+		return turtle;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Alligator> getAlligators(){
+		return alligator;
+	}
 }
