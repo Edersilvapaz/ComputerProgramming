@@ -28,8 +28,6 @@ public class Playing extends GameStates{
 	private Collision collisionDetector; //
 	
 	//These are the variables used to generate the items on the screen
-	private int gen; //used to decide which kind of object within the linked list to create
-	private int position; //used to decide the random position of each created object
 	private int timer; //used to implement the timer of each phase.
 	private int frogIndex; //used to which between frogs during the game
 	
@@ -65,7 +63,9 @@ public class Playing extends GameStates{
 	 */
 	@Override
 	public void tick() {
-		counter++;
+		for(int x=0 ; x<counter.length ; x++)
+			counter[x]++;
+		
 		timer--;
 		
 		generateRoadAndRiverObjects(); //Generate objects vehicles and river items, if necessary
@@ -76,31 +76,13 @@ public class Playing extends GameStates{
 		
 		checkForCollisions(); //check for collisions in the game
 		
+		checkFrogPosition(); //check if the frog got to a river bank position
+		
 		//Ticking all the objects that the game state contains
 		alligator.tick();
-		player.getFrog(frogIndex).tick();;
+		if(timer<=7200)player.getFrog(frogIndex).tick();;
 		vehicles.tick();
 		riverItems.tick();
-		
-		//every time a frog gets to a bank, start to play with the next frog
-		if(player.getFrog(frogIndex).getY()==77){
-			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<5){
-				player.getFrog(frogIndex).goToPosition(21.6f,77);
-				changeFrog();
-			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<5){
-				player.getFrog(frogIndex).goToPosition(103.79f,77);
-				changeFrog();
-			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<5){
-				player.getFrog(frogIndex).goToPosition(186,77);
-				changeFrog();
-			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<5){
-				player.getFrog(frogIndex).goToPosition(268.3f,77);
-				changeFrog();
-			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<5){
-				player.getFrog(frogIndex).goToPosition(350.4f,77);
-				changeFrog();
-			}
-		}
 	}
 	
 	/**
@@ -127,7 +109,7 @@ public class Playing extends GameStates{
 		else
 			g.setColor(Color.GREEN);
 		
-		g.fillRect(100,game.getHeight()-20,(int)(timer/25.0f),15);
+		if(timer<=7200)g.fillRect(100,game.getHeight()-20,(int)(timer/25.0f),15);
 		
 		//Draw the highest score obtained in the game
 		g.setColor(Color.WHITE);
@@ -136,9 +118,19 @@ public class Playing extends GameStates{
 		//Render all the objects
 		riverItems.render(g);
 		alligator.render(g);
-		for(int x=0 ; x<=frogIndex ; x++) //render just the frogs that are on the river bank or current playing
-			player.getFrog(x).render(g);
+		player.getFrog(frogIndex).render(g);
+		for(int x=0 ; x<5 ; x++){
+			if(player.getFrog(x).getY()==77)
+				player.getFrog(x).render(g); //render just the frogs that are on the river bank
+		}
 		vehicles.render(g);
+		
+		if(timer>7320)
+			g.drawString("READY",game.getWidht()/2-30,game.getHeight()/2-10);
+		else if(timer>7260)
+			g.drawString("SET",game.getWidht()/2-17,game.getHeight()/2-10);
+		else if(timer>7200)
+			g.drawString("GO!!!!",game.getWidht()/2-17,game.getHeight()/2-10);
 	}
 	
 	/**
@@ -156,7 +148,7 @@ public class Playing extends GameStates{
 		for(int x=0 ; x<5 ; x++)
 			player.getFrog(x).goToInitialPosition();
 		
-		timer=7200;
+		timer=7380;
 		frogIndex=0;
 		life=3;
 	}
@@ -166,55 +158,116 @@ public class Playing extends GameStates{
 	 * call the next frog to the game and resets the variables used for score tracking. 
 	 */
 	private void changeFrog(){
-		frogIndex++;
+		int x;
+		for(x=0 ; x<5 ; x++){
+			if(player.getFrog(x).getY()!=77){
+				frogIndex=x;
+				break;
+			}
+		}
+		
+		//If every frog reached its river bank, start a new level
+		if(x==5){
+			levelBegin();
+		}
 		
 		for(int i=0 ; i<playerPosition.length ; i++){
 			playerPosition[i]=111+i*34;
 			scorePermition[i]=true;
 		}
-		
-		//If every frog reached its river bank, start a new level
-		if(frogIndex==5){
-			levelBegin();
+	}
+	
+	private void checkFrogPosition(){
+		//every time a frog gets to a bank, start to play with the next frog
+		if(player.getFrog(frogIndex).getY()==77){
+			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<10){
+				player.getFrog(frogIndex).goToPosition(21.6f,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<10){
+				player.getFrog(frogIndex).goToPosition(103.79f,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<10){
+				player.getFrog(frogIndex).goToPosition(186,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<10){
+				player.getFrog(frogIndex).goToPosition(268.3f,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<50){
+				player.getFrog(frogIndex).goToPosition(350.4f,77);
+				changeFrog();
+			}
 		}
 	}
 	
 	/**
 	 * 
 	 */
-	private void generateRoadAndRiverObjects(){
-		/*
-		 * Every time counter is equal to 30
-		 * 		1.	Reset counter to 0
-		 * 		2.	Generate a new random number between 0 and 3
-		 * 		3.	Increase the position variable
-		 * 		4.	According to the number generated, create the an object in the currently position value
-		 * 		OBS.: The position variable keeps going from 0 to 4 so that in every iteration an object is created in a different line
-		 */
+	private void generateRoadAndRiverObjects(){		
+		if(counter[0]==180){
+			counter[0]=0;
+			if(r.nextInt(7)==3)
+				riverItems.addAlligator(new Alligator(game,0));
+			else
+				riverItems.addLog(new Log(game,0,r.nextInt(41)+100));
+		}
 		
-		if(counter==30){
-			counter=0;
-			gen = r.nextInt(4);
-			
-			position++;
-			if(position==5)
-				position=0;
-			
-			if(gen==0 || gen==1)
-				riverItems.addLog(new Log(game,position,r.nextInt(81)+75));
-			else if(gen==2)
-				riverItems.addTurtle(new Turtle(game,position,r.nextInt(2)+2));
+		if(counter[1]==120){
+			counter[1]=0;
+			if(r.nextInt(7)==3)
+				riverItems.addAlligator(new Alligator(game,1));
 			else
-				riverItems.addAlligator(new Alligator(game,position));
-			
-			if(gen==0)
-				vehicles.addCar(new Car(game,position));
-			else if(gen==1)
-				vehicles.addTruck(new Truck(game,position));
-			else if(gen==2)
-				vehicles.addBus(new Bus(game,position));
+				riverItems.addTurtle(new Turtle(game,1,r.nextInt(3)+2));
+		}
+		
+		if(counter[2]==140){
+			counter[2]=0;
+			if(r.nextInt(7)==3)
+				riverItems.addAlligator(new Alligator(game,2));
 			else
-				vehicles.addTaxi(new Taxi(game,position));
+				riverItems.addLog(new Log(game,2,r.nextInt(41)+100));
+		}
+		
+		if(counter[3]==90){
+			counter[3]=0;
+			if(r.nextInt(4)==3)
+				riverItems.addAlligator(new Alligator(game,3));
+			else
+				riverItems.addTurtle(new Turtle(game,3,r.nextInt(2)+2));
+		}
+		
+		if(counter[4]==100){
+			counter[4]=0;
+			riverItems.addLog(new Log(game,4,r.nextInt(41)+80));
+		}
+		
+		if(counter[5]==120){
+			counter[5]=0;
+			vehicles.addCar(new Car(game,4));
+		}
+		
+		if(counter[6]==160){
+			counter[6]=0;
+			vehicles.addTruck(new Truck(game,3));
+		}
+		
+		if(counter[7]>=100){
+			if(counter[7]==100){
+				vehicles.addCar(new Car(game,2));
+			}
+			if(counter[7]==140){
+				vehicles.addCar(new Car(game,2));
+				counter[7]=0;
+			}
+		}
+		
+		if(counter[8]==150){
+			counter[8]=0;
+			vehicles.addBus(new Bus(game,1));
+		}
+		
+		if(counter[9]==160){
+			counter[9]=0;
+			vehicles.addTaxi(new Taxi(game,0));
 		}
 	}
 	
@@ -244,7 +297,7 @@ public class Playing extends GameStates{
 		if(timer==0){
 			player.Death();
 			life--;
-			timer=7200;
+			timer=7380;
 			frogIndex=0;
 		}
 	}
@@ -273,9 +326,18 @@ public class Playing extends GameStates{
 				player.getFrog(frogIndex).setX(riverItems.getTurtles().get(turtleIndex).getSpeed());	
 			}else if(alligatorIndex >=0){
 				player.getFrog(frogIndex).setX(riverItems.getAlligators().get(alligatorIndex).getSpeed());
+			}else if(collisionDetector.frogAndAlligatorMouth(player.getFrog(frogIndex),riverItems.getAlligators())){
+				player.getFrog(frogIndex).goToInitialPosition();
 			}else{
 				life--;
 				player.getFrog(frogIndex).goToInitialPosition();
+			}
+		}
+		
+		//
+		for(int x=0 ; x<5 ; x++){
+			if(collisionDetector.frogAndAlligatorBank(player.getFrog(x),alligator)){
+				player.getFrog(x).goToInitialPosition();
 			}
 		}
 	}

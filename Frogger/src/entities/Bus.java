@@ -28,7 +28,7 @@ public class Bus extends Entity{
 		
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction 
-		if(y==417||y==451){
+		if(y==417||y==349){
 			speed = game.getDefaultSpeed()+0.15f;
 			x=-width;
 			image = r.nextInt(2)+2;

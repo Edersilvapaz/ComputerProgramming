@@ -1,8 +1,6 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -19,7 +17,7 @@ public class AlligatorBank extends Entity{
 	 * that it contains can be used by this one, as long as it is defined as protected
 	 */
 	
-	private final int time = 600; //Holds how much time the alligator stays in a respective bank
+	private final int time = 1800; //Holds how much time the alligator stays in a respective bank
 	
 	/**
 	 * Defines the river bank alligator's width, height.<br>
@@ -59,11 +57,11 @@ public class AlligatorBank extends Entity{
 			anim=1;
 		else if(counter==15)
 			anim=2;
-		else if(counter==time-70)
+		else if(counter==255)
 			anim=1;
-		else if(counter==time-65)
+		else if(counter==260)
 			anim=0;
-		else if(counter==time-60)
+		else if(counter==265)
 			anim=3;
 	}
 	
@@ -73,7 +71,16 @@ public class AlligatorBank extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.alligatorBank[anim],(int)x,(int)y,width,height,null);
-		g.setColor(Color.GRAY);
-		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isInTheSurface(){
+		if(anim==2)
+			return true;
+		else
+			return false;
 	}
 }

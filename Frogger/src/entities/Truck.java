@@ -28,7 +28,7 @@ public class Truck extends Entity{
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction
 		//It also defines randomly what image is going to be used to draw the truck
-		if(y==417||y==451){
+		if(y==417||y==349){
 			speed = game.getDefaultSpeed();
 			x=-width;
 			image = r.nextInt(4)+4;

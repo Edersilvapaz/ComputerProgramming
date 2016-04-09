@@ -1,8 +1,7 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
+import java.awt.Rectangle;
 import game.Game;
 import graphics.Assets;
 
@@ -17,7 +16,9 @@ public class Alligator extends Entity{
 	 * This class extends the abstract class Entity, this means that every variable, object or method
 	 * that it contains can be used by this one, as long as it is defined as protected
 	 */
-		
+	
+	private Rectangle headBounds;
+	
 	/**
 	 * Defines the alligator's width, height, initial position, speed and direction in which the alligator has to move to.
 	 * @param game Instance of the game so the alligator can rely on games variables.
@@ -27,7 +28,7 @@ public class Alligator extends Entity{
 		//Its y position will be in one of the five lines that the lake has, when y is 100,134,168,202, or 236 and it will be fixed
 		//This position is defined according to the pos variable that is passed to it
 		super(game,0,100+34*pos,alli_width,alli_height);
-		
+		headBounds = new Rectangle();
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction 
 		if(y==202||y==134){
@@ -36,12 +37,14 @@ public class Alligator extends Entity{
 			speed = game.getDefaultSpeed();
 			//setting the rectangle variables used to collision detection
 			bounds.x=10;
-						
+			headBounds.x=60;
+			
 		}else{
 			x=game.getWidht()+width;
 			image=0;
 			speed=-game.getDefaultSpeed();
 			//setting the rectangle variables used to collision detection
+			headBounds.x=10;
 			bounds.x=30;
 		}
 		
@@ -49,6 +52,9 @@ public class Alligator extends Entity{
 		bounds.width=width-40;
 		bounds.y=17;
 		bounds.height=height-25;
+		headBounds.y=17;
+		headBounds.width=10;
+		headBounds.height=10;
 	}
 	
 	/**
@@ -72,7 +78,13 @@ public class Alligator extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.alligator[image][anim],(int)x,(int)y,width,height,null);
-		g.setColor(Color.GREEN);
-		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Rectangle getHeadBounds(){
+		return new Rectangle(headBounds.x+(int)x,headBounds.y+(int)y,headBounds.width,headBounds.height);
 	}
 }

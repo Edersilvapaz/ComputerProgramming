@@ -32,6 +32,35 @@ public class Collision {
 	/**
 	 * 
 	 * @param frog
+	 * @param alligator
+	 * @return
+	 */
+	public boolean frogAndAlligatorMouth(Frog frog,ArrayList<Alligator> alligator){
+		for(int x=0 ; x<alligator.size() ; x++){
+			if(alligator.get(x)!=null){
+				if(alligator.get(x).getHeadBounds().intersects(frog.getBounds()))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param frog
+	 * @param alligator
+	 * @return
+	 */
+	public boolean frogAndAlligatorBank(Frog frog,AlligatorBank alligator){
+		if(alligator.isInTheSurface())
+			if(alligator.getBounds().intersects(frog.getBounds()))
+					return true;
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param frog
 	 * @param log
 	 * @return
 	 */

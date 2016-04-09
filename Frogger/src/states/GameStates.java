@@ -17,7 +17,7 @@ public abstract class GameStates {
 	 */
 	
 	//Here all the common variables to the game states are defined
-	protected int counter; //Used to upgrade the state variables, when it is needed
+	protected int[] counter = new int[10]; //Used to upgrade the state variables, when it is needed
 	protected Font playingFont = new Font("SansSerif",Font.BOLD,18); //Temporary variable used to draw menu items
 	protected Game game;
 	
