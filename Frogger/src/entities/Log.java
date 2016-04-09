@@ -1,8 +1,6 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -41,8 +39,8 @@ public class Log extends Entity{
 		}
 		
 		//setting the rectangle variables used to collision detection
-		bounds.x=3;
-		bounds.y=3;
+		bounds.x=8;
+		bounds.y=6;
 		bounds.width=width-2*bounds.x;
 		bounds.height=height-2*bounds.y;
 	}
@@ -62,7 +60,5 @@ public class Log extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.log,(int)x,(int)y,width,height,null);
-		g.setColor(Color.BLACK);
-		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 }

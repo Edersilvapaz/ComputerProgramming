@@ -1,8 +1,6 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -40,8 +38,8 @@ public class Frog extends Entity{
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
 		
 		//setting the rectangle variables used to collision detection
-		bounds.x=3;
-		bounds.y=3;
+		bounds.x=6;
+		bounds.y=6;
 		bounds.width=width-2*bounds.x;
 		bounds.height=height-2*bounds.y;
 	}
@@ -137,8 +135,6 @@ public class Frog extends Entity{
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
-		g.setColor(Color.BLUE);
-		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 	
 	/**
@@ -153,9 +149,27 @@ public class Frog extends Entity{
 	
 	/**
 	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void goToPosition(float x,float y){
+		this.x=x;
+		this.y=y;
+	}
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public boolean isStopped(){
-		return !moveUp&&!moveDown&&!moveLeft&&!moveRight;
+		return !moveUp&&!moveDown;
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 */
+	public void setX(float speed){
+		x+=speed;
 	}
 }

@@ -35,14 +35,49 @@ public class Collision {
 	 * @param log
 	 * @return
 	 */
-	public boolean frogAndLogs(Frog frog,ArrayList<Log> log){
+	public int frogAndLogs(Frog frog,ArrayList<Log> log){
 		for(int x=0 ; x<log.size() ; x++){
 			if(log.get(x)!=null){
-				if(log.get(x).getBounds().intersects(frog.getBounds()))
-					return true;
+				if(log.get(x).getBounds().intersects(frog.getBounds())){
+					return x;
+				}
 			}
 		}
-		return false;
+		return -1;
+	}
+	
+	/**
+	 * 
+	 * @param frog
+	 * @param turtle
+	 * @return
+	 */
+	public int frogAndTurtles(Frog frog,ArrayList<Turtle> turtle){
+		for(int x=0 ; x<turtle.size() ; x++){
+			if(turtle.get(x)!=null){
+				if(turtle.get(x).getBounds().intersects(frog.getBounds())){
+					return x;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * 
+	 * @param frog
+	 * @param alligator
+	 * @return
+	 */
+	public int frogAndAlligators(Frog frog,ArrayList<Alligator> alligator){
+		for(int x=0 ; x<alligator.size() ; x++){
+			if(alligator.get(x)!=null){
+				if(alligator.get(x).getBounds().intersects(frog.getBounds())){
+					return x;
+				}
+			}
+		}
+		return -1;
 	}
 	
 	/**

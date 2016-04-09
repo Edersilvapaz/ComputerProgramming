@@ -25,7 +25,7 @@ public class Playing extends GameStates{
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
 	private AlligatorBank alligator; //instance of the alligator that stays on the river bank
-	private Collision collisionDetector;
+	private Collision collisionDetector; //
 	
 	//These are the variables used to generate the items on the screen
 	private int gen; //used to decide which kind of object within the linked list to create
@@ -74,7 +74,7 @@ public class Playing extends GameStates{
 		
 		checkTimer(); //check for the end of the game timer
 		
-		checkForCollisions();
+		checkForCollisions(); //check for collisions in the game
 		
 		//Ticking all the objects that the game state contains
 		alligator.tick();
@@ -83,13 +83,24 @@ public class Playing extends GameStates{
 		riverItems.tick();
 		
 		//every time a frog gets to a bank, start to play with the next frog
-		if(player.getFrog(frogIndex).getY()==77)
-			if(		Math.abs(player.getFrog(frogIndex).getX()-21.6f)<0.1f || 
-					Math.abs(player.getFrog(frogIndex).getX()-103.79f)<0.1f ||
-					Math.abs(player.getFrog(frogIndex).getX()-186)<0.1f ||
-					Math.abs(player.getFrog(frogIndex).getX()-268.3f)<0.1f ||
-					Math.abs(player.getFrog(frogIndex).getX()-350.4f)<0.1f	)
+		if(player.getFrog(frogIndex).getY()==77){
+			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<5){
+				player.getFrog(frogIndex).goToPosition(21.6f,77);
 				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<5){
+				player.getFrog(frogIndex).goToPosition(103.79f,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<5){
+				player.getFrog(frogIndex).goToPosition(186,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<5){
+				player.getFrog(frogIndex).goToPosition(268.3f,77);
+				changeFrog();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<5){
+				player.getFrog(frogIndex).goToPosition(350.4f,77);
+				changeFrog();
+			}
+		}
 	}
 	
 	/**
@@ -111,12 +122,12 @@ public class Playing extends GameStates{
 		//Draw the timer bar on the screen
 		if(timer<600)
 			g.setColor(Color.RED);
-		else if(timer<2400)
+		else if(timer<3000)
 			g.setColor(Color.YELLOW);
 		else
 			g.setColor(Color.GREEN);
 		
-		g.fillRect(100,game.getHeight()-20,(int)(timer/12.7f),15);
+		g.fillRect(100,game.getHeight()-20,(int)(timer/25.0f),15);
 		
 		//Draw the highest score obtained in the game
 		g.setColor(Color.WHITE);
@@ -145,7 +156,7 @@ public class Playing extends GameStates{
 		for(int x=0 ; x<5 ; x++)
 			player.getFrog(x).goToInitialPosition();
 		
-		timer=3600;
+		timer=7200;
 		frogIndex=0;
 		life=3;
 	}
@@ -190,7 +201,7 @@ public class Playing extends GameStates{
 				position=0;
 			
 			if(gen==0 || gen==1)
-				riverItems.addLog(new Log(game,position,r.nextInt(81)+50));
+				riverItems.addLog(new Log(game,position,r.nextInt(81)+75));
 			else if(gen==2)
 				riverItems.addTurtle(new Turtle(game,position,r.nextInt(2)+2));
 			else
@@ -233,7 +244,7 @@ public class Playing extends GameStates{
 		if(timer==0){
 			player.Death();
 			life--;
-			timer=3600;
+			timer=7200;
 			frogIndex=0;
 		}
 	}
@@ -242,14 +253,30 @@ public class Playing extends GameStates{
 	 * 
 	 */
 	private void checkForCollisions(){
-		//Starting collision detecting stuff
+		
 		//Collision with vehicles already detected
 		if(player.getFrog(frogIndex).isStopped()&&collisionDetector.frogAndVehicles(player.getFrog(frogIndex),vehicles)){
 			life--;
 			player.getFrog(frogIndex).goToInitialPosition();
 		}
 		
-		//if(player.getFrog(frogIndex).isStopped()&&collisionDetector.fronAndLogs(player.getFrog(frogIndex),riverItems.getLogs()))
-			//System.out.println("yeah!!!");
+		//Test for collisions; is there is, get the index number of the object that is colliding with the frog
+		int logIndex = collisionDetector.frogAndLogs(player.getFrog(frogIndex),riverItems.getLogs());
+		int turtleIndex = collisionDetector.frogAndTurtles(player.getFrog(frogIndex),riverItems.getTurtles());
+		int alligatorIndex = collisionDetector.frogAndAlligators(player.getFrog(frogIndex),riverItems.getAlligators());
+		
+		//if there is any collision with a river object, move the frog at the same speed of the object
+		if(player.getFrog(frogIndex).isStopped() && player.getFrog(frogIndex).getY()<260){
+			if(logIndex >=0){
+				player.getFrog(frogIndex).setX(riverItems.getLogs().get(logIndex).getSpeed());
+			}else if(turtleIndex >=0){
+				player.getFrog(frogIndex).setX(riverItems.getTurtles().get(turtleIndex).getSpeed());	
+			}else if(alligatorIndex >=0){
+				player.getFrog(frogIndex).setX(riverItems.getAlligators().get(alligatorIndex).getSpeed());
+			}else{
+				life--;
+				player.getFrog(frogIndex).goToInitialPosition();
+			}
+		}
 	}
 }

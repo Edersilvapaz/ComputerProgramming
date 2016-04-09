@@ -34,17 +34,21 @@ public class Alligator extends Entity{
 			x=-width;
 			image=1;
 			speed = game.getDefaultSpeed();
+			//setting the rectangle variables used to collision detection
+			bounds.x=10;
+						
 		}else{
 			x=game.getWidht()+width;
 			image=0;
 			speed=-game.getDefaultSpeed();
+			//setting the rectangle variables used to collision detection
+			bounds.x=30;
 		}
 		
 		//setting the rectangle variables used to collision detection
-		bounds.x=3;
-		bounds.y=13;
-		bounds.width=width-2*bounds.x;
-		bounds.height=height-15;
+		bounds.width=width-40;
+		bounds.y=17;
+		bounds.height=height-25;
 	}
 	
 	/**

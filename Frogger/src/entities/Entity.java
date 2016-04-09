@@ -150,6 +150,14 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public float getSpeed(){
+		return speed;
+	}
+	
+	/**
 	 * Getter for the rectangle object used in collision detection.
 	 * @return Entity's rectangle object that defines the are that the enemy holds in the screen.
 	 */

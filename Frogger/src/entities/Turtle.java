@@ -1,8 +1,6 @@
 package entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
 import game.Game;
 import graphics.Assets;
 
@@ -45,8 +43,8 @@ public class Turtle extends Entity{
 		}
 		
 		//setting the rectangle variables used to collision detection
-		bounds.x=2;
-		bounds.y=2;
+		bounds.x=7;
+		bounds.y=4;
 		bounds.width=width-2*bounds.x;
 		bounds.height=height-2*bounds.y;
 	}
@@ -75,7 +73,5 @@ public class Turtle extends Entity{
 		//this if statement draw the amount of turtle needed according to the side they are moving to;
 		for(int i=0 ; i<amountTurtle ; i++ )
 			g.drawImage(Assets.turtle[image][anim],(int)(x+i*turtle_width),(int)y,turtle_width,height,null);
-		g.setColor(Color.MAGENTA);
-		g.fillRect(bounds.x+(int)x,bounds.y+(int)y,bounds.width,bounds.height);
 	}
 }
