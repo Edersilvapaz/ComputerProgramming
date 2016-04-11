@@ -74,6 +74,8 @@ public class Playing extends GameStates{
 		
 		checkTimer(); //check for the end of the game timer
 		
+		checkLives(); //check for the end of lives
+		
 		checkForCollisions(); //check for collisions in the game
 		
 		checkFrogPosition(); //check if the frog got to a river bank position
@@ -302,6 +304,15 @@ public class Playing extends GameStates{
 		}
 	}
 	
+	/**
+	 * 
+	 */
+	private void checkLives(){
+		if(life==0){
+			levelBegin();
+			score=0;
+		}
+	}
 	/**
 	 * 
 	 */

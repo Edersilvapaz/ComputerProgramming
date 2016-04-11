@@ -19,10 +19,12 @@ public abstract class GameStates {
 	//Here all the common variables to the game states are defined
 	protected int[] counter = new int[10]; //Used to upgrade the state variables, when it is needed
 	protected Font playingFont = new Font("SansSerif",Font.BOLD,18); //Temporary variable used to draw menu items
+	protected Font menuFont = new Font("SansSerif",Font.BOLD,25);
 	protected Game game;
 	
-	private static GameStates currentState = null; //currentState - stores the current state that is being ticked and rendered on the screen
-	private static boolean changeState = true; //changeState - variable used to make the transition between state more precise
+	private static GameStates currentState = null; //stores the current state that is being ticked and rendered on the screen
+	private static GameStates lastState = null; //stores the last state used in the game
+	private static boolean changeState = true; //variable used to make the transition between state more precise
 	
 	/**
 	 * Creates a new instance of the game to each game state so the the state can rely on the game variables.
@@ -47,10 +49,18 @@ public abstract class GameStates {
 	 * Sets the current state of the game.
 	 * @param state State that the current game state has to be set to.
 	 */
-	public static void setState(GameStates state){
+	public static void setGameStateTo(GameStates state){
 		if(changeState){
+			lastState = currentState;
 			currentState = state;
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public static void backToLastState(){
+		currentState = lastState;
 	}
 	
 	/**

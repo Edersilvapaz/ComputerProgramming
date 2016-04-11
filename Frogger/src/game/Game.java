@@ -2,12 +2,15 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
 import display.Display;
 import graphics.Assets;
 import input.KeyManager;
 import input.MouseManager;
 import score.Score;
 import states.GameStates;
+import states.HighScores;
+import states.MainMenu;
 import states.Playing;
 
 /**
@@ -39,6 +42,8 @@ public class Game implements Runnable{
 	
 	//the game will hold an instance of each state that it might go through
 	private GameStates playingState;
+	private GameStates mainMenuState;
+	private GameStates highScoreState;
 	
 	
 	/**
@@ -159,7 +164,9 @@ public class Game implements Runnable{
 		
 		//here the states objects of the game are created and the first state to be used in the game is defined
 		playingState = new Playing(this);
-		GameStates.setState(playingState);
+		mainMenuState = new MainMenu(this);
+		highScoreState = new HighScores(this);
+		GameStates.setGameStateTo(mainMenuState);
 	}
 	
 	/**
@@ -251,5 +258,29 @@ public class Game implements Runnable{
 	 */
 	public void setDefaultSpeed(float speed){
 		defaultSpeed=speed;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GameStates getPlatingState(){
+		return playingState;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GameStates getMenuState(){
+		return mainMenuState;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GameStates getHighScoreState(){
+		return highScoreState;
 	}
 }
