@@ -8,6 +8,7 @@ import graphics.Assets;
 import input.KeyManager;
 import input.MouseManager;
 import score.Score;
+import states.GameOver;
 import states.GameStates;
 import states.HighScores;
 import states.MainMenu;
@@ -44,7 +45,7 @@ public class Game implements Runnable{
 	private GameStates playingState;
 	private GameStates mainMenuState;
 	private GameStates highScoreState;
-	
+	private GameStates gameOverState;	
 	
 	/**
 	 * The game title, width and height are defined.<br>
@@ -166,6 +167,7 @@ public class Game implements Runnable{
 		playingState = new Playing(this);
 		mainMenuState = new MainMenu(this);
 		highScoreState = new HighScores(this);
+		gameOverState = new GameOver(this);
 		GameStates.setGameStateTo(mainMenuState);
 	}
 	
@@ -272,6 +274,14 @@ public class Game implements Runnable{
 	 * 
 	 * @return
 	 */
+	public Playing PlayingState(){
+		return (Playing) playingState;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public GameStates getMenuState(){
 		return mainMenuState;
 	}
@@ -282,5 +292,21 @@ public class Game implements Runnable{
 	 */
 	public GameStates getHighScoreState(){
 		return highScoreState;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GameStates getGameOverState(){
+		return gameOverState;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GameOver GameOverState(){
+		return (GameOver) gameOverState;
 	}
 }

@@ -32,8 +32,8 @@ public class Playing extends GameStates{
 	private int frogIndex; //used to which between frogs during the game
 	
 	//these variable store the life and the score of the player
-	private int score;
 	private int life;
+	private int score;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -288,7 +288,7 @@ public class Playing extends GameStates{
 				score+=5;
 				scorePermition[i]=false;
 			}
-		}
+		}		
 	}
 	
 	/**
@@ -310,7 +310,11 @@ public class Playing extends GameStates{
 	private void checkLives(){
 		if(life==0){
 			levelBegin();
-			score=0;
+			game.GameOverState().checkScore(score);
+			GameStates.setGameStateTo(game.getGameOverState());
+			GameStates.setChangeState(false);
+		}else{
+			GameStates.setChangeState(true);
 		}
 	}
 	/**
@@ -351,5 +355,13 @@ public class Playing extends GameStates{
 				player.getFrog(x).goToInitialPosition();
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getScore(){
+		return score;
 	}
 }
