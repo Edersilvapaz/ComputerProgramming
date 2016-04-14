@@ -33,7 +33,7 @@ public class Playing extends GameStates{
 	
 	//these variable store the life and the score of the player
 	private int life;
-	private int score=100;
+	private int score;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -140,7 +140,7 @@ public class Playing extends GameStates{
 	 * Initialize the variables to record the player score correctly.<br>
 	 * Initialize the timer of the game.
 	 */
-	private void levelBegin(){
+	public void levelBegin(){
 		
 		for(int i=0 ; i<playerPosition.length ; i++){
 			playerPosition[i]=111+i*34;
@@ -153,6 +153,12 @@ public class Playing extends GameStates{
 		timer=7380;
 		frogIndex=0;
 		life=3;
+		score=0;
+		
+		game.getKeyManager().resetInitials();
+		
+		vehicles.clear();
+		riverItems.clear();		
 	}
 	
 	/**
@@ -309,7 +315,6 @@ public class Playing extends GameStates{
 	 */
 	private void checkLives(){
 		if(life==0){
-			levelBegin();
 			game.GameOverState().checkScore(score);
 			GameStates.setGameStateTo(game.getGameOverState());
 			GameStates.setChangeState(false);

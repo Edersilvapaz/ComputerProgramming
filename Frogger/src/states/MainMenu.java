@@ -2,7 +2,9 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 import game.Game;
+import score.Score;
 
 public class MainMenu extends GameStates{
 
@@ -15,7 +17,8 @@ public class MainMenu extends GameStates{
 		if(game.getMouseManager().isLeftPressed()){
 			if(game.getMouseManager().getMouseX()>=118 && game.getMouseManager().getMouseX()<=282){
 				if(game.getMouseManager().getMouseY()>=233 && game.getMouseManager().getMouseY()<=251){
-					GameStates.setGameStateTo(game.getPlatingState());
+					game.PlayingState().levelBegin();
+					GameStates.setGameStateTo(game.getPlayingState());
 					GameStates.setChangeState(false);
 				}
 			} 
@@ -27,6 +30,7 @@ public class MainMenu extends GameStates{
 			} 
 			if(game.getMouseManager().getMouseX()>=172 && game.getMouseManager().getMouseX()<=226){
 				if(game.getMouseManager().getMouseY()>=309 && game.getMouseManager().getMouseY()<=327){
+					Score.storeHighScores();
 					game.stop(); //need changes
 				}
 			}

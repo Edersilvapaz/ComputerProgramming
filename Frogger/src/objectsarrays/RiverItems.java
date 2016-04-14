@@ -130,4 +130,13 @@ public class RiverItems {
 	public ArrayList<Alligator> getAlligators(){
 		return alligator;
 	}
+	
+	/**
+	 * 
+	 */
+	public void clear(){
+		log.clear();
+		turtle.clear();
+		alligator.clear();
+	}
 }

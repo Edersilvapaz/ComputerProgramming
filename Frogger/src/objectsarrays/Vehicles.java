@@ -167,4 +167,14 @@ public class Vehicles {
 	public ArrayList<Taxi> getTaxis(){
 		return taxi;
 	}
+	
+	/**
+	 * 
+	 */
+	public void clear(){
+		car.clear();
+		bus.clear();
+		truck.clear();
+		taxi.clear();
+	}
 }

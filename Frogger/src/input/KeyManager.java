@@ -14,7 +14,7 @@ public class KeyManager implements KeyListener{
 	private Game game;
 	private boolean[] keys;					//This boolean array is responsible for identifying which key on the keyboard has been pressed;
 	private boolean up,down,left,right;		//These are the keys that the game will use;
-	private String initials;
+	StringBuilder builder = new StringBuilder();
 	
 	/**
 	 * Initiate the boolean array that is used to store which key that action took place on.
@@ -22,7 +22,7 @@ public class KeyManager implements KeyListener{
 	public KeyManager(Game game){
 		this.game=game;
 		keys = new boolean[256];
-		initials = new String("   ");
+		builder = new StringBuilder();
 	}
 	
 	/**
@@ -59,11 +59,8 @@ public class KeyManager implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if(GameStates.getState()==game.GameOverState()){
-			for(int x=0 ; x<initials.length() ; x++){
-				if(initials.charAt(x)==' '){
-					
-				}
-			}
+			if(builder.toString().length()<3)
+				builder.append(e.getKeyChar());
 		}
 	}
 	
@@ -104,6 +101,13 @@ public class KeyManager implements KeyListener{
 	 * @return
 	 */
 	public String getInitials(){
-		return initials;
+		return builder.toString().toUpperCase();
+	}
+	
+	/**
+	 * 
+	 */
+	public void resetInitials(){
+		builder.setLength(0);
 	}
 }
