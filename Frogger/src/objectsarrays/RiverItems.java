@@ -108,7 +108,7 @@ public class RiverItems {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of logs that are in the window.
 	 * @return
 	 */
 	public ArrayList<Log> getLogs(){
@@ -116,7 +116,7 @@ public class RiverItems {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of turtles that are in the window.
 	 * @return
 	 */
 	public ArrayList<Turtle> getTurtles(){
@@ -124,7 +124,7 @@ public class RiverItems {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of alligators that are in the window.
 	 * @return
 	 */
 	public ArrayList<Alligator> getAlligators(){

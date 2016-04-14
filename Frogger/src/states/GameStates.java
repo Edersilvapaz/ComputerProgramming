@@ -57,7 +57,7 @@ public abstract class GameStates {
 	}
 	
 	/**
-	 * 
+	 * This brings the player to the screen that was the last state of the player in the game.
 	 */
 	public static void backToLastState(){
 		currentState = lastState;

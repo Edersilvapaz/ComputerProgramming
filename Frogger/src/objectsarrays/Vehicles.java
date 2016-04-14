@@ -137,7 +137,7 @@ public class Vehicles {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of cars that are in the window.
 	 * @return
 	 */
 	public ArrayList<Car> getCars(){
@@ -145,7 +145,7 @@ public class Vehicles {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of trucks that are in the window.
 	 * @return
 	 */
 	public ArrayList<Truck> getTrucks(){
@@ -153,7 +153,7 @@ public class Vehicles {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of buses that are in the window.
 	 * @return
 	 */
 	public ArrayList<Bus> getBuses(){
@@ -161,7 +161,7 @@ public class Vehicles {
 	}
 	
 	/**
-	 * 
+	 * Returns a list of taxis that are in the window.
 	 * @return
 	 */
 	public ArrayList<Taxi> getTaxis(){

@@ -5,7 +5,7 @@ import entities.Frog;
 import game.Game;
 
 /**
- * 
+ * This is a class setting up arrays for the player in the game.
  * @author Eder
  */
 public class Player {
@@ -13,7 +13,7 @@ public class Player {
 	private ArrayList<Frog> frog = new ArrayList<Frog>();
 	
 	/**
-	 * 
+	 * This method allows the player to start a new game with a new frog.
 	 * @param game
 	 */
 	public Player(Game game){
@@ -22,7 +22,7 @@ public class Player {
 	}
 	
 	/**
-	 * 
+	 * Sets the frog in the initial position after death.
 	 */
 	public void Death(){
 		for(int x=0 ; x<frog.size() ; x++)
@@ -30,7 +30,7 @@ public class Player {
 	}
 	
 	/**
-	 * 
+	 * This gets the frog before the game starts or after death.
 	 * @param index
 	 * @return
 	 */

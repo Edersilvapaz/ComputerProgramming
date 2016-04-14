@@ -6,14 +6,27 @@ import java.awt.Graphics;
 import game.Game;
 import score.Score;
 
+/**
+ * This is the class that defines the game over screen.
+ * @author Eder Paz, Logan Wedel, Neil Blake
+ */
 public class GameOver extends GameStates{
 	
+	/**
+	 * 
+	 */
 	private boolean reachedHighScores;
 	
+	/**
+	 * 
+	 */
 	public GameOver(Game game) {
 		super(game);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void tick() {
 		
@@ -25,6 +38,9 @@ public class GameOver extends GameStates{
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
