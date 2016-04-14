@@ -13,10 +13,6 @@ import game.Game;
  */
 public abstract class Entity {
 	
-	/*
-	 * This class is an abstract class, that means it is not possible to instantiate it, just extending it using other subclasses
-	 */
-	
 	/**
 	 * Default value for the player width.
 	 */
@@ -82,8 +78,6 @@ public abstract class Entity {
 	protected Game game; //Used to rely on game private variables, like width and height
 	protected Random r;	//Used in case any random number needs to be generated in the entity tick() method
 	protected Rectangle bounds; //Used to implement collision detection
-	
-	//protected variables, objects and methods work like private ones, except that they can be used by the classes that extend this one 
 	
 	/**
 	 * Defines the entity object initial position and size.<br>
@@ -151,7 +145,7 @@ public abstract class Entity {
 	
 	/**
 	 * This method gets the speed of the entities in the game.
-	 * @return
+	 * @return Current speed of the entity.
 	 */
 	public float getSpeed(){
 		return speed;

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * This class is responsible for loading the .txt file which contains the player's initials and scores.
+ * This class is responsible for loading and writting in the .txt file which contains the player's initials and scores.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class FileHandler {
@@ -48,9 +48,9 @@ public class FileHandler {
 	}
 	
 	/**
-	 * 
-	 * @param initials
-	 * @param scores
+	 * Rewrites the high scores files with the new high scores information.
+	 * @param initials Initials of the player's high scores
+	 * @param scores Scores of the player's high scores
 	 */
 	public void write(String[] initials,int[] scores){
 		

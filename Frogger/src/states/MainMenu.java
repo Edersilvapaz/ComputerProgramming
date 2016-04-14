@@ -2,16 +2,25 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
 import game.Game;
 import score.Score;
 
+/**
+ * This is the class that defines the main menu of the game.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
+ */
 public class MainMenu extends GameStates{
-
+	
+	/**
+	 * Makes a copy of the game object so that the state can rely on the game variables.
+	 * @param game Game instance
+	 */
 	public MainMenu(Game game) {
 		super(game);
 	}
-
+	/**
+	 * Evaluates the position where the mouse was clicked on the game window and change the state of the game according to it.
+	 */
 	@Override
 	public void tick() {
 		if(game.getMouseManager().isLeftPressed()){
@@ -38,7 +47,10 @@ public class MainMenu extends GameStates{
 			GameStates.setChangeState(true);
 		}
 	}
-
+	
+	/**
+	 * Draw the buttons on the screen.
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.setFont(menuFont);

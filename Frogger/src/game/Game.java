@@ -264,48 +264,48 @@ public class Game implements Runnable{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the playing state.
+	 * @return PlayingState as a GameStates object
 	 */
 	public GameStates getPlayingState(){
 		return playingState;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the playing state
+	 * @return PlayingState as a Playing State object
 	 */
 	public Playing PlayingState(){
 		return (Playing) playingState;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the menu state.
+	 * @return MenuState as a GameStates object
 	 */
 	public GameStates getMenuState(){
 		return mainMenuState;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the high score state.
+	 * @return HighScoreState as a GameStates object
 	 */
 	public GameStates getHighScoreState(){
 		return highScoreState;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the game over state.
+	 * @return GameOverState as a GameStates object
 	 */
 	public GameStates getGameOverState(){
 		return gameOverState;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the game over state.
+	 * @return GameOverState as a GameOver State object
 	 */
 	public GameOver GameOverState(){
 		return (GameOver) gameOverState;

@@ -11,13 +11,15 @@ import states.GameStates;
  */
 public class KeyManager implements KeyListener{
 	
-	private Game game;
-	private boolean[] keys;					//This boolean array is responsible for identifying which key on the keyboard has been pressed;
-	private boolean up,down,left,right;		//These are the keys that the game will use;
-	StringBuilder builder = new StringBuilder();
+	private Game game;								//Instance of the game
+	private boolean[] keys;							//This boolean array is responsible for identifying which key on the keyboard has been pressed;
+	private boolean up,down,left,right;				//These are the keys that the game will use;
+	StringBuilder builder = new StringBuilder(); 	//used to concatenate the chars typed on the keyboard into a single string
 	
 	/**
-	 * Initiate the boolean array that is used to store which key that action took place on.
+	 * Initiate the boolean array that is used to store which key that action took place on.<br>
+	 * copies and instance of the game object so that it is possible to tests in with state the game is.
+	 * @param game Instance of Game
 	 */
 	public KeyManager(Game game){
 		this.game=game;
@@ -54,7 +56,7 @@ public class KeyManager implements KeyListener{
 	
 	/**
 	 * Runs every time a key is typed on the keyboard.<br>
-	 * Not used in the game.
+	 * Concatenates the key pressed to the string builder object.
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -97,15 +99,15 @@ public class KeyManager implements KeyListener{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the player's initials
+	 * @return Initials of the player as a string object
 	 */
 	public String getInitials(){
 		return builder.toString().toUpperCase();
 	}
 	
 	/**
-	 * 
+	 * Resets the string builder object so that new initials can be typed when the game ends.
 	 */
 	public void resetInitials(){
 		builder.setLength(0);

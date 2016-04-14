@@ -25,7 +25,7 @@ public class Playing extends GameStates{
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
 	private AlligatorBank alligator; //instance of the alligator that stays on the river bank
-	private Collision collisionDetector; //
+	private Collision collisionDetector; //instance of the collision class
 	
 	//These are the variables used to generate the items on the screen
 	private int timer; //used to implement the timer of each phase.
@@ -41,6 +41,7 @@ public class Playing extends GameStates{
 	
 	/**
 	 * Creates a new instance of all objects and instantiate the game object passed to it.<br>
+	 * Initiate all the objects needed or the game.
 	 * @param game Game instance so that the game state can rely on the game variables.
 	 */
 	public Playing(Game game) {
@@ -57,8 +58,7 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * Generates random and automatically all the objects that cross the screen according to time.<br>
-	 * Keeps track of and updates the player score.<br>
+	 * Keeps track of everything that can happen in the game.<br>
 	 * Calls the tick() methods of all the object of the game state.
 	 */
 	@Override
@@ -88,7 +88,7 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * Draws the player score and life on the screen.<br>
+	 * Draws the player score and life on the screen as well as the highest score already achieved and the timer bar.<br>
 	 * Call the render() method of all objects in the game state.
 	 */
 	@Override
@@ -136,9 +136,11 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * Starts every different level of the game.<br>
+	 * Starts the game.<br>
 	 * Initialize the variables to record the player score correctly.<br>
-	 * Initialize the timer of the game.
+	 * Initialize the timer, life and score variables.<br>
+	 * Set the frogs to their initial position.<br>
+	 * Clear all the objects that have already been created.
 	 */
 	public void levelBegin(){
 		
@@ -178,13 +180,12 @@ public class Playing extends GameStates{
 		if(x==5){
 			levelBegin();
 		}
-		
-		for(int i=0 ; i<playerPosition.length ; i++){
-			playerPosition[i]=111+i*34;
-			scorePermition[i]=true;
-		}
 	}
 	
+	/**
+	 * Check the frog position when it gets to the river bank, if its position is within the range,<br>
+	 * Move the frog to the river bank position and go to the next frog.
+	 */
 	private void checkFrogPosition(){
 		//every time a frog gets to a bank, start to play with the next frog
 		if(player.getFrog(frogIndex).getY()==77){
@@ -208,7 +209,7 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * 
+	 * Generates objects that cross the streets. Both on the road and in the river.
 	 */
 	private void generateRoadAndRiverObjects(){		
 		if(counter[0]==180){
@@ -280,15 +281,12 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * 
+	 * Goes through all the positions that the frog can reach in the y axis.<br>
+	 * If the frog is there and its respective boolean variable is equal to true<br>
+	 * it updates the player score by 20 and sets the boolean variable to false so<br>
+	 * that getting to that position again wont increase anything on the player's score.
 	 */
 	private void updateScore(){
-		/*
-		 * This loop goes through all the position the frog can reach in the y axis
-		 * If the frog is there and its respective boolean variable is equal to true
-		 * it updates the player score by 20 and sets the boolean variable to false so
-		 * that getting to that position again wont increase anything on the player's score
-		 */
 		for(int i=0 ; i<playerPosition.length ; i++){
 			if(player.getFrog(frogIndex).getY()==playerPosition[i] && scorePermition[i]==true){
 				score+=5;
@@ -298,7 +296,7 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * 
+	 * Check the timer of the game.
 	 */
 	private void checkTimer(){
 		//If the time of the level is up, kill the player and go back to the beginning of the level
@@ -311,7 +309,8 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * 
+	 * Check how many lives the player still have,<br>
+	 * If they are take, take the game to the game over state.
 	 */
 	private void checkLives(){
 		if(life==0){
@@ -322,8 +321,9 @@ public class Playing extends GameStates{
 			GameStates.setChangeState(true);
 		}
 	}
+	
 	/**
-	 * 
+	 * Checks all the collisions that might happen on the game and act accordingly to the collision that took place.
 	 */
 	private void checkForCollisions(){
 		
@@ -354,7 +354,8 @@ public class Playing extends GameStates{
 			}
 		}
 		
-		//
+		//If there is a collision between a frog and a alligator in the bank,
+		//take the frog that is in the bank to the initial position
 		for(int x=0 ; x<5 ; x++){
 			if(collisionDetector.frogAndAlligatorBank(player.getFrog(x),alligator)){
 				player.getFrog(x).goToInitialPosition();
@@ -363,8 +364,8 @@ public class Playing extends GameStates{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter for the player score.
+	 * @return Player score value.
 	 */
 	public int getScore(){
 		return score;

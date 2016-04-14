@@ -21,8 +21,7 @@ public class SpriteSheet {
 	public SpriteSheet(BufferedImage sheet){
 		this.sheet = sheet;
 	}
-	
-	//This is the method used to crop an specific image from the entire sprite sheet;
+
 	/**
 	 * Used to load an smaller image that is contained inside the sprite sheet object image.
 	 * @param x First x coordinate pixel of the image, at its top right.

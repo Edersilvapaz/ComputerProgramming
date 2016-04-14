@@ -7,18 +7,18 @@ import entities.Log;
 import entities.Turtle;
 
 /**
- * This class holds the linked lists that helps the creation of the objects of the game.
+ * This class holds the arrays lists of all the river objects of the game.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class RiverItems {
 	
-	//Initiate the linked lists that will hold every river item on the game
+	//Initiate the array lists that will hold every river item on the game
 	private ArrayList<Log> log = new ArrayList<Log>();
 	private ArrayList<Turtle> turtle = new ArrayList<Turtle>();
 	private ArrayList<Alligator> alligator = new ArrayList<Alligator>();
 	
 	/**
-	 * Goes through every position available on the linked links and tests the position of the object on the screen.<br>
+	 * Goes through every position available on the array lists and tests the position of the object on the screen.<br>
 	 * If it is already completely out of the screen, the respective object is removed, is it is not, its tick() method is called
 	 */
 	public void tick(){
@@ -45,7 +45,7 @@ public class RiverItems {
 	}
 	
 	/**
-	 * Goes through every position available on the linked lists and call the objects render() method.
+	 * Goes through every position available on the array lists and call the objects render() method.
 	 * @param g Graphics object used to draw images on the game window.
 	 */
 	public void render(Graphics g){
@@ -109,7 +109,7 @@ public class RiverItems {
 	
 	/**
 	 * Returns a list of logs that are in the window.
-	 * @return
+	 * @return ArrayList of logs
 	 */
 	public ArrayList<Log> getLogs(){
 		return log;
@@ -117,7 +117,7 @@ public class RiverItems {
 	
 	/**
 	 * Returns a list of turtles that are in the window.
-	 * @return
+	 * @return ArrayList of turtles
 	 */
 	public ArrayList<Turtle> getTurtles(){
 		return turtle;
@@ -125,14 +125,14 @@ public class RiverItems {
 	
 	/**
 	 * Returns a list of alligators that are in the window.
-	 * @return
+	 * @return ArrayLists of alligators
 	 */
 	public ArrayList<Alligator> getAlligators(){
 		return alligator;
 	}
 	
 	/**
-	 * 
+	 * Remove all the existent river items objects from their respective lists.
 	 */
 	public void clear(){
 		log.clear();

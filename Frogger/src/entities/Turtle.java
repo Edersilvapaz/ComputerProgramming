@@ -11,8 +11,7 @@ import graphics.Assets;
  */
 public class Turtle extends Entity{
 	
-	//Every time turtles show up on the river, they will do it in a certain amount, defined by this variable
-	private int amountTurtle;
+	private int amountTurtle; //Define how many turtles there will be in the turtle line
 	
 	/**
 	 * Defines the turtles line width, height, initial position, speed and direction in which the alligator has to move to.<br>
@@ -22,14 +21,10 @@ public class Turtle extends Entity{
 	 * @param amountTurtle Defines how many turtles needs to be created in the turtle line.
 	 */
 	public Turtle(Game game,int pos,int amountTurtle) {
-		//The y position will be in one of the five lines that the lake has, when y is 100,134,168,202, or 236 and it will be fixed
-		//This position is defined according to the pos variable that is passed to it
 		super(game,0,115+34*pos,turtle_width,turtle_height);
-		
 		//The width of the object is redefined by the amount of turtle to draw so that the real hit box can be implemented
 		this.amountTurtle=amountTurtle;
 		width*=amountTurtle;
-		
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction
 		if(y==217||y==149){
@@ -41,7 +36,6 @@ public class Turtle extends Entity{
 			image=0;
 			speed=-game.getDefaultSpeed();
 		}
-		
 		//setting the rectangle variables used to collision detection
 		bounds.x=7;
 		bounds.y=4;

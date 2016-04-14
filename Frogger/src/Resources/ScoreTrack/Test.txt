@@ -1,9 +1,5 @@
 ESP	100
-
 EDP	90
-
 LGL	90
-
-ASD	70
-
+RFR	90
 DFG	60

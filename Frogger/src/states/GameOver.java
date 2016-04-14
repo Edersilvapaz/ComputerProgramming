@@ -8,24 +8,22 @@ import score.Score;
 
 /**
  * This is the class that defines the game over screen.
- * @author Eder Paz, Logan Wedel, Neil Blake
+ * @author Eder Paz ; Logan Wedel ; Neil Blake
  */
 public class GameOver extends GameStates{
 	
-	/**
-	 * 
-	 */
 	private boolean reachedHighScores;
 	
 	/**
-	 * 
+	 * Makes a copy of the game object so that the state can rely on the game variables.
+	 * @param game Game instance
 	 */
 	public GameOver(Game game) {
 		super(game);
 	}
 
 	/**
-	 * 
+	 * Evaluates the position where the mouse was clicked on the game window and change the state of the game according to it.
 	 */
 	@Override
 	public void tick() {
@@ -52,7 +50,7 @@ public class GameOver extends GameStates{
 	}
 
 	/**
-	 * 
+	 * Draws the the menus and the player's initials that are being typed, if the player reached a high score.
 	 */
 	@Override
 	public void render(Graphics g) {
@@ -70,7 +68,7 @@ public class GameOver extends GameStates{
 	}
 	
 	/**
-	 * 
+	 * Check if the score sent to it is within the high score values recorded in the high scores file.
 	 */
 	public void checkScore(int score){
 		reachedHighScores=false;

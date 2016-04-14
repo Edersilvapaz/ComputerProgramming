@@ -11,11 +11,6 @@ import graphics.Assets;
  */
 public class Frog extends Entity{
 	
-	/*
-	 * This class extends the abstract class Entity, this means that every variable, object or method
-	 * that it contains can be used by this one, as long as it is defined as protected
-	 */
-	
 	//These boolean variables are used make the frog move on the screen
 	private boolean move = false;
 	private boolean moveUp = false;
@@ -36,7 +31,6 @@ public class Frog extends Entity{
 		//Player will start always at the middle bottom of the screen and will have a fixed size
 		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height);
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
-		
 		//setting the rectangle variables used to collision detection
 		bounds.x=6;
 		bounds.y=6;
@@ -148,9 +142,9 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * This method makes sure that the frog makes it to the finish.
-	 * @param x
-	 * @param y
+	 * Takes the frog objects to the position define by the parameters x and y.
+	 * @param x X position
+	 * @param y Y position
 	 */
 	public void goToPosition(float x,float y){
 		this.x=x;
@@ -158,16 +152,16 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * This method returns true if the frog is moving and false if it is not.
-	 * @return
+	 * Test if the frog is in movement.
+	 * @return True if the frog is moving, false if it is not
 	 */
 	public boolean isStopped(){
 		return !moveUp&&!moveDown;
 	}
 	
 	/**
-	 *Allows the frog to move when you jump over something in the river.
-	 * @param x
+	 * Moves the frog according to the speed passed as a parameter.
+	 * @param speed Speed in which the frog should move
 	 */
 	public void setX(float speed){
 		x+=speed;

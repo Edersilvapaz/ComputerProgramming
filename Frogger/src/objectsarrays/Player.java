@@ -5,16 +5,16 @@ import entities.Frog;
 import game.Game;
 
 /**
- * This is a class setting up arrays for the player in the game.
- * @author Eder
+ * This is a class sets up the frogs array for the player in the game.
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class Player {
 	
 	private ArrayList<Frog> frog = new ArrayList<Frog>();
 	
 	/**
-	 * This method allows the player to start a new game with a new frog.
-	 * @param game
+	 * Adds five frog objects to the player's list of frogs.
+	 * @param game Game instance so that the player can rely on the game's variables
 	 */
 	public Player(Game game){
 		for(int x=0 ; x<5 ; x++)
@@ -22,7 +22,7 @@ public class Player {
 	}
 	
 	/**
-	 * Sets the frog in the initial position after death.
+	 * Sets all the player frogs to the initial position.
 	 */
 	public void Death(){
 		for(int x=0 ; x<frog.size() ; x++)
@@ -30,9 +30,9 @@ public class Player {
 	}
 	
 	/**
-	 * This gets the frog before the game starts or after death.
-	 * @param index
-	 * @return
+	 * Getter for an specific frog in the frog list.
+	 * @param index Index of the frog in the list to be returned
+	 * @return Frog located on the index passed as a parameter
 	 */
 	public Frog getFrog(int index){
 		return frog.get(index);

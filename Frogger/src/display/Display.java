@@ -10,10 +10,6 @@ import javax.swing.JFrame;
  */
 public class Display {
 	
-	/*
-	 * A Jframe is the window itself
-	 * A Canvas is the place where the items are drawn and measured from, not the actual window
-	 */
 	private JFrame frame=null;
 	private Canvas canvas;
 	
@@ -45,9 +41,9 @@ public class Display {
 			frame.setVisible(true);									// makes the window visible
 			
 			canvas = new Canvas();									//Create a new canvas object
-			canvas.setPreferredSize(new Dimension(width,height));	//
+			canvas.setPreferredSize(new Dimension(width,height));	
 			canvas.setMaximumSize(new Dimension(width,height));		//Set the size of the canvas to the window width and height and fix it to that size
-			canvas.setMinimumSize(new Dimension(width,height));		//
+			canvas.setMinimumSize(new Dimension(width,height));		
 			canvas.setFocusable(false);
 			
 			frame.add(canvas);										// add the canvas to the window frame

@@ -12,10 +12,6 @@ import game.*;
  */
 public abstract class GameStates {
 	
-	/*
-	 * This class is an abstract class, that means it is not possible to instantiate it, just extending it using other subclasses
-	 */
-	
 	//Here all the common variables to the game states are defined
 	protected int[] counter = new int[10]; //Used to upgrade the state variables, when it is needed
 	protected Font playingFont = new Font("SansSerif",Font.BOLD,18); //Temporary variable used to draw menu items
