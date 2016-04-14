@@ -150,7 +150,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * 
+	 * This method gets the speed of the entities in the game.
 	 * @return
 	 */
 	public float getSpeed(){

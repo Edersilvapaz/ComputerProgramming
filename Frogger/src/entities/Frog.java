@@ -148,7 +148,7 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * 
+	 * This method makes sure that the frog makes it to the finish.
 	 * @param x
 	 * @param y
 	 */
@@ -158,7 +158,7 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * 
+	 * This method returns true if the frog is moving and false if it is not.
 	 * @return
 	 */
 	public boolean isStopped(){
@@ -166,7 +166,7 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * 
+	 *Allows the frog to move when you jump over something in the river.
 	 * @param x
 	 */
 	public void setX(float speed){

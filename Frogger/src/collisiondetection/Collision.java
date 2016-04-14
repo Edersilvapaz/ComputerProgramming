@@ -12,7 +12,7 @@ import objectsarrays.*;
 public class Collision {
 	
 	/**
-	 * 
+	 * This is a method that checks whether the frog collides with a vehicle.
 	 * @param frog
 	 * @param vehicles
 	 * @return
@@ -30,7 +30,7 @@ public class Collision {
 	}
 	
 	/**
-	 * 
+	 * This is a method that checks whether or not the frog lands on the alligators mouth and gets eaten.
 	 * @param frog
 	 * @param alligator
 	 * @return
@@ -46,7 +46,7 @@ public class Collision {
 	}
 	
 	/**
-	 * 
+	 * This method dictates the movement of the alligators of the river banks.
 	 * @param frog
 	 * @param alligator
 	 * @return
@@ -59,7 +59,7 @@ public class Collision {
 	}
 	
 	/**
-	 * 
+	 * This method dictates the frogs ability to stand on the logs to get across the river.
 	 * @param frog
 	 * @param log
 	 * @return
@@ -76,7 +76,7 @@ public class Collision {
 	}
 	
 	/**
-	 * 
+	 * This method allows the frog to jump on the shells of turtles in the river.
 	 * @param frog
 	 * @param turtle
 	 * @return
@@ -93,7 +93,7 @@ public class Collision {
 	}
 	
 	/**
-	 * 
+	 * This method allows the frog to be on the alligators' backs.
 	 * @param frog
 	 * @param alligator
 	 * @return

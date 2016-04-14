@@ -81,7 +81,7 @@ public class Alligator extends Entity{
 	}
 	
 	/**
-	 * 
+	 * Getter for the rectangle object of the alligator head.
 	 * @return
 	 */
 	public Rectangle getHeadBounds(){
