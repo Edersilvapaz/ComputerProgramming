@@ -2,22 +2,26 @@ package score;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * This class is responsible for loading the .txt file which contains the player's initials and scores.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
-public class FileReader {
+public class FileHandler {
 	
 	private Scanner file = null;
+	private FileWriter writer = null;
+	private String txtName;
 	
 	/**
 	 * Loads and stores as a scanner the text file saved in the resource folder with the name specified by txtName.
 	 * @param txtName Name of the file saved in the resource folder.
 	 */
-	public FileReader(String txtName){
-		
+	public FileHandler(String txtName){
+		this.txtName = txtName;
 		ClassLoader classLoader = getClass().getClassLoader();
 		File fileName = new File(classLoader.getResource("ScoreTrack/"+txtName+".txt").getFile());
 		
@@ -41,5 +45,31 @@ public class FileReader {
 	 */
 	public void close(){
 		file.close();
+	}
+	
+	/**
+	 * 
+	 * @param initials
+	 * @param scores
+	 */
+	public void write(String[] initials,int[] scores){
+		
+		ClassLoader classLoader = getClass().getClassLoader();
+		File fileName = new File(classLoader.getResource("ScoreTrack/"+txtName+".txt").getFile());
+		
+		try {
+			this.writer = new FileWriter(fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(int x=0 ; x<initials.length ; x++){
+			try {
+				writer.write(initials[x]+"\t"+scores[x]+"\n");
+				writer.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 }

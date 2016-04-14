@@ -266,7 +266,7 @@ public class Game implements Runnable{
 	 * 
 	 * @return
 	 */
-	public GameStates getPlatingState(){
+	public GameStates getPlayingState(){
 		return playingState;
 	}
 	

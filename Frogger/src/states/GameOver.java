@@ -16,10 +16,23 @@ public class GameOver extends GameStates{
 
 	@Override
 	public void tick() {
-		
-		if(game.getKeyManager().Down()){
-			GameStates.setGameStateTo(game.getMenuState());
-			GameStates.setChangeState(false);
+		if(game.getMouseManager().isLeftPressed()){
+			if(reachedHighScores){
+				if(game.getMouseManager().getMouseX()>=165 && game.getMouseManager().getMouseX()<=235){
+					if(game.getMouseManager().getMouseY()>=525 && game.getMouseManager().getMouseY()<=543){
+						Score.updateHighScores(game.getKeyManager().getInitials(),game.PlayingState().getScore());
+						GameStates.setGameStateTo(game.getMenuState());
+						GameStates.setChangeState(false);
+					}
+				}
+			}else{
+				if(game.getMouseManager().getMouseX()>=65 && game.getMouseManager().getMouseX()<=335){
+					if(game.getMouseManager().getMouseY()>=525 && game.getMouseManager().getMouseY()<=543){
+						GameStates.setGameStateTo(game.getMenuState());
+						GameStates.setChangeState(false);
+					}
+				}
+			}
 		}else{
 			GameStates.setChangeState(true);
 		}
@@ -33,7 +46,10 @@ public class GameOver extends GameStates{
 		g.drawString("Your Score: "+game.PlayingState().getScore(),100,250);
 		if(reachedHighScores){
 			g.drawString("Congratulations!",100,300);
-			g.drawString("Type your initials: "+game.getKeyManager().getInitials(),10,350);
+			g.drawString("Type your initials: "+game.getKeyManager().getInitials(),50,350);
+			g.drawString("SAVE",165,525+18);
+		}else{
+			g.drawString("BACK TO MAIN MENU",70,525+18);
 		}
 	}
 	
