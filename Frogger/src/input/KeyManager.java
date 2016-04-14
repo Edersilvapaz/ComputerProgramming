@@ -2,6 +2,8 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import game.Game;
+import states.GameStates;
 
 /**
  * This is the class that identifies all the actions that are performed on the keyboard.
@@ -9,14 +11,18 @@ import java.awt.event.KeyListener;
  */
 public class KeyManager implements KeyListener{
 	
+	private Game game;
 	private boolean[] keys;					//This boolean array is responsible for identifying which key on the keyboard has been pressed;
 	private boolean up,down,left,right;		//These are the keys that the game will use;
+	private String initials;
 	
 	/**
 	 * Initiate the boolean array that is used to store which key that action took place on.
 	 */
-	public KeyManager(){
+	public KeyManager(Game game){
+		this.game=game;
 		keys = new boolean[256];
+		initials = new String("   ");
 	}
 	
 	/**
@@ -52,7 +58,13 @@ public class KeyManager implements KeyListener{
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+		if(GameStates.getState()==game.GameOverState()){
+			for(int x=0 ; x<initials.length() ; x++){
+				if(initials.charAt(x)==' '){
+					
+				}
+			}
+		}
 	}
 	
 	/**
@@ -85,5 +97,13 @@ public class KeyManager implements KeyListener{
 	 */
 	public boolean Left(){
 		return left;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getInitials(){
+		return initials;
 	}
 }

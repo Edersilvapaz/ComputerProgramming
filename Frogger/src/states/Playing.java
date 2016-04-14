@@ -33,7 +33,7 @@ public class Playing extends GameStates{
 	
 	//these variable store the life and the score of the player
 	private int life;
-	private int score;
+	private int score=100;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score

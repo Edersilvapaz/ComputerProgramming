@@ -59,7 +59,7 @@ public class Game implements Runnable{
 		this.width = width;
 		this.height = height;
 		
-		keyManager = new KeyManager();
+		keyManager = new KeyManager(this);
 		mouseManager = new MouseManager();
 	}
 	

@@ -30,9 +30,10 @@ public class GameOver extends GameStates{
 		g.setColor(Color.WHITE);
 		g.setFont(menuFont);
 		g.drawString("GAME OVER",125,200);
-		g.drawString("Your Score: "+game.PlayingState().getScore(),100,300);
+		g.drawString("Your Score: "+game.PlayingState().getScore(),100,250);
 		if(reachedHighScores){
-			g.fillRect(0, 0, 50, 50);
+			g.drawString("Congratulations!",100,300);
+			g.drawString("Type your initials: "+game.getKeyManager().getInitials(),10,350);
 		}
 	}
 	
@@ -42,7 +43,7 @@ public class GameOver extends GameStates{
 	public void checkScore(int score){
 		reachedHighScores=false;
 		for(int x=0 ; x<Score.score.length ; x++){
-			if(Score.score[x]>game.PlayingState().getScore())
+			if(game.PlayingState().getScore()>Score.score[x])
 				reachedHighScores=true;
 		}
 	}
