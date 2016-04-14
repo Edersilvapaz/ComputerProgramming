@@ -176,6 +176,11 @@ public class Playing extends GameStates{
 			}
 		}
 		
+		for(int i=0 ; i<playerPosition.length ; i++){
+			playerPosition[i]=111+i*34;
+			scorePermition[i]=true;
+		}
+		
 		//If every frog reached its river bank, start a new level
 		if(x==5){
 			levelBegin();

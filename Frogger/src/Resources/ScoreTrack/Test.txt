@@ -1,5 +1,9 @@
 ESP	100
+
 EDP	90
+
 LGL	90
+
 RFR	90
-DFG	60
+
+WYA	75
