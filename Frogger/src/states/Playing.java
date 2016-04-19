@@ -2,13 +2,14 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Random;
-
 import collisiondetection.Collision;
-import entities.*;
+import entities.AlligatorBank;
 import game.Game;
 import graphics.Assets;
-import objectsarrays.*;
+import itemsgeneration.ItemGenerator;
+import objectsarrays.Player;
+import objectsarrays.RiverItems;
+import objectsarrays.Vehicles;
 import score.Score;
 
 /**
@@ -17,15 +18,13 @@ import score.Score;
  */
 public class Playing extends GameStates{
 	
-	//This variable is used to generate all the random values in the game
-	private Random r = new Random();
-	
 	//Here all the game objects are defined 
 	private Player player; //player object
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
 	private AlligatorBank alligator; //instance of the alligator that stays on the river bank
 	private Collision collisionDetector; //instance of the collision class
+	private ItemGenerator itemsGenerator;
 	
 	//These are the variables used to generate the items on the screen
 	private int timer; //used to implement the timer of each phase.
@@ -52,6 +51,7 @@ public class Playing extends GameStates{
 		riverItems = new RiverItems();
 		alligator = new AlligatorBank(game);
 		collisionDetector = new Collision();
+		itemsGenerator = new ItemGenerator(game);
 		game.setDefaultSpeed(1.5f);
 		
 		levelBegin();
@@ -68,7 +68,9 @@ public class Playing extends GameStates{
 		
 		timer--;
 		
-		generateRoadAndRiverObjects(); //Generate objects vehicles and river items, if necessary
+		itemsGenerator.tick();
+		
+		itemsGenerator.fase1(vehicles,riverItems);
 		
 		updateScore(); //check is the score needs to be updated
 		
@@ -210,78 +212,6 @@ public class Playing extends GameStates{
 				player.getFrog(frogIndex).goToPosition(350.4f,77);
 				changeFrog();
 			}
-		}
-	}
-	
-	/**
-	 * Generates objects that cross the streets. Both on the road and in the river.
-	 */
-	private void generateRoadAndRiverObjects(){		
-		if(counter[0]==180){
-			counter[0]=0;
-			if(r.nextInt(7)==3)
-				riverItems.addAlligator(new Alligator(game,0));
-			else
-				riverItems.addLog(new Log(game,0,r.nextInt(41)+100));
-		}
-		
-		if(counter[1]==120){
-			counter[1]=0;
-			if(r.nextInt(7)==3)
-				riverItems.addAlligator(new Alligator(game,1));
-			else
-				riverItems.addTurtle(new Turtle(game,1,r.nextInt(3)+2));
-		}
-		
-		if(counter[2]==140){
-			counter[2]=0;
-			if(r.nextInt(7)==3)
-				riverItems.addAlligator(new Alligator(game,2));
-			else
-				riverItems.addLog(new Log(game,2,r.nextInt(41)+100));
-		}
-		
-		if(counter[3]==90){
-			counter[3]=0;
-			if(r.nextInt(4)==3)
-				riverItems.addAlligator(new Alligator(game,3));
-			else
-				riverItems.addTurtle(new Turtle(game,3,r.nextInt(2)+2));
-		}
-		
-		if(counter[4]==100){
-			counter[4]=0;
-			riverItems.addLog(new Log(game,4,r.nextInt(41)+80));
-		}
-		
-		if(counter[5]==120){
-			counter[5]=0;
-			vehicles.addCar(new Car(game,4));
-		}
-		
-		if(counter[6]==160){
-			counter[6]=0;
-			vehicles.addTruck(new Truck(game,3));
-		}
-		
-		if(counter[7]>=100){
-			if(counter[7]==100){
-				vehicles.addCar(new Car(game,2));
-			}
-			if(counter[7]==140){
-				vehicles.addCar(new Car(game,2));
-				counter[7]=0;
-			}
-		}
-		
-		if(counter[8]==150){
-			counter[8]=0;
-			vehicles.addBus(new Bus(game,1));
-		}
-		
-		if(counter[9]==160){
-			counter[9]=0;
-			vehicles.addTaxi(new Taxi(game,0));
 		}
 	}
 	
