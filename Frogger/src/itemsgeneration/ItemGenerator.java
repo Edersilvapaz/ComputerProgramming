@@ -1,7 +1,6 @@
 package itemsgeneration;
 
 import java.util.Random;
-
 import entities.Alligator;
 import entities.Bus;
 import entities.Car;

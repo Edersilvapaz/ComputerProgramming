@@ -11,6 +11,10 @@ import graphics.Assets;
  */
 public class Frog extends Entity{
 	
+	private boolean death;
+	private boolean sank = false;
+	private boolean gotHit = false;
+	
 	//These boolean variables are used make the frog move on the screen
 	private boolean move = false;
 	private boolean moveUp = false;
@@ -44,6 +48,9 @@ public class Frog extends Entity{
 	 */
 	@Override
 	public void tick() {
+		
+		death = gotHit || sank;
+		
 		/*
 		 * Every time a moving button is pressed and the counter is equal to 8:
 		 * 		1.	The move boolean variable is set to false so the action on the keyboard will be detected only once
@@ -128,7 +135,11 @@ public class Frog extends Entity{
 	 */
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
+		if(!death){
+			g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
+		}else{
+			g.drawImage(Assets.frogDeath[0],(int)x,(int)y,width,height,null);
+		}
 	}
 	
 	/**
@@ -157,6 +168,18 @@ public class Frog extends Entity{
 	 */
 	public boolean isStopped(){
 		return !moveUp&&!moveDown;
+	}
+	
+	public boolean isDead(){
+		return death;
+	}
+	
+	public void gotHit(){
+		gotHit=true;
+	}
+	
+	public void sank(){
+		sank=true;
 	}
 	
 	/**

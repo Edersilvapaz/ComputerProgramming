@@ -60,9 +60,16 @@ public class KeyManager implements KeyListener{
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
+		
+		int letter = (int)e.getKeyChar();
+		
 		if(GameStates.getState()==game.GameOverState()){
-			if(builder.toString().length()<3)
-				builder.append(e.getKeyChar());
+			if((letter>=48 && letter<=57) || (letter>=97 && letter<=122)){
+				if(builder.toString().length()<3)
+					builder.append(e.getKeyChar());
+			}else if(letter == 8){
+				builder.setLength(builder.length()-1);
+			}
 		}
 	}
 	

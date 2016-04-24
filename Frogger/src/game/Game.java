@@ -80,9 +80,12 @@ public class Game implements Runnable{
 	public synchronized void stop(){
 		if(!running)
 			return;
+		
 		running = false;
 		display.close();
 		try {
+
+			System.exit(0);
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

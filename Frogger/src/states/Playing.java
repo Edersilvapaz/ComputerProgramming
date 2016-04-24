@@ -78,13 +78,13 @@ public class Playing extends GameStates{
 		
 		checkLives(); //check for the end of lives
 		
-		checkForCollisions(); //check for collisions in the game
+		if(!player.getFrog(frogIndex).isDead())checkForCollisions(); //check for collisions in the game
 		
 		checkFrogPosition(); //check if the frog got to a river bank position
 		
 		//Ticking all the objects that the game state contains
 		alligator.tick();
-		if(timer<=7200)player.getFrog(frogIndex).tick();;
+		if(!player.getFrog(frogIndex).isDead() && timer<=7200)player.getFrog(frogIndex).tick();;
 		vehicles.tick();
 		riverItems.tick();
 	}
@@ -265,7 +265,7 @@ public class Playing extends GameStates{
 		//Collision with vehicles already detected
 		if(player.getFrog(frogIndex).isStopped()&&collisionDetector.frogAndVehicles(player.getFrog(frogIndex),vehicles)){
 			life--;
-			player.getFrog(frogIndex).goToInitialPosition();
+			player.getFrog(frogIndex).gotHit();
 		}
 		
 		//Test for collisions; is there is, get the index number of the object that is colliding with the frog
@@ -285,7 +285,7 @@ public class Playing extends GameStates{
 				player.getFrog(frogIndex).goToInitialPosition();
 			}else{
 				life--;
-				player.getFrog(frogIndex).goToInitialPosition();
+				player.getFrog(frogIndex).sank();
 			}
 		}
 		

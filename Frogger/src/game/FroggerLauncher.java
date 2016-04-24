@@ -11,6 +11,7 @@ package game;
  * @version 1.0 Created: 03/31/2016
  */
 public class FroggerLauncher {
+	
 	/**
 	 * Launcher of the game.<br>
 	 * Creates a new game object and start it.
