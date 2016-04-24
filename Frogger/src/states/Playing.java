@@ -62,7 +62,9 @@ public class Playing extends GameStates{
 	 * Calls the tick() methods of all the object of the game state.
 	 */
 	@Override
-	public void tick() {		
+	public void tick() {
+		checkLives(); //check for the end of lives
+		
 		timer--;
 		
 		itemsGenerator.fase1(vehicles,riverItems);
@@ -71,21 +73,17 @@ public class Playing extends GameStates{
 		
 		checkTimer(); //check for the end of the game timer
 		
-		checkLives(); //check for the end of lives
-		
 		if(!player.getFrog(frogIndex).isDead())checkForCollisions(); //check for collisions in the game
 		
 		checkFrogPosition(); //check if the frog got to a river bank position
 		
 		//Ticking all the objects that the game state contains
 		if(!player.getFrog(frogIndex).isDead()){
-			if(timer<=7200){
-				itemsGenerator.tick();
-				alligator.tick();
-				player.getFrog(frogIndex).tick();
-				vehicles.tick();
-				riverItems.tick();
-			}
+			itemsGenerator.tick();
+			vehicles.tick();
+			riverItems.tick();
+			alligator.tick();
+			if(timer<=7200)player.getFrog(frogIndex).tick();
 		}else{
 			player.getFrog(frogIndex).death();
 		}
@@ -124,13 +122,8 @@ public class Playing extends GameStates{
 		//Render all the objects
 		riverItems.render(g);
 		alligator.render(g);
-		if(!player.getFrog(frogIndex).isDead()){
-			player.getFrog(frogIndex).render(g);
-			vehicles.render(g);
-		}else{
-			vehicles.render(g);
-			player.getFrog(frogIndex).render(g);
-		}
+		vehicles.render(g);
+		player.getFrog(frogIndex).render(g);
 		
 		for(int x=0 ; x<5 ; x++){
 			if(player.getFrog(x).getY()==77)
@@ -256,7 +249,7 @@ public class Playing extends GameStates{
 	 * If they are take, take the game to the game over state.
 	 */
 	private void checkLives(){
-		if(life==0){
+		if(life==0 && !player.getFrog(frogIndex).isDead()){
 			game.GameOverState().checkScore(score);
 			GameStates.setGameStateTo(game.getGameOverState());
 			GameStates.setChangeState(false);
