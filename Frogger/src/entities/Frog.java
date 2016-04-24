@@ -128,6 +128,31 @@ public class Frog extends Entity{
 		if(counter==5)image=2;
 		if(counter==8)image=0;
 	}
+	
+	public void death(){
+		counter++;
+		if(anim==0 && counter%60==0){
+			counter=necessaryMovements;
+			goToInitialPosition();
+			death=gotHit=sank=false;
+		}else if(counter%20==0){
+			if(gotHit){
+				if(anim==4)
+					anim=5;
+				else if(anim==5)
+					anim=6;
+				else if(anim==6)
+					anim=0;
+			}else if(sank){
+				if(anim==1)
+					anim=2;
+				else if(anim==2)
+					anim=3;
+				else if(anim==3)
+					anim=0;
+			}
+		}
+	}
 
 	/**
 	 * Draws the player on the screen according to its x and y position and the respective image according<br>
@@ -138,7 +163,7 @@ public class Frog extends Entity{
 		if(!death){
 			g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
 		}else{
-			g.drawImage(Assets.frogDeath[0],(int)x,(int)y,width,height,null);
+			g.drawImage(Assets.frogDeath[anim],(int)x,(int)y,width,height,null);
 		}
 	}
 	
@@ -175,10 +200,12 @@ public class Frog extends Entity{
 	}
 	
 	public void gotHit(){
+		anim=4;
 		gotHit=true;
 	}
 	
 	public void sank(){
+		anim=1;
 		sank=true;
 	}
 	

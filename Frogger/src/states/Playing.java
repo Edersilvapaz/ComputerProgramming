@@ -62,13 +62,8 @@ public class Playing extends GameStates{
 	 * Calls the tick() methods of all the object of the game state.
 	 */
 	@Override
-	public void tick() {
-		for(int x=0 ; x<counter.length ; x++)
-			counter[x]++;
-		
+	public void tick() {		
 		timer--;
-		
-		itemsGenerator.tick();
 		
 		itemsGenerator.fase1(vehicles,riverItems);
 		
@@ -83,10 +78,17 @@ public class Playing extends GameStates{
 		checkFrogPosition(); //check if the frog got to a river bank position
 		
 		//Ticking all the objects that the game state contains
-		alligator.tick();
-		if(!player.getFrog(frogIndex).isDead() && timer<=7200)player.getFrog(frogIndex).tick();;
-		vehicles.tick();
-		riverItems.tick();
+		if(!player.getFrog(frogIndex).isDead()){
+			if(timer<=7200){
+				itemsGenerator.tick();
+				alligator.tick();
+				player.getFrog(frogIndex).tick();
+				vehicles.tick();
+				riverItems.tick();
+			}
+		}else{
+			player.getFrog(frogIndex).death();
+		}
 	}
 	
 	/**
@@ -122,12 +124,18 @@ public class Playing extends GameStates{
 		//Render all the objects
 		riverItems.render(g);
 		alligator.render(g);
-		player.getFrog(frogIndex).render(g);
+		if(!player.getFrog(frogIndex).isDead()){
+			player.getFrog(frogIndex).render(g);
+			vehicles.render(g);
+		}else{
+			vehicles.render(g);
+			player.getFrog(frogIndex).render(g);
+		}
+		
 		for(int x=0 ; x<5 ; x++){
 			if(player.getFrog(x).getY()==77)
 				player.getFrog(x).render(g); //render just the frogs that are on the river bank
 		}
-		vehicles.render(g);
 		
 		if(timer>7320)
 			g.drawString("READY",game.getWidht()/2-30,game.getHeight()/2-10);
