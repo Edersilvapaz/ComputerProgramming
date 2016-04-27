@@ -283,7 +283,8 @@ public class Playing extends GameStates{
 			}else if(alligatorIndex >=0){
 				player.getFrog(frogIndex).setX(riverItems.getAlligators().get(alligatorIndex).getSpeed());
 			}else if(collisionDetector.frogAndAlligatorMouth(player.getFrog(frogIndex),riverItems.getAlligators())){
-				player.getFrog(frogIndex).goToInitialPosition();
+				life--;
+				player.getFrog(frogIndex).eaten();
 			}else{
 				life--;
 				player.getFrog(frogIndex).sank();

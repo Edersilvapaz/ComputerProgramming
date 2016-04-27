@@ -58,7 +58,7 @@ public class Assets {
 	/**
 	 * Images used for the frog's death.
 	 */
-	public static BufferedImage[] frogDeath = new BufferedImage[7];
+	public static BufferedImage[] frogDeath = new BufferedImage[15];
 	/**
 	 * Images of the game turtles.
 	 */
@@ -84,8 +84,11 @@ public class Assets {
 		bgnd = backgroung.crop(0,0,400,560);
 		log = riverItems.crop(0, 0,log_width,log_height);
 		
-		for(int x=0 ; x<7 ; x++){
-			frogDeath[x] = frogdeath.crop(x*frog_death_size,0,frog_death_size,frog_death_size);
+		for(int x=0 ; x<15 ; x++){
+			if(x<7)
+				frogDeath[x] = frogdeath.crop(x*frog_death_size,0,frog_death_size,frog_death_size);
+			else
+				frogDeath[x] = frogdeath.crop((x-7)*frog_size,frog_death_size,frog_size,frog_size);
 		}
 		
 		for(int i=0 ; i<=1 ; i++ ){

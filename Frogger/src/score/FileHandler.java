@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * This class is responsible for loading and writting in the .txt file which contains the player's initials and scores.
+ * This class is responsible for loading and writing in the .txt file which contains the player's initials and scores.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class FileHandler {
@@ -41,7 +41,7 @@ public class FileHandler {
 	}
 	
 	/**
-	 * Closes the scanner object, used in the end of the game when no reading and writing is necessary anymore.
+	 * Closes the scanner object, used in the end of the game when no reading and writing is not necessary anymore.
 	 */
 	public void close(){
 		file.close();

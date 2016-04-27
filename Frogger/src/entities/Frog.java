@@ -11,9 +11,11 @@ import graphics.Assets;
  */
 public class Frog extends Entity{
 	
+	private int deathCont;
 	private boolean death;
 	private boolean sank = false;
 	private boolean gotHit = false;
+	private boolean eaten = false;
 	
 	//These boolean variables are used make the frog move on the screen
 	private boolean move = false;
@@ -49,7 +51,7 @@ public class Frog extends Entity{
 	@Override
 	public void tick() {
 		
-		death = gotHit || sank;
+		death = gotHit || sank || eaten;
 		
 		/*
 		 * Every time a moving button is pressed and the counter is equal to 8:
@@ -134,7 +136,7 @@ public class Frog extends Entity{
 		if(anim==0 && counter%60==0){
 			counter=necessaryMovements;
 			goToInitialPosition();
-			death=gotHit=sank=false;
+			death=gotHit=sank=eaten=false;
 		}else if(counter%20==0){
 			if(gotHit){
 				if(anim==4)
@@ -150,6 +152,15 @@ public class Frog extends Entity{
 					anim=3;
 				else if(anim==3)
 					anim=0;
+			}else if(eaten){
+				if(deathCont!=6)deathCont++;
+				if(deathCont==6){
+					anim = 0;
+				}else if(deathCont%2==0){
+					anim-=4;
+				}else{
+					anim+=4;
+				}
 			}
 		}
 	}
@@ -207,6 +218,12 @@ public class Frog extends Entity{
 	public void sank(){
 		anim=1;
 		sank=true;
+	}
+	
+	public void eaten(){
+		deathCont=0;
+		anim+=7;
+		eaten=true;
 	}
 	
 	/**
