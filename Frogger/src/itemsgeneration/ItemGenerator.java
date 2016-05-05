@@ -283,4 +283,74 @@ public class ItemGenerator {
 			}
 		}
 	}
+	public void fase5(Vehicles vehicles,RiverItems riverItems){
+		if(counter[0]==70){
+			counter[0]=0;
+			riverItems.addLog(new Log(game,0,100,1.9f));
+		}
+		
+		if(counter[1]==50){
+			counter[1]=0;
+			if(r.nextInt(11)>7)
+				riverItems.addAlligator(new Alligator(game,1,2.4f));
+			else
+				riverItems.addTurtle(new Turtle(game,1,r.nextInt(2)+2,2.4f));
+		}
+		
+		if(counter[2]==150){
+			counter[2]=0;
+			riverItems.addLog(new Log(game,2,r.nextInt(41)+150,1.6f));
+		}
+		
+		if(counter[3]==80){
+			counter[3]=0;
+			if(r.nextInt(11)>7)
+				riverItems.addAlligator(new Alligator(game,3,1.9f));
+			else
+				riverItems.addTurtle(new Turtle(game,3,r.nextInt(2)+2,1.7f));
+		}
+		
+		if(counter[4]==150){
+			counter[4]=0;
+			riverItems.addLog(new Log(game,4,r.nextInt(41)+100,1.5f));
+		}
+		
+		if(counter[5]==120){
+			counter[5]=0;
+			vehicles.addTruck(new Truck(game,4,2.0f));
+		}
+		
+		if(counter[6]==115){
+			counter[6]=0;
+			vehicles.addBus(new Bus(game,3,1.7f));
+		}
+		
+		if(counter[7]>=100){
+			if(counter[7]==120){
+				vehicles.addTaxi(new Taxi(game,2,2.8f));
+			}
+			if(counter[7]==140){
+				vehicles.addTaxi(new Taxi(game,2,2.8f));
+				counter[7]=0;
+			}
+		}
+		
+		if(counter[8]==150){
+			counter[8]=0;
+			vehicles.addBus(new Bus(game,1,1.6f));
+		}
+		
+		if(counter[9]>=150){
+			if(counter[9]==160){
+				vehicles.addCar(new Car(game,0,2.3f));
+			}
+			if(counter[9]==190){
+				vehicles.addCar(new Car(game,0,2.3f));
+			}
+			if(counter[9]==220){
+				vehicles.addCar(new Car(game,0,2.3f));
+				counter[9]=0;
+			}
+		}
+	}
 }

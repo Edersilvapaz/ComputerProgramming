@@ -33,7 +33,7 @@ public class Playing extends GameStates{
 	//these variable store the life and the score of the player
 	private int life;
 	private int score;
-	private int phase=3;
+	private int phase=4;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -76,6 +76,9 @@ public class Playing extends GameStates{
 			break;
 		case 4:
 			itemsGenerator.fase4(vehicles,riverItems);
+			break;
+		case 5:
+			itemsGenerator.fase5(vehicles,riverItems);
 			break;
 		}
 		
