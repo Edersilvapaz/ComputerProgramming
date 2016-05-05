@@ -22,8 +22,8 @@ public class Assets {
 	private static int alli_height = 17;
 	private static int alliBank_width = 15;
 	private static int alliBank_height = 10;
-	private static int fly_width = 33;
-	private static int fly_height = 38;
+	private static int fly_width = 18;
+	private static int fly_height = 22;
 	
 	/**
 	 * Image of the background of the game.
@@ -71,9 +71,14 @@ public class Assets {
 	public static BufferedImage[][] alligator = new BufferedImage[2][2];
 	
 	/**
-	 * Images of the game alligators.
+	 * Images of the game fly.
 	 */
 	public static BufferedImage fly;
+	
+	/**
+	 * Images of the game golden fly.
+	 */
+	public static BufferedImage goldenfly;
 	
 	/**
 	 * Load all the Sprite sheets objects and images that are doing to be used in the game.<br>
@@ -86,12 +91,12 @@ public class Assets {
 		SpriteSheet vehicles = new SpriteSheet(ImageLoader.loadImage("Vehicles"));
 		SpriteSheet riverItems = new SpriteSheet(ImageLoader.loadImage("River_Items"));
 		SpriteSheet frogdeath = new SpriteSheet(ImageLoader.loadImage("Death"));
-		SpriteSheet flyy = new SpriteSheet(ImageLoader.loadImage("Fly"));
+		SpriteSheet flies = new SpriteSheet(ImageLoader.loadImage("Fly"));
 		
 		//Initialize all the images of the game using the crop method;
 		bgnd = backgroung.crop(0,0,400,560);
 		log = riverItems.crop(0, 0,log_width,log_height);
-		fly = flyy.crop(0, 0,log_width,log_height);
+		fly = flies.crop(0, 0,fly_width,fly_height);
 		
 		for(int x=0 ; x<15 ; x++){
 			if(x<7)

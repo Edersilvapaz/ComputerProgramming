@@ -34,7 +34,7 @@ public class Playing extends GameStates{
 	private int life;
 	private int score;
 
-	private int phase=4;
+	private int phase;
 
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -66,6 +66,7 @@ public class Playing extends GameStates{
 		checkLives(); //check for the end of lives
 		
 		timer--;
+		
 		switch(phase){
 		case 1:
 			itemsGenerator.fase1(vehicles,riverItems);
@@ -371,28 +372,6 @@ public class Playing extends GameStates{
 					player.getFrog(x).goToInitialPosition();
 				}
 			}
-		}
-		
-		if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<10){
-			riverBank[0]=true;
-			player.getFrog(frogIndex).goToPosition(21.6f,77);
-			changeFrog();
-		}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<10){
-			riverBank[1]=true;
-			player.getFrog(frogIndex).goToPosition(103.79f,77);
-			changeFrog();
-		}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<10){
-			riverBank[2]=true;
-			player.getFrog(frogIndex).goToPosition(186,77);
-			changeFrog();
-		}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<10){
-			riverBank[3]=true;
-			player.getFrog(frogIndex).goToPosition(268.3f,77);
-			changeFrog();
-		}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<30){
-			riverBank[4]=true;
-			player.getFrog(frogIndex).goToPosition(350.4f,77);
-			changeFrog();
 		}
 	}
 	

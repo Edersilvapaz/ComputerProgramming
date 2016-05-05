@@ -2,10 +2,12 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
 import display.Display;
 import graphics.Assets;
 import input.KeyManager;
 import input.MouseManager;
+import score.Score;
 import states.GameOver;
 import states.GameStates;
 import states.HighScores;
@@ -164,7 +166,7 @@ public class Game implements Runnable{
 		
 		
 		Assets.init(); //initiate the assets of the game
-		//Score.init(); //initiate the score tracking of the game
+		Score.init(); //initiate the score tracking of the game
 		
 		//here the states objects of the game are created and the first state to be used in the game is defined
 		playingState = new Playing(this);
