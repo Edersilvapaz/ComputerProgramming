@@ -96,7 +96,8 @@ public class Assets {
 		//Initialize all the images of the game using the crop method;
 		bgnd = backgroung.crop(0,0,400,560);
 		log = riverItems.crop(0, 0,log_width,log_height);
-		fly = flies.crop(0, 0,fly_width,fly_height);
+		fly = flies.crop(0,0,fly_width,fly_height);
+		goldenfly = flies.crop(18,0,fly_width,fly_height);
 		
 		for(int x=0 ; x<15 ; x++){
 			if(x<7)
