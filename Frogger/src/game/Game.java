@@ -6,7 +6,6 @@ import display.Display;
 import graphics.Assets;
 import input.KeyManager;
 import input.MouseManager;
-import score.Score;
 import states.GameOver;
 import states.GameStates;
 import states.HighScores;

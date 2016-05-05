@@ -36,9 +36,6 @@ public class Playing extends GameStates{
 
 	private int phase=4;
 
-	
-
-	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
 	private int[] playerPosition = new int[11]; //Array which stores all the y position the player needs to get to in order to increase score
