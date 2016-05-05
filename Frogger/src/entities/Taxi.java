@@ -16,17 +16,17 @@ public class Taxi extends Entity{
 	 * @param game Instance of game so that the taxi can rely on the game variables.
 	 * @param pos Defines the initial position of the taxi on the screen.
 	 */
-	public Taxi(Game game,int pos) {
-		super(game,0,315+34*pos,car_width,car_height);
+	public Taxi(Game game,int pos,float speed) {
+		super(game,0,315+34*pos,car_width,car_height,speed);
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction
 		if(y==417||y==349){
-			speed = game.getDefaultSpeed()+0.3f;
+			this.speed = game.getDefaultSpeed()+speed;
 			x=-width;
 			image = 1;
 		}
 		else{
-			speed = -(game.getDefaultSpeed()+0.3f);
+			this.speed = -(game.getDefaultSpeed()+speed);
 			x=game.getWidht()+width;
 			image = 0;
 		}

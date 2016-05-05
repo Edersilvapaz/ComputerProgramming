@@ -90,7 +90,7 @@ public abstract class Entity {
 	 * @param width Entity object width.
 	 * @param height Entity object height.
 	 */
-	public Entity(Game game,float x,float y,int width,int height){
+	public Entity(Game game,float x,float y,int width,int height, float speed){
 		this.x = x;
 		this.y = y;
 		this.width = width;

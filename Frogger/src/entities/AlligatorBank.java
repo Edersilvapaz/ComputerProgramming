@@ -19,7 +19,7 @@ public class AlligatorBank extends Entity{
 	 * @param game Instance of the game so that the bank alligator can rely on the game variables.
 	 */
 	public AlligatorBank(Game game) {
-		super(game,0,82,alliBank_width,alliBank_height);
+		super(game,0,82,alliBank_width,alliBank_height,0);
 		x=25f+82.2f*r.nextInt(5);
 		//setting the rectangle variables used to collision detection
 		bounds.x=1;

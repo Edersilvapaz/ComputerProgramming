@@ -35,7 +35,7 @@ public class Frog extends Entity{
 	 */
 	public Frog(Game game) {
 		//Player will start always at the middle bottom of the screen and will have a fixed size
-		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height);
+		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height,0);
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
 		//setting the rectangle variables used to collision detection
 		bounds.x=6;

@@ -17,16 +17,16 @@ public class Log extends Entity{
 	 * @param pos Defines the initial position of the log in the river.
 	 * @param width Used to define the log's width.
 	 */
-	public Log(Game game,int pos,int width) {
-		super(game,0,115+34*pos,width,log_height);
+	public Log(Game game,int pos,int width,float speed) {
+		super(game,0,115+34*pos,width,log_height,speed);
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one;
 		if(y==217||y==149){
 			x=-width;
-			speed=game.getDefaultSpeed();
+			this.speed=game.getDefaultSpeed()+speed;
 		}
 		else{
 			x=game.getWidht()+width;
-			speed=-game.getDefaultSpeed();
+			this.speed=-(game.getDefaultSpeed()+speed);
 		}
 		//setting the rectangle variables used to collision detection
 		bounds.x=8;

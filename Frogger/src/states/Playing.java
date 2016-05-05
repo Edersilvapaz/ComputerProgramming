@@ -22,7 +22,7 @@ public class Playing extends GameStates{
 	private Player player; //player object
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
-	private AlligatorBank alligator; //instance of the alligator that stays on the river bank
+	private AlligatorBank alligator1; //instance of the alligator that stays on the river bank
 	private Collision collisionDetector; //instance of the collision class
 	private ItemGenerator itemsGenerator;
 	
@@ -33,6 +33,7 @@ public class Playing extends GameStates{
 	//these variable store the life and the score of the player
 	private int life;
 	private int score;
+	private int phase=3;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -49,12 +50,9 @@ public class Playing extends GameStates{
 		player = new Player(game);		
 		vehicles = new Vehicles();
 		riverItems = new RiverItems();
-		alligator = new AlligatorBank(game);
 		collisionDetector = new Collision();
 		itemsGenerator = new ItemGenerator(game);
-		game.setDefaultSpeed(1.5f);
-		
-		levelBegin();
+		game.setDefaultSpeed(1.0f);
 	}
 	
 	/**
@@ -66,8 +64,20 @@ public class Playing extends GameStates{
 		checkLives(); //check for the end of lives
 		
 		timer--;
-		
-		itemsGenerator.fase1(vehicles,riverItems);
+		switch(phase){
+		case 1:
+			itemsGenerator.fase1(vehicles,riverItems);
+			break;
+		case 2:
+			itemsGenerator.fase2(vehicles,riverItems);
+			break;
+		case 3:
+			itemsGenerator.fase3(vehicles,riverItems);
+			break;
+		case 4:
+			itemsGenerator.fase4(vehicles,riverItems);
+			break;
+		}
 		
 		updateScore(); //check is the score needs to be updated
 		
@@ -82,7 +92,8 @@ public class Playing extends GameStates{
 			itemsGenerator.tick();
 			vehicles.tick();
 			riverItems.tick();
-			alligator.tick();
+			if(phase >= 3)
+				alligator1.tick();
 			if(timer<=7200)player.getFrog(frogIndex).tick();
 		}else{
 			player.getFrog(frogIndex).death();
@@ -121,7 +132,8 @@ public class Playing extends GameStates{
 		
 		//Render all the objects
 		riverItems.render(g);
-		alligator.render(g);
+		if(phase >= 3)
+			alligator1.render(g);
 		vehicles.render(g);
 		player.getFrog(frogIndex).render(g);
 		
@@ -129,6 +141,8 @@ public class Playing extends GameStates{
 			if(player.getFrog(x).getY()==77)
 				player.getFrog(x).render(g); //render just the frogs that are on the river bank
 		}
+		
+		if(timer>7200)g.drawString("LEVEL "+phase,game.getWidht()/2-30,game.getHeight()/2-30);
 		
 		if(timer>7320)
 			g.drawString("READY",game.getWidht()/2-30,game.getHeight()/2-10);
@@ -146,6 +160,11 @@ public class Playing extends GameStates{
 	 * Clear all the objects that have already been created.
 	 */
 	public void levelBegin(){
+		phase++;
+		if(phase > 1)
+			score+=50;
+		if(phase >= 3)
+			alligator1 = new AlligatorBank(game);
 		
 		for(int i=0 ; i<playerPosition.length ; i++){
 			playerPosition[i]=111+i*34;
@@ -186,6 +205,8 @@ public class Playing extends GameStates{
 		
 		//If every frog reached its river bank, start a new level
 		if(x==5){
+			vehicles.clear();
+			riverItems.clear();
 			levelBegin();
 		}
 	}
@@ -293,9 +314,11 @@ public class Playing extends GameStates{
 		
 		//If there is a collision between a frog and a alligator in the bank,
 		//take the frog that is in the bank to the initial position
-		for(int x=0 ; x<5 ; x++){
-			if(collisionDetector.frogAndAlligatorBank(player.getFrog(x),alligator)){
-				player.getFrog(x).goToInitialPosition();
+		if(phase >= 3){
+			for(int x=0 ; x<5 ; x++){
+				if(collisionDetector.frogAndAlligatorBank(player.getFrog(x),alligator1)){
+					player.getFrog(x).goToInitialPosition();
+				}
 			}
 		}
 	}

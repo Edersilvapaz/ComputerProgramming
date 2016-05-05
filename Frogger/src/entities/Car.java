@@ -16,18 +16,18 @@ public class Car extends Entity{
 	 * @param game Instance of the game so the car can rely on the game variables.
 	 * @param pos Defines the initial position of the car on the road.
 	 */
-	public Car(Game game,int pos) {
-		super(game,0,315+34*pos,car_width,car_height);
+	public Car(Game game,int pos,float speed) {
+		super(game,0,315+34*pos,car_width,car_height,speed);
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction
 		//It also defines randomly what image is going to be used to draw the car
 		if(y==417||y==349){
-			speed = game.getDefaultSpeed()+0.2f;
+			this.speed = game.getDefaultSpeed()+speed;
 			x=-width;
 			image = r.nextInt(4)+4;
 		}
 		else{
-			speed = -(game.getDefaultSpeed()+0.2f);
+			this.speed = -(game.getDefaultSpeed()+speed);
 			x=game.getWidht()+width;
 			image = r.nextInt(4);
 		}

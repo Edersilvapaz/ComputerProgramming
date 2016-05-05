@@ -20,8 +20,8 @@ public class Turtle extends Entity{
 	 * @param pos Defines the turtle line initial position on the screen.
 	 * @param amountTurtle Defines how many turtles needs to be created in the turtle line.
 	 */
-	public Turtle(Game game,int pos,int amountTurtle) {
-		super(game,0,115+34*pos,turtle_width,turtle_height);
+	public Turtle(Game game,int pos,int amountTurtle,float speed) {
+		super(game,0,115+34*pos,turtle_width,turtle_height,speed);
 		//The width of the object is redefined by the amount of turtle to draw so that the real hit box can be implemented
 		this.amountTurtle=amountTurtle;
 		width*=amountTurtle;
@@ -30,11 +30,11 @@ public class Turtle extends Entity{
 		if(y==217||y==149){
 			x=-width;
 			image=1;
-			speed = game.getDefaultSpeed();
+			this.speed = game.getDefaultSpeed()+speed;
 		}else{
 			x=game.getWidht()+width;
 			image=0;
-			speed=-game.getDefaultSpeed();
+			this.speed = -(game.getDefaultSpeed()+speed);
 		}
 		//setting the rectangle variables used to collision detection
 		bounds.x=7;

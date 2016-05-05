@@ -19,22 +19,22 @@ public class Alligator extends Entity{
 	 * @param game Instance of the game so the alligator can rely on games variables.
 	 * @param pos Defines the initial position of the alligator in the river
 	 */
-	public Alligator(Game game,int pos) {
-		super(game,0,100+34*pos,alli_width,alli_height);
+	public Alligator(Game game,int pos,float speed) {
+		super(game,0,100+34*pos,alli_width,alli_height,speed);
 		headBounds = new Rectangle();
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction 
 		if(y==202||y==134){
 			x=-width;
 			image=1;
-			speed = game.getDefaultSpeed();
+			this.speed = game.getDefaultSpeed()+speed;
 			bounds.x=10;
 			headBounds.x=60;
 			
 		}else{
 			x=game.getWidht()+width;
 			image=0;
-			speed=-game.getDefaultSpeed();
+			this.speed=-(game.getDefaultSpeed()+speed);
 			headBounds.x=10;
 			bounds.x=30;
 		}

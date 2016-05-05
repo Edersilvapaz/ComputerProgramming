@@ -2,8 +2,8 @@ package score;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class FileHandler {
 	
 	private Scanner file = null;
-	private FileWriter writer = null;
+	private PrintWriter writer = null;
 	private String txtName;
 	
 	/**
@@ -58,18 +58,14 @@ public class FileHandler {
 		File fileName = new File(classLoader.getResource("ScoreTrack/"+txtName+".txt").getFile());
 		
 		try {
-			this.writer = new FileWriter(fileName);
+			this.writer = new PrintWriter(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		for(int x=0 ; x<initials.length ; x++){
-			try {
-				writer.write(initials[x]+"\t"+scores[x]+"\n");
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			writer.println(initials[x]+"\t"+scores[x]+"\n");
+			writer.flush();
 		}		
 	}
 }
