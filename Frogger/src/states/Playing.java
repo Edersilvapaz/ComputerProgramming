@@ -2,11 +2,16 @@ package states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
+
 import collisiondetection.Collision;
 import entities.AlligatorBank;
+import entities.Entity;
+import entities.Fly;
 import game.Game;
 import graphics.Assets;
 import itemsgeneration.ItemGenerator;
+import objectsarrays.Flies;
 import objectsarrays.Player;
 import objectsarrays.RiverItems;
 import objectsarrays.Vehicles;
@@ -22,6 +27,7 @@ public class Playing extends GameStates{
 	private Player player; //player object
 	private Vehicles vehicles; //linked lists which summarizes all the vehicles from the road
 	private RiverItems riverItems; //linked lists which summarizes all the items from the river
+	private Flies flies;
 	private AlligatorBank alligator1; //instance of the alligator that stays on the river bank
 	private Collision collisionDetector; //instance of the collision class
 	private ItemGenerator itemsGenerator;
@@ -33,8 +39,8 @@ public class Playing extends GameStates{
 	//these variable store the life and the score of the player
 	private int life;
 	private int score;
-
-	private int phase;
+	private int phase=5;
+	private Random r;
 
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
@@ -52,8 +58,10 @@ public class Playing extends GameStates{
 		player = new Player(game);		
 		vehicles = new Vehicles();
 		riverItems = new RiverItems();
+		flies = new Flies();
 		collisionDetector = new Collision();
 		itemsGenerator = new ItemGenerator(game);
+		r = new Random();
 		game.setDefaultSpeed(1.0f);
 	}
 	
@@ -63,9 +71,10 @@ public class Playing extends GameStates{
 	 */
 	@Override
 	public void tick() {
-		checkLives(); //check for the end of lives
+		if(phase!=6)checkLives(); //check for the end of lives
 		
-		timer--;
+		if(phase!=6)timer--;
+		else timer-=10;
 		
 		switch(phase){
 		case 1:
@@ -83,6 +92,9 @@ public class Playing extends GameStates{
 		case 5:
 			itemsGenerator.fase5(vehicles,riverItems);
 			break;
+		case 6:
+			itemsGenerator.fase6(vehicles,riverItems);
+			break;
 		}
 		
 		updateScore(); //check is the score needs to be updated
@@ -98,6 +110,7 @@ public class Playing extends GameStates{
 			itemsGenerator.tick();
 			vehicles.tick();
 			riverItems.tick();
+			flies.tick();
 			if(phase >= 3)
 				alligator1.tick();
 			if(timer<=7200)player.getFrog(frogIndex).tick();
@@ -141,6 +154,7 @@ public class Playing extends GameStates{
 		if(phase >= 3)
 			alligator1.render(g);
 		vehicles.render(g);
+		flies.render(g);
 		player.getFrog(frogIndex).render(g);
 		
 		for(int x=0 ; x<5 ; x++){
@@ -158,6 +172,12 @@ public class Playing extends GameStates{
 			g.drawString("GO!!!!",game.getWidht()/2-17,game.getHeight()/2-10);
 	}
 	
+	public void gameBegin(){
+		phase=0;
+		flies.clear();
+		levelBegin();
+	}
+	
 	/**
 	 * Starts the game.<br>
 	 * Initialize the variables to record the player score correctly.<br>
@@ -167,6 +187,20 @@ public class Playing extends GameStates{
 	 */
 	public void levelBegin(){
 		phase++;
+		
+		if(phase==6){
+			for(int x=0 ; x<5 ; x++){
+				flies.addFly(new Fly(game,27f+x*82.2f,80,1));
+			}
+			
+			for(int x=0 ; x<game.getWidht()-Entity.flySize ; x++){
+				for(int y=0 ; y<5 ; y++){
+					if(r.nextInt(100) > 97){
+						flies.addFly(new Fly(game,x,315+y*34,0));
+					}
+				}
+			}
+		}
 		
 		if(phase > 1)
 			score+=50;
@@ -293,10 +327,17 @@ public class Playing extends GameStates{
 	private void checkTimer(){
 		//If the time of the level is up, kill the player and go back to the beginning of the level
 		if(timer==0){
-			player.Death();
-			life--;
-			timer=7380;
-			frogIndex=0;
+			if(phase==6){
+				GameStates.setChangeState(true);
+				game.GameOverState().checkScore(score);
+				GameStates.setGameStateTo(game.GameOverState());
+				GameStates.setChangeState(false);
+			}else{
+				player.Death();
+				life--;
+				timer=7380;
+				frogIndex=0;
+			}
 		}
 	}
 	
@@ -372,6 +413,13 @@ public class Playing extends GameStates{
 					player.getFrog(x).goToInitialPosition();
 				}
 			}
+		}
+		int collision = collisionDetector.frogAndFlies(player.getFrog(frogIndex),flies.getFliesList());
+		
+		if(collision==1){
+			score+=50;
+		}else if(collision==2){
+			score+=500;
 		}
 	}
 	

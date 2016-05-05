@@ -171,4 +171,19 @@ public class Collision {
 		}
 		return false;
 	}
+	
+	public int frogAndFlies(Frog frog,ArrayList<Fly> flies){
+		for(int x=0 ; x<flies.size() ; x++){
+			if(frog.getBounds().intersects(flies.get(x).getBounds())){
+				if(flies.get(x).getY()<100){
+					flies.remove(flies.get(x));
+					return 2;
+				}else{
+					flies.remove(flies.get(x));
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
 }

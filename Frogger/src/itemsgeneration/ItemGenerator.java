@@ -288,6 +288,7 @@ public class ItemGenerator {
 			}
 		}
 	}
+	
 	public void fase5(Vehicles vehicles,RiverItems riverItems){
 		if(counter[0]==70){
 			counter[0]=0;
@@ -356,6 +357,33 @@ public class ItemGenerator {
 				vehicles.addCar(new Car(game,0,2.3f));
 				counter[9]=0;
 			}
+		}
+	}
+	
+	public void fase6(Vehicles vehicles,RiverItems riverItems){
+		if(counter[0]==70){
+			counter[0]=0;
+			riverItems.addLog(new Log(game,0,100,1.9f));
+		}
+		
+		if(counter[1]==50){
+			counter[1]=0;
+			riverItems.addLog(new Log(game,1,100,2.4f));
+		}
+		
+		if(counter[2]==150){
+			counter[2]=0;
+			riverItems.addLog(new Log(game,2,r.nextInt(41)+150,1.6f));
+		}
+		
+		if(counter[3]==80){
+			counter[3]=0;
+			riverItems.addLog(new Log(game,3,150,1.7f));
+		}
+		
+		if(counter[4]==150){
+			counter[4]=0;
+			riverItems.addLog(new Log(game,4,r.nextInt(41)+100,1.5f));
 		}
 	}
 }

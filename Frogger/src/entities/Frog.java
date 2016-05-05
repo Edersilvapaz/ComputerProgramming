@@ -52,7 +52,6 @@ public class Frog extends Entity{
 	@Override
 	public void tick() {
 		death = gotHit || sank || eaten;
-		
 		/*
 		 * Every time a moving button is pressed and the counter is equal to 8:
 		 * 		1.	The move boolean variable is set to false so the action on the keyboard will be detected only once

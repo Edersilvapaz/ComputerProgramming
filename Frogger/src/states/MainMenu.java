@@ -26,7 +26,7 @@ public class MainMenu extends GameStates{
 		if(game.getMouseManager().isLeftPressed()){
 			if(game.getMouseManager().getMouseX()>=118 && game.getMouseManager().getMouseX()<=282){
 				if(game.getMouseManager().getMouseY()>=233 && game.getMouseManager().getMouseY()<=251){
-					game.PlayingState().levelBegin();
+					game.PlayingState().gameBegin();
 					GameStates.setGameStateTo(game.getPlayingState());
 					GameStates.setChangeState(false);
 				}

@@ -66,6 +66,9 @@ public abstract class Entity {
 	 */
 	public static final int alliBank_height = 19;
 	
+	public static final int flySize = 20;
+	
+	
 	//Here all the common variables are defined
 	protected float x,y; //Store entity's position on the screen
 	protected int width,height; //Store entity's size
