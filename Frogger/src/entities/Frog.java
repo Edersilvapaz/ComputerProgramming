@@ -18,6 +18,7 @@ public class Frog extends Entity{
 	private boolean eaten = false;
 	
 	//These boolean variables are used make the frog move on the screen
+	private boolean dontMove = true;
 	private boolean move = false;
 	private boolean moveUp = false;
 	private boolean moveDown = false;
@@ -50,7 +51,6 @@ public class Frog extends Entity{
 	 */
 	@Override
 	public void tick() {
-		
 		death = gotHit || sank || eaten;
 		
 		/*
@@ -65,7 +65,7 @@ public class Frog extends Entity{
 		
 		if(game.getKeyManager().Up()||game.getKeyManager().Down()||game.getKeyManager().Left()||game.getKeyManager().Right() ){
 			if(move && counter==necessaryMovements){
-				if( game.getKeyManager().Up() && y>80 ){
+				if( game.getKeyManager().Up() && y>80 && dontMove){
 					moveUp=true;
 					counter=0;
 					anim=0;
@@ -232,5 +232,13 @@ public class Frog extends Entity{
 	 */
 	public void setX(float speed){
 		x+=speed;
+	}
+	
+	public void dontMove(){
+		dontMove=false;
+	}
+	
+	public void move(){
+		dontMove=true;
 	}
 }
