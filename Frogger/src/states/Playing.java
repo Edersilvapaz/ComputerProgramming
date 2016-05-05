@@ -33,11 +33,12 @@ public class Playing extends GameStates{
 	//these variable store the life and the score of the player
 	private int life;
 	private int score;
-	private int phase=3;
+	private int phase;
 	
 	//This variables are used to manage the uploading the score 
 	private boolean[] scorePermition = new boolean[11]; //Array used to decide when to upgrade the score
 	private int[] playerPosition = new int[11]; //Array which stores all the y position the player needs to get to in order to increase score
+	private boolean[] riverBank = new boolean[5];
 	
 	/**
 	 * Creates a new instance of all objects and instantiate the game object passed to it.<br>
@@ -161,8 +162,12 @@ public class Playing extends GameStates{
 	 */
 	public void levelBegin(){
 		phase++;
+		
 		if(phase > 1)
 			score+=50;
+		else
+			score=0;
+		
 		if(phase >= 3)
 			alligator1 = new AlligatorBank(game);
 		
@@ -171,16 +176,20 @@ public class Playing extends GameStates{
 			scorePermition[i]=true;
 		}
 		
+		for(int x=0 ; x<riverBank.length ; x++){
+			riverBank[x]=false;
+		}
+		
 		for(int x=0 ; x<5 ; x++)
 			player.getFrog(x).goToInitialPosition();
 		
 		timer=7380;
 		frogIndex=0;
 		life=3;
-		score=0;
 		
 		game.getKeyManager().resetInitials();
 		
+		itemsGenerator.resetCounters();
 		vehicles.clear();
 		riverItems.clear();		
 	}
@@ -219,20 +228,41 @@ public class Playing extends GameStates{
 		//every time a frog gets to a bank, start to play with the next frog
 		if(player.getFrog(frogIndex).getY()==77){
 			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<10){
+				riverBank[0]=true;
 				player.getFrog(frogIndex).goToPosition(21.6f,77);
 				changeFrog();
 			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<10){
+				riverBank[1]=true;
 				player.getFrog(frogIndex).goToPosition(103.79f,77);
 				changeFrog();
 			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<10){
+				riverBank[2]=true;
 				player.getFrog(frogIndex).goToPosition(186,77);
 				changeFrog();
 			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<10){
+				riverBank[3]=true;
 				player.getFrog(frogIndex).goToPosition(268.3f,77);
 				changeFrog();
-			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<50){
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<30){
+				riverBank[4]=true;
 				player.getFrog(frogIndex).goToPosition(350.4f,77);
 				changeFrog();
+			}
+		}
+		
+		if(player.getFrog(frogIndex).getY()==111.0f){
+			if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<20 && riverBank[0]){
+				player.getFrog(frogIndex).dontMove();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<20 && riverBank[1]){
+				player.getFrog(frogIndex).dontMove();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<20 && riverBank[2]){
+				player.getFrog(frogIndex).dontMove();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<20 && riverBank[3]){
+				player.getFrog(frogIndex).dontMove();
+			}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<30 && riverBank[4]){
+				player.getFrog(frogIndex).dontMove();
+			}else{
+				player.getFrog(frogIndex).move();
 			}
 		}
 	}
@@ -317,9 +347,48 @@ public class Playing extends GameStates{
 		if(phase >= 3){
 			for(int x=0 ; x<5 ; x++){
 				if(collisionDetector.frogAndAlligatorBank(player.getFrog(x),alligator1)){
+					switch((int)player.getFrog(x).getWidth()){
+					case (int)21.6f:
+						riverBank[0]=false;
+						break;
+					case (int)103.79f:
+						riverBank[1]=false;
+						break;
+					case (int)186:
+						riverBank[2]=false;
+						break;
+					case (int)268.3f:
+						riverBank[3]=false;
+						break;
+					case (int)350.4f:
+						riverBank[4]=false;
+						break;
+					}
 					player.getFrog(x).goToInitialPosition();
 				}
 			}
+		}
+		
+		if(Math.abs(player.getFrog(frogIndex).getX()-21.6f)<10){
+			riverBank[0]=true;
+			player.getFrog(frogIndex).goToPosition(21.6f,77);
+			changeFrog();
+		}else if(Math.abs(player.getFrog(frogIndex).getX()-103.79f)<10){
+			riverBank[1]=true;
+			player.getFrog(frogIndex).goToPosition(103.79f,77);
+			changeFrog();
+		}else if(Math.abs(player.getFrog(frogIndex).getX()-186)<10){
+			riverBank[2]=true;
+			player.getFrog(frogIndex).goToPosition(186,77);
+			changeFrog();
+		}else if(Math.abs(player.getFrog(frogIndex).getX()-268.3f)<10){
+			riverBank[3]=true;
+			player.getFrog(frogIndex).goToPosition(268.3f,77);
+			changeFrog();
+		}else if(Math.abs(player.getFrog(frogIndex).getX()-350.4f)<30){
+			riverBank[4]=true;
+			player.getFrog(frogIndex).goToPosition(350.4f,77);
+			changeFrog();
 		}
 	}
 	

@@ -22,6 +22,11 @@ public class ItemGenerator {
 		this.game=game;
 	}
 	
+	public void resetCounters(){
+		for(int x=0 ; x<counter.length ; x++)
+			counter[x]=0;
+	}
+	
 	public void tick(){
 		for(int x=0 ; x<counter.length ; x++)
 			counter[x]++;
