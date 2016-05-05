@@ -125,7 +125,7 @@ public class Game implements Runnable{
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
-		
+	
 		while(running){
 			now = System.nanoTime();
 			delta += (now - lastTime)/timePerTick;
@@ -162,7 +162,7 @@ public class Game implements Runnable{
 		
 		
 		Assets.init(); //initiate the assets of the game
-		Score.init(); //initiate the score tracking of the game
+		//Score.init(); //initiate the score tracking of the game
 		
 		//here the states objects of the game are created and the first state to be used in the game is defined
 		playingState = new Playing(this);
