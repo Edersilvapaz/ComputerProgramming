@@ -9,19 +9,19 @@ import entities.Taxi;
 import entities.Truck;
 
 /**
- * This class holds the linked lists that helps the creation of the objects of the game.
+ * This class holds the array lists of all the vehicles of the game.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class Vehicles {
 	
-	//Initiates the linked lists that will hold each of the vehicles objects
+	//Initiates the array lists that will hold each of the vehicles objects
 	private ArrayList<Car> car = new ArrayList<Car>();
 	private ArrayList<Truck> truck = new ArrayList<Truck>();
 	private ArrayList<Bus> bus = new ArrayList<Bus>();
 	private ArrayList<Taxi> taxi = new ArrayList<Taxi>();
 	
 	/**
-	 * Goes through every position available on the linked links and tests the position of the object on the screen.<br>
+	 * Goes through every position available on the arrays lists and tests the position of the object on the screen.<br>
 	 * If it is already completely out of the screen, the respective object is removed, is it is not, its tick() method is called
 	 */
 	public void tick(){
@@ -55,7 +55,7 @@ public class Vehicles {
 	}
 	
 	/**
-	 * Goes through every position available on the linked lists and call the objects render() method.
+	 * Goes through every position available on the arrays lists and call the objects render() method.
 	 * @param g Graphics object used to draw images on the game window.
 	 */
 	public void render(Graphics g){
@@ -138,7 +138,7 @@ public class Vehicles {
 	
 	/**
 	 * Returns a list of cars that are in the window.
-	 * @return
+	 * @return ArrayList of cars
 	 */
 	public ArrayList<Car> getCars(){
 		return car;
@@ -146,7 +146,7 @@ public class Vehicles {
 	
 	/**
 	 * Returns a list of trucks that are in the window.
-	 * @return
+	 * @return ArrayList of trucks
 	 */
 	public ArrayList<Truck> getTrucks(){
 		return truck;
@@ -154,7 +154,7 @@ public class Vehicles {
 	
 	/**
 	 * Returns a list of buses that are in the window.
-	 * @return
+	 * @return ArrayList of buses
 	 */
 	public ArrayList<Bus> getBuses(){
 		return bus;
@@ -162,14 +162,14 @@ public class Vehicles {
 	
 	/**
 	 * Returns a list of taxis that are in the window.
-	 * @return
+	 * @return ArrayList of taxis
 	 */
 	public ArrayList<Taxi> getTaxis(){
 		return taxi;
 	}
 	
 	/**
-	 * 
+	 * Remove all the existent vehicles from their respective lists.
 	 */
 	public void clear(){
 		car.clear();

@@ -2,18 +2,18 @@ package score;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * This class is responsible for loading the .txt file which contains the player's initials and scores.
+ * This class is responsible for loading and writing in the .txt file which contains the player's initials and scores.
  * @author Eder Paz ; Neil Blake ; Logan Wedel
  */
 public class FileHandler {
 	
 	private Scanner file = null;
-	private FileWriter writer = null;
+	private PrintWriter writer = null;
 	private String txtName;
 	
 	/**
@@ -41,16 +41,16 @@ public class FileHandler {
 	}
 	
 	/**
-	 * Closes the scanner object, used in the end of the game when no reading and writing is necessary anymore.
+	 * Closes the scanner object, used in the end of the game when no reading and writing is not necessary anymore.
 	 */
 	public void close(){
 		file.close();
 	}
 	
 	/**
-	 * 
-	 * @param initials
-	 * @param scores
+	 * Rewrites the high scores files with the new high scores information.
+	 * @param initials Initials of the player's high scores
+	 * @param scores Scores of the player's high scores
 	 */
 	public void write(String[] initials,int[] scores){
 		
@@ -58,18 +58,14 @@ public class FileHandler {
 		File fileName = new File(classLoader.getResource("ScoreTrack/"+txtName+".txt").getFile());
 		
 		try {
-			this.writer = new FileWriter(fileName);
+			this.writer = new PrintWriter(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		for(int x=0 ; x<initials.length ; x++){
-			try {
-				writer.write(initials[x]+"\t"+scores[x]+"\n");
-				writer.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			writer.println(initials[x]+"\t"+scores[x]+"\n");
+			writer.flush();
 		}		
 	}
 }

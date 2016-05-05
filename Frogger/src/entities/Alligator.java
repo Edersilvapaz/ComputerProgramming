@@ -12,43 +12,33 @@ import graphics.Assets;
  */
 public class Alligator extends Entity{
 	
-	/*
-	 * This class extends the abstract class Entity, this means that every variable, object or method
-	 * that it contains can be used by this one, as long as it is defined as protected
-	 */
-	
-	private Rectangle headBounds;
+	private Rectangle headBounds; //Extra rectangle object for collision with the alligator's head
 	
 	/**
 	 * Defines the alligator's width, height, initial position, speed and direction in which the alligator has to move to.
 	 * @param game Instance of the game so the alligator can rely on games variables.
 	 * @param pos Defines the initial position of the alligator in the river
 	 */
-	public Alligator(Game game,int pos) {
-		//Its y position will be in one of the five lines that the lake has, when y is 100,134,168,202, or 236 and it will be fixed
-		//This position is defined according to the pos variable that is passed to it
-		super(game,0,100+34*pos,alli_width,alli_height);
+	public Alligator(Game game,int pos,float speed) {
+		super(game,0,100+34*pos,alli_width,alli_height,speed);
 		headBounds = new Rectangle();
 		//Depending on the y position, it will start in one of the sides of the screen and move to the other one
 		//This if statement also defines the image variable so that the right image is printed on the screen according to its direction 
 		if(y==202||y==134){
 			x=-width;
 			image=1;
-			speed = game.getDefaultSpeed();
-			//setting the rectangle variables used to collision detection
+			this.speed = game.getDefaultSpeed()+speed;
 			bounds.x=10;
 			headBounds.x=60;
 			
 		}else{
 			x=game.getWidht()+width;
 			image=0;
-			speed=-game.getDefaultSpeed();
-			//setting the rectangle variables used to collision detection
+			this.speed=-(game.getDefaultSpeed()+speed);
 			headBounds.x=10;
 			bounds.x=30;
 		}
 		
-		//setting the rectangle variables used to collision detection
 		bounds.width=width-40;
 		bounds.y=17;
 		bounds.height=height-25;
@@ -82,7 +72,7 @@ public class Alligator extends Entity{
 	
 	/**
 	 * Getter for the rectangle object of the alligator head.
-	 * @return
+	 * @return Rectangle that represents the alligator head.
 	 */
 	public Rectangle getHeadBounds(){
 		return new Rectangle(headBounds.x+(int)x,headBounds.y+(int)y,headBounds.width,headBounds.height);

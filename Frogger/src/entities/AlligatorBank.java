@@ -11,12 +11,6 @@ import graphics.Assets;
  */
 public class AlligatorBank extends Entity{
 	
-
-	/*
-	 * This class extends the abstract class Entity, this means that every variable, object or method
-	 * that it contains can be used by this one, as long as it is defined as protected
-	 */
-	
 	private final int time = 1800; //Holds how much time the alligator stays in a respective bank
 	
 	/**
@@ -25,11 +19,8 @@ public class AlligatorBank extends Entity{
 	 * @param game Instance of the game so that the bank alligator can rely on the game variables.
 	 */
 	public AlligatorBank(Game game) {
-		//Its y will be fixed in the river bank height
-		//Its x position will be in one of the river banks, defined randomly by the r object and the expression on line 31
-		super(game,0,82,alliBank_width,alliBank_height);
+		super(game,0,82,alliBank_width,alliBank_height,0);
 		x=25f+82.2f*r.nextInt(5);
-		
 		//setting the rectangle variables used to collision detection
 		bounds.x=1;
 		bounds.y=1;
@@ -74,8 +65,8 @@ public class AlligatorBank extends Entity{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Checks if the alligator is visible on the screen.
+	 * @return True if the alligator is visible, false if it is not
 	 */
 	public boolean isInTheSurface(){
 		if(anim==2)

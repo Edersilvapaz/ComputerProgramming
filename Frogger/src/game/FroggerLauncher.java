@@ -7,10 +7,11 @@ package game;
  * 	- Subjects shown on the book "An Introduction to programming using java"
  *	- The you tube channel "Java Game Development Series" -  https://www.youtube.com/playlist?list=PLWms45O3n--6KCNAEETGiVTEFvnqA7qCi
  *	- The you tube channel "New Beginner 2D Programming" - https://www.youtube.com/playlist?list=PLah6faXAgguMnTBs3JnEJY0shAc18XYQZ</pre>
- * @author Eder Paz; Neil Blake; Logan Wedel
+ * @author Eder Paz ; Neil Blake ; Logan Wedel
  * @version 1.0 Created: 03/31/2016
  */
 public class FroggerLauncher {
+	
 	/**
 	 * Launcher of the game.<br>
 	 * Creates a new game object and start it.

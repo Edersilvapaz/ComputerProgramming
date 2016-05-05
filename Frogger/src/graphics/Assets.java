@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 public class Assets {
 	
 	//Here all the items size all stored on the sprite, they are not objects sizes in the game;
+	private static int frog_death_size = 16;
 	private static int frog_size = 14;
 	private static int car_width = 15;
 	private static int car_height = 10;
@@ -55,6 +56,10 @@ public class Assets {
 	 */
 	public static BufferedImage[][] frog = new BufferedImage[4][3];
 	/**
+	 * Images used for the frog's death.
+	 */
+	public static BufferedImage[] frogDeath = new BufferedImage[15];
+	/**
 	 * Images of the game turtles.
 	 */
 	public static BufferedImage[][] turtle = new BufferedImage[2][2];
@@ -73,10 +78,18 @@ public class Assets {
 		SpriteSheet frogs = new SpriteSheet(ImageLoader.loadImage("Frogs"));
 		SpriteSheet vehicles = new SpriteSheet(ImageLoader.loadImage("Vehicles"));
 		SpriteSheet riverItems = new SpriteSheet(ImageLoader.loadImage("River_Items"));
+		SpriteSheet frogdeath = new SpriteSheet(ImageLoader.loadImage("Death"));
 		
 		//Initialize all the images of the game using the crop method;
 		bgnd = backgroung.crop(0,0,400,560);
 		log = riverItems.crop(0, 0,log_width,log_height);
+		
+		for(int x=0 ; x<15 ; x++){
+			if(x<7)
+				frogDeath[x] = frogdeath.crop(x*frog_death_size,0,frog_death_size,frog_death_size);
+			else
+				frogDeath[x] = frogdeath.crop((x-7)*frog_size,frog_death_size,frog_size,frog_size);
+		}
 		
 		for(int i=0 ; i<=1 ; i++ ){
 			taxi[i] = vehicles.crop(120+i*car_width,0,car_width,car_height);

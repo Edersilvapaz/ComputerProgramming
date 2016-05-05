@@ -56,6 +56,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 	
 	/**
 	 * Runs every time the mouse is clicked, that means pressing and releasing it.<br>
+	 * Not used in the game.
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {

@@ -11,10 +11,11 @@ import graphics.Assets;
  */
 public class Frog extends Entity{
 	
-	/*
-	 * This class extends the abstract class Entity, this means that every variable, object or method
-	 * that it contains can be used by this one, as long as it is defined as protected
-	 */
+	private int deathCont;
+	private boolean death;
+	private boolean sank = false;
+	private boolean gotHit = false;
+	private boolean eaten = false;
 	
 	//These boolean variables are used make the frog move on the screen
 	private boolean move = false;
@@ -34,9 +35,8 @@ public class Frog extends Entity{
 	 */
 	public Frog(Game game) {
 		//Player will start always at the middle bottom of the screen and will have a fixed size
-		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height);
+		super(game,(game.getWidht()-player_width)/2,game.getHeight()-75,player_width,player_height,0);
 		counter=necessaryMovements; //here the counter is initiated to make sure it will not move in the beginning of the game
-		
 		//setting the rectangle variables used to collision detection
 		bounds.x=6;
 		bounds.y=6;
@@ -50,6 +50,9 @@ public class Frog extends Entity{
 	 */
 	@Override
 	public void tick() {
+		
+		death = gotHit || sank || eaten;
+		
 		/*
 		 * Every time a moving button is pressed and the counter is equal to 8:
 		 * 		1.	The move boolean variable is set to false so the action on the keyboard will be detected only once
@@ -127,6 +130,40 @@ public class Frog extends Entity{
 		if(counter==5)image=2;
 		if(counter==8)image=0;
 	}
+	
+	public void death(){
+		counter++;
+		if(anim==0 && counter%60==0){
+			counter=necessaryMovements;
+			goToInitialPosition();
+			death=gotHit=sank=eaten=false;
+		}else if(counter%20==0){
+			if(gotHit){
+				if(anim==4)
+					anim=5;
+				else if(anim==5)
+					anim=6;
+				else if(anim==6)
+					anim=0;
+			}else if(sank){
+				if(anim==1)
+					anim=2;
+				else if(anim==2)
+					anim=3;
+				else if(anim==3)
+					anim=0;
+			}else if(eaten){
+				if(deathCont!=6)deathCont++;
+				if(deathCont==6){
+					anim = 0;
+				}else if(deathCont%2==0){
+					anim-=4;
+				}else{
+					anim+=4;
+				}
+			}
+		}
+	}
 
 	/**
 	 * Draws the player on the screen according to its x and y position and the respective image according<br>
@@ -134,7 +171,11 @@ public class Frog extends Entity{
 	 */
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
+		if(!death){
+			g.drawImage(Assets.frog[anim][image],(int)x,(int)y,width,height,null);
+		}else{
+			g.drawImage(Assets.frogDeath[anim],(int)x,(int)y,width,height,null);
+		}
 	}
 	
 	/**
@@ -148,9 +189,9 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * This method makes sure that the frog makes it to the finish.
-	 * @param x
-	 * @param y
+	 * Takes the frog objects to the position define by the parameters x and y.
+	 * @param x X position
+	 * @param y Y position
 	 */
 	public void goToPosition(float x,float y){
 		this.x=x;
@@ -158,16 +199,36 @@ public class Frog extends Entity{
 	}
 	
 	/**
-	 * This method returns true if the frog is moving and false if it is not.
-	 * @return
+	 * Test if the frog is in movement.
+	 * @return True if the frog is moving, false if it is not
 	 */
 	public boolean isStopped(){
 		return !moveUp&&!moveDown;
 	}
 	
+	public boolean isDead(){
+		return death;
+	}
+	
+	public void gotHit(){
+		anim=4;
+		gotHit=true;
+	}
+	
+	public void sank(){
+		anim=1;
+		sank=true;
+	}
+	
+	public void eaten(){
+		deathCont=0;
+		anim+=7;
+		eaten=true;
+	}
+	
 	/**
-	 *Allows the frog to move when you jump over something in the river.
-	 * @param x
+	 * Moves the frog according to the speed passed as a parameter.
+	 * @param speed Speed in which the frog should move
 	 */
 	public void setX(float speed){
 		x+=speed;

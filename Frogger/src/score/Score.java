@@ -7,7 +7,6 @@ package score;
 public class Score {
 	
 	private static FileHandler file = new FileHandler("Test");
-	
 	public static String[] initials = new String[5];
 	public static int[] score = new int[5];
 	
@@ -29,20 +28,34 @@ public class Score {
 	}
 	
 	/**
-	 * 
+	 * Test if the list of highest scores needs to be upgraded and if it does, upgrade it.
 	 */
 	public static void updateHighScores(String newInitials,int newScore){
-		for(int x=0 ; x<5 ; x++){
+		int x, tempScore, auxScore;
+		String tempInitials, auxInitials;
+		for(x=0 ; x<5 ; x++){
 			if(score[x]<newScore){
-				score[x]=newScore;
-				initials[x]=newInitials;
 				break;
 			}
+		}
+		
+		tempScore = score[x];
+		tempInitials = initials[x];
+		score[x] = newScore;
+		initials[x] = newInitials;
+		
+		for(x+=1 ; x<5 ; x++){
+			auxScore = score[x];
+			auxInitials = initials[x];
+			score[x] = tempScore;
+			initials[x] = tempInitials;
+			tempScore = auxScore;
+			tempInitials = auxInitials;
 		}
 	}
 	
 	/**
-	 * 
+	 * Rewrites a the high score file with the new high score data.
 	 */
 	public static void storeHighScores(){
 		file.write(initials,score);
