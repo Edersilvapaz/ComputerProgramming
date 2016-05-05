@@ -111,7 +111,7 @@ public class Playing extends GameStates{
 			vehicles.tick();
 			riverItems.tick();
 			flies.tick();
-			if(phase >= 3)
+			if(phase >= 3 && phase!=6)
 				alligator1.tick();
 			if(timer<=7200)player.getFrog(frogIndex).tick();
 		}else{
@@ -151,7 +151,7 @@ public class Playing extends GameStates{
 		
 		//Render all the objects
 		riverItems.render(g);
-		if(phase >= 3)
+		if(phase >= 3 && phase !=6)
 			alligator1.render(g);
 		vehicles.render(g);
 		flies.render(g);
@@ -162,18 +162,24 @@ public class Playing extends GameStates{
 				player.getFrog(x).render(g); //render just the frogs that are on the river bank
 		}
 		
-		if(timer>7200)g.drawString("LEVEL "+phase,game.getWidht()/2-30,game.getHeight()/2-30);
-		
-		if(timer>7320)
-			g.drawString("READY",game.getWidht()/2-30,game.getHeight()/2-10);
-		else if(timer>7260)
-			g.drawString("SET",game.getWidht()/2-17,game.getHeight()/2-10);
-		else if(timer>7200)
-			g.drawString("GO!!!!",game.getWidht()/2-17,game.getHeight()/2-10);
+		if(phase!=6){
+			if(timer>7200)
+				g.drawString("LEVEL "+phase,game.getWidht()/2-30,game.getHeight()/2-30);
+			if(timer>7320)
+				g.drawString("READY",game.getWidht()/2-30,game.getHeight()/2-10);
+			else if(timer>7260)
+				g.drawString("SET",game.getWidht()/2-17,game.getHeight()/2-10);
+			else if(timer>7200)
+				g.drawString("GO!!!!",game.getWidht()/2-17,game.getHeight()/2-10);
+		}else{
+			if(timer>7200)
+			g.drawString("BONUS LEVEL",game.getWidht()/2-70,game.getHeight()/2-30);
+		}
 	}
+		
 	
 	public void gameBegin(){
-		phase=0;
+		phase=5;
 		flies.clear();
 		levelBegin();
 	}
@@ -222,7 +228,8 @@ public class Playing extends GameStates{
 		for(int x=0 ; x<5 ; x++)
 			player.getFrog(x).goToInitialPosition();
 		
-		timer=7380;
+		if(phase!=6)timer=7380;
+		else timer=8000;
 		frogIndex=0;
 		life=3;
 		
