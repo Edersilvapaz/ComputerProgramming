@@ -3,7 +3,6 @@ package states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-
 import collisiondetection.Collision;
 import entities.AlligatorBank;
 import entities.Entity;
@@ -179,7 +178,7 @@ public class Playing extends GameStates{
 		
 	
 	public void gameBegin(){
-		phase=5;
+		phase=3;
 		flies.clear();
 		levelBegin();
 	}
